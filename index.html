@@ -8,6 +8,10 @@
 </head>
 <body>
 
+  <!-- Custom cursor -->
+  <div id="cursor-dot"></div>
+  <div id="cursor-bubble"><span>See project</span></div>
+
   <!-- Navbar -->
   <nav class="navbar">
     <div class="navbar-inner">
@@ -227,11 +231,13 @@
 
   <!-- Footer -->
   <footer id="contact">
-    <span class="footer-year">2026</span>
-    <p class="footer-tagline">Based in Madrid, working globally.</p>
-    <div class="footer-social">
-      <a href="https://www.linkedin.com/in/giuliana-vicente/" target="_blank" rel="noopener">Linked In</a>
-      <a href="mailto:giuvicente23@gmail.com">Email</a>
+    <div class="footer-inner">
+      <span class="footer-year">2026</span>
+      <p class="footer-tagline">Based in Madrid, working globally.</p>
+      <div class="footer-social">
+        <a href="https://www.linkedin.com/in/giuliana-vicente/" target="_blank" rel="noopener">Linked In</a>
+        <a href="mailto:giuvicente23@gmail.com">Email</a>
+      </div>
     </div>
   </footer>
 
@@ -341,6 +347,37 @@
     });
 
     startWowCycle();
+
+    // ── Custom cursor ─────────────────────────────────────────────────────
+    var cursorDot    = document.getElementById('cursor-dot');
+    var cursorBubble = document.getElementById('cursor-bubble');
+    var cursorX = window.innerWidth / 2;
+    var cursorY = window.innerHeight / 2;
+    var rafPending = false;
+
+    document.addEventListener('mousemove', function(e) {
+      cursorX = e.clientX;
+      cursorY = e.clientY;
+      if (!rafPending) {
+        rafPending = true;
+        requestAnimationFrame(function() {
+          cursorDot.style.left    = cursorX + 'px';
+          cursorDot.style.top     = cursorY + 'px';
+          cursorBubble.style.left = cursorX + 'px';
+          cursorBubble.style.top  = cursorY + 'px';
+          rafPending = false;
+        });
+      }
+    });
+
+    document.querySelectorAll('.card').forEach(function(card) {
+      card.addEventListener('mouseenter', function() {
+        document.body.classList.add('cursor-on-card');
+      });
+      card.addEventListener('mouseleave', function() {
+        document.body.classList.remove('cursor-on-card');
+      });
+    });
 
     // ── Footer slide-up from below ─────────────────────────────────────────
     var footerEl = document.querySelector('footer');
