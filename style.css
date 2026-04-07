@@ -295,11 +295,12 @@ a {
   transform: translateY(-50%);
   z-index: 2;
   width: 100%;
+  text-align: center;
 }
 
 .hero-title {
   font-family: 'ApfelGrotezk', sans-serif;
-  font-weight: 500;
+  font-weight: 400;
   font-size: clamp(52px, 11.1vw, 160px);
   line-height: 0.95;
   color: var(--white);
@@ -308,11 +309,11 @@ a {
 }
 
 .hero-line--product {
-  padding-left: 15%;
+  padding-left: 0;
 }
 
 .hero-line--designer {
-  padding-left: 30%;
+  padding-left: 0;
 }
 
 .hero-name {
@@ -414,10 +415,10 @@ footer.footer-visible .footer-inner {
   transform: translateY(0);
 }
 
-.card.reveal-on-scroll,
+.card-row.reveal-on-scroll,
 .wow-item.reveal-on-scroll,
 .exp-item.reveal-on-scroll {
-  transition-delay: calc(var(--delay, 0) * 0.12s);
+  transition-delay: calc(var(--delay, 0) * 0.15s);
 }
 
 /* =============================================
@@ -529,61 +530,97 @@ footer.footer-visible .footer-inner {
    CASE STUDIES
    ============================================= */
 
+/* Sección: solo posicionamiento, sin visual propia */
 .case-studies {
-  background-color: var(--white);
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  padding: 120px 24px;
-  width: 100%;
   position: relative;
   z-index: 2;
+}
+
+/* Sticky viewport — el contenedor visual real */
+.cs-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  background-color: #ffffff;
   border-radius: 24px 24px 0 0;
   box-shadow: 0 -16px 48px rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  padding-top: 70px; /* altura navbar */
+}
+
+/* Label CASE STUDIES */
+.cs-header {
+  flex-shrink: 0;
+  padding: 24px 24px 16px;
 }
 
 .label--dark {
   color: var(--grey);
 }
 
-.cards {
-  display: flex;
-  gap: 12px;
-  width: 100%;
-}
-
-.card {
+/* Track: recorta el stack de cards */
+.cs-track {
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  background-color: #ffffff;
-  border-radius: 24px;
-  box-shadow: 0px 25px 60px 0px rgba(0, 0, 0, 0.12);
-  min-width: 0;
   overflow: hidden;
+  position: relative;
+  padding: 0 24px;
 }
 
-.card-content {
+/* Stack de cards — JS anima el translateY */
+.cs-cards {
   display: flex;
   flex-direction: column;
   gap: 12px;
+  padding-bottom: 48px;
+  will-change: transform;
+}
+
+/* ── Fila de proyecto ─────────────────────────
+   Un solo rectángulo redondeado con shadow.
+   Altura asignada por JS.
+   ─────────────────────────────────────────── */
+.card-row {
+  display: flex;
+  align-items: stretch;
+  flex-shrink: 0;
+  border-radius: 36px;
+  overflow: hidden;
+  box-shadow: 0px 50px 70px 0px rgba(0, 0, 0, 0.08);
+}
+
+/* ── Panel de texto (izquierda) ──────────────── */
+.card {
+  background-color: var(--card-bg, #f5f5f5);
+  flex: 0 0 26%;
   padding: 16px;
-  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 0;
+}
+
+.card-top {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .card-meta {
   display: flex;
-  gap: 12px;
-  align-items: flex-start;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .card-year {
   font-family: 'ApfelGrotezk', sans-serif;
+  font-weight: 400;
   font-size: 16px;
   line-height: 20px;
   letter-spacing: -0.32px;
-  color: var(--grey);
+  color: var(--card-text, var(--grey));
   white-space: nowrap;
 }
 
@@ -599,7 +636,7 @@ footer.footer-visible .footer-inner {
   justify-content: center;
   padding: 2px 6px;
   border-radius: 24px;
-  background-color: var(--white);
+  background-color: #f5f5f5;
   font-family: Arial, sans-serif;
   font-size: 12px;
   line-height: 16px;
@@ -612,62 +649,48 @@ footer.footer-visible .footer-inner {
   font-weight: 500;
   font-size: 36px;
   line-height: 36px;
-  color: var(--black);
+  color: var(--card-text, var(--black));
 }
 
-.card-content > p {
+.card-top > p {
   font-family: 'ApfelGrotezk', sans-serif;
   font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
-  letter-spacing: -0.28px;
-  color: var(--black);
+  font-size: 24px;
+  line-height: 28px;
+  letter-spacing: -0.48px;
+  color: var(--card-text, var(--black));
 }
 
-.card-result {
+.card-metric {
+  font-family: 'ApfelGrotezk', sans-serif;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 28px;
+  letter-spacing: -0.48px;
+  color: var(--card-text, var(--black));
+}
+
+.card-metrics {
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  margin-top: auto;
+  gap: 12px;
 }
 
-.result-label {
-  font-family: 'ApfelGrotezk', sans-serif;
-  font-size: 14px;
-  line-height: 16px;
-  letter-spacing: -0.28px;
-  color: var(--grey);
-  white-space: nowrap;
+/* ── Panel de imagen (derecha) ───────────────── */
+.card-img {
+  flex: 1;
+  position: relative;
+  min-width: 0;
+  background-color: var(--card-bg, #f5f5f5);
 }
 
-.result-value {
-  font-family: 'ApfelGrotezk', sans-serif;
-  font-size: 14px;
-  line-height: 16px;
-  letter-spacing: -0.28px;
-  color: var(--teal);
-  white-space: nowrap;
-}
-
-.result-values {
-  display: flex;
-  gap: 23px;
-}
-
-.card-image {
-  height: 253px;
-  flex-shrink: 0;
-  overflow: hidden;
-}
-
-.card-image img {
+.card-img img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-.card-image--empty {
-  background-color: #fcf9ff;
+  display: block;
 }
 
 /* =============================================
@@ -905,11 +928,58 @@ footer {
   .wow-item-img { display: block; }
 
   /* ── Case Studies ────────────────────────── */
-  .case-studies { padding: 40px 16px; }
+  .case-studies { padding: 0 16px 24px; }
 
-  .cards {
-    flex-direction: column;
+  /* Desactiva scroll-lock en mobile */
+  .cs-sticky {
+    position: static;
+    height: auto;
+    overflow: visible;
+    padding-top: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .cs-track {
+    overflow: visible;
+    padding: 0;
+    flex: none;
+  }
+
+  .cs-cards {
+    transform: none !important;
     gap: 12px;
+  }
+
+  .cs-header {
+    padding: 40px 0 16px;
+  }
+
+  /* Cada fila se apila verticalmente */
+  .card-row {
+    flex-direction: column;
+    height: auto !important;
+    border-radius: 24px;
+  }
+
+  /* Panel texto: ocupa el ancho completo */
+  .card {
+    flex: none;
+    width: 100%;
+    border-radius: 0;
+  }
+
+  .card h3 { font-size: 28px; line-height: 30px; }
+
+  .card-top > p,
+  .card-metric { font-size: 16px; line-height: 20px; letter-spacing: -0.28px; }
+
+  /* Panel imagen */
+  .card-img {
+    flex: none;
+    width: 100%;
+    min-height: 220px;
+    position: relative;
   }
 
   /* ── Experience & Skills ─────────────────── */

@@ -3,13 +3,13 @@
   "configurations": [
     {
       "name": "Python HTTP Server",
-      "runtimeExecutable": "python3",
-      "runtimeArgs": ["/Users/giuliana/Desktop/giulianavicente/serve.py"],
+      "runtimeExecutable": "/usr/local/bin/node",
+      "runtimeArgs": ["/Users/giuliana/Desktop/giulianavicente/server.js"],
       "port": 8080
     },
     {
       "name": "npx serve",
-      "runtimeExecutable": "npx",
+      "runtimeExecutable": "/usr/local/bin/npx",
       "runtimeArgs": ["serve", ".", "-p", "3000"],
       "port": 3000
     }
