@@ -4,7 +4,7 @@
     {
       "name": "Python HTTP Server",
       "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "8080"],
+      "runtimeArgs": ["/Users/giuliana/Desktop/giulianavicente/serve.py"],
       "port": 8080
     },
     {

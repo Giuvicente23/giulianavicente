@@ -34,6 +34,14 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Newake';
+  src: url('fonts/NewakeFont-Demo.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* =============================================
    RESET & BASE
    ============================================= */
@@ -260,50 +268,24 @@ a {
   overflow: clip;
 }
 
-.hero-photos {
+.hero-bg {
   position: absolute;
   inset: 0;
-  pointer-events: none;
   z-index: 0;
-}
-
-.hero-photo {
-  position: absolute;
-  width: 180px;
-  height: 130px;
-  border-radius: 8px;
   overflow: hidden;
 }
 
-.hero-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: opacity 0.8s ease;
+.hero-bg-img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: auto;
+  height: auto;
+  max-width: none;
+  transform: translate(-50%, -50%);
+  will-change: transform;
 }
 
-.hero-photo--tl { top: 5%;  left: 1%;  animation: float-a 6s ease-in-out infinite; }
-.hero-photo--lm { top: 58%; left: 13%; animation: float-b 7.5s ease-in-out infinite; }
-.hero-photo--rm { top: 62%; right: 4%; animation: float-c 5.8s ease-in-out infinite; }
-.hero-photo--tr { top: 6%;  right: 3%; animation: float-a 7s ease-in-out infinite 1.2s; }
-
-@keyframes float-a {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  40%       { transform: translateY(-14px) rotate(0.8deg); }
-  70%       { transform: translateY(-6px) rotate(-0.4deg); }
-}
-
-@keyframes float-b {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  35%       { transform: translateY(-10px) rotate(-1deg); }
-  65%       { transform: translateY(-18px) rotate(0.6deg); }
-}
-
-@keyframes float-c {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  50%       { transform: translateY(-12px) rotate(0.5deg); }
-  80%       { transform: translateY(-4px) rotate(-0.8deg); }
-}
 
 .hero-text {
   position: absolute;
@@ -311,12 +293,12 @@ a {
   left: 0;
   right: 0;
   transform: translateY(-50%);
-  z-index: 1;
+  z-index: 2;
   width: 100%;
 }
 
 .hero-title {
-  font-family: 'FunnelDisplay', sans-serif;
+  font-family: 'ApfelGrotezk', sans-serif;
   font-weight: 500;
   font-size: clamp(52px, 11.1vw, 160px);
   line-height: 0.95;
@@ -378,6 +360,40 @@ a {
 
 @keyframes name-fade-up {
   to { opacity: 1; transform: translateY(0); }
+}
+
+/* Hero location — only visible on mobile */
+.hero-location-mobile {
+  display: none;
+  position: absolute;
+  bottom: 24px;
+  left: 16px;
+  align-items: center;
+  gap: 8px;
+  z-index: 2;
+}
+
+.hero-location-mobile span {
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--white);
+  white-space: nowrap;
+}
+
+/* WoW inline images — only visible on mobile */
+.wow-item-img {
+  display: none;
+  width: 100%;
+  height: 200px;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: 4px;
+}
+
+.wow-item-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 footer.footer-visible .footer-inner {
@@ -813,4 +829,127 @@ footer {
 
 .footer-social a:hover {
   opacity: 0.5;
+}
+
+/* =============================================
+   MOBILE  (≤ 768px)
+   ============================================= */
+
+@media (max-width: 768px) {
+
+  /* ── Navbar ───────────────────────────────── */
+  .navbar { padding: 12px 16px; }
+  .navbar-location { display: none; }
+  .navbar-inner { justify-content: center; }
+
+  /* ── Hero ─────────────────────────────────── */
+  .hero {
+    height: 448px;
+    height: 448px;
+  }
+
+  .hero-location-mobile {
+    display: flex;
+    left: 0;
+    right: 0;
+    justify-content: center;
+    padding: 0 16px;
+  }
+
+  .hero-text {
+    padding: 0 16px;
+    text-align: center;
+  }
+
+  .hero-title {
+    font-size: 54px;
+    line-height: 54px;
+    text-align: center;
+  }
+
+  .hero-line--product { padding-left: 0; }
+  .hero-line--designer { padding-left: 0; }
+
+  .hero-name {
+    font-size: 16px;
+    line-height: 1.2;
+    margin-top: 12px;
+  }
+
+  /* ── Description ─────────────────────────── */
+  .description {
+    padding: 40px 16px;
+    border-radius: 0;
+  }
+
+  .description p {
+    font-size: 32px;
+    line-height: 32px;
+  }
+
+  /* ── Way of Working ──────────────────────── */
+  .wow {
+    flex-direction: column;
+    padding: 40px 16px;
+    position: relative;
+    z-index: 1;
+    gap: 32px;
+    align-items: flex-start;
+    background-color: var(--black);
+  }
+
+  .wow-image { display: none; }
+
+  .wow-text { width: 100%; }
+
+  .wow-item-img { display: block; }
+
+  /* ── Case Studies ────────────────────────── */
+  .case-studies { padding: 40px 16px; }
+
+  .cards {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  /* ── Experience & Skills ─────────────────── */
+  .experience-skills {
+    flex-direction: column;
+    padding: 40px 0;
+    gap: 40px;
+  }
+
+  .experience-col,
+  .skills-col {
+    padding: 0 16px;
+  }
+
+  /* ── Footer ──────────────────────────────── */
+  footer { max-width: 100%; }
+
+  .footer-inner {
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 40px 16px;
+    min-height: auto;
+    gap: 24px 0;
+  }
+
+  .footer-year  { order: 1; flex: 1; }
+  .footer-social { order: 2; }
+
+  .footer-tagline {
+    order: 3;
+    position: static;
+    transform: none;
+    left: auto;
+    top: auto;
+    width: 100%;
+    flex-basis: 100%;
+    text-align: center;
+    font-size: 32px;
+    line-height: 36px;
+    white-space: normal;
+  }
+
 }

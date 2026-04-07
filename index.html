@@ -33,11 +33,18 @@
 
   <!-- Hero -->
   <section class="hero">
-    <div class="hero-photos">
-      <div class="hero-photo hero-photo--tl"><img src="images/photo_hero_mockup01.png" alt=""></div>
-      <div class="hero-photo hero-photo--lm"><img src="images/photo_hero_mockup02.png" alt=""></div>
-      <div class="hero-photo hero-photo--rm"><img src="images/photo_hero_mockup03.png" alt=""></div>
-      <div class="hero-photo hero-photo--tr"><img src="images/photo_hero_mockup04.png" alt=""></div>
+    <div class="hero-bg">
+      <picture>
+        <source media="(max-width: 768px)" srcset="images/hero-background-mobile.png">
+        <img class="hero-bg-img" src="images/hero-background.png?v=6" alt="">
+      </picture>
+    </div>
+    <div class="hero-location-mobile">
+      <div class="location-dot">
+        <span class="dot-ring"></span>
+        <span class="dot-core"></span>
+      </div>
+      <span>Based in Madrid, working globally</span>
     </div>
     <div class="hero-text">
       <h1 class="hero-title hero-line--product">PRODUCT</h1>
@@ -62,14 +69,17 @@
       <div class="wow-item wow-item--active" data-wow-index="0">
         <h3>Evidence-Based</h3>
         <p>Every decision is backed by data and user validation. I don't assume; I investigate. I analyze pathways, behavior through tools like Datadog, and complement with qualitative research.</p>
+        <div class="wow-item-img"><img src="images/wow_01.png" alt="Evidence-Based"></div>
       </div>
       <div class="wow-item wow-item--muted" data-wow-index="1">
         <h3>Strategic Partnership</h3>
         <p>I work as a partner to the PM and engineering team, not as an executor. Together we balance what's ideal with what's viable, user needs with business objectives.</p>
+        <div class="wow-item-img"><img src="images/wow_02.png" alt="Strategic Partnership"></div>
       </div>
       <div class="wow-item wow-item--muted" data-wow-index="2">
         <h3>Outcome-Oriented</h3>
         <p>I design for measurable impact. Every project has clear success criteria, revenue, speed, retention, or efficiency gains. That's my north star, and it shapes every decision I make.</p>
+        <div class="wow-item-img"><img src="images/wow_03.png" alt="Outcome-Oriented"></div>
       </div>
     </div>
   </section>
@@ -263,29 +273,6 @@
         name.textContent + '</span></span>';
     })();
 
-    // ── Hero photo slideshow ─────────────────────────────────────────────
-    var allPhotos = [
-      'images/photo_hero_mockup01.png',
-      'images/photo_hero_mockup02.png',
-      'images/photo_hero_mockup03.png',
-      'images/photo_hero_mockup04.png',
-      'images/photo_hero_mockup05.png',
-      'images/photo_hero_mockup06.png',
-    ];
-
-    document.querySelectorAll('.hero-photo').forEach(function(frame, fi) {
-      var img = frame.querySelector('img');
-      var idx = fi % allPhotos.length;
-      setInterval(function() {
-        img.style.opacity = '0';
-        setTimeout(function() {
-          idx = (idx + 1) % allPhotos.length;
-          img.src = allPhotos[idx];
-          img.style.opacity = '1';
-        }, 800);
-      }, 3500 + fi * 650);
-    });
-
     // ── Way of Working: auto-cycle + hover ────────────────────────────────
     var wowItems = document.querySelectorAll('.wow-item');
     var wowImages = ['images/wow_01.png', 'images/wow_02.png', 'images/wow_03.png'];
@@ -378,6 +365,38 @@
         document.body.classList.remove('cursor-on-card');
       });
     });
+
+    // ── Hero background parallax ──────────────────────────────────────────
+    (function() {
+      var bgImg = document.querySelector('.hero-bg-img');
+      var targetX = 0, targetY = 0;
+      var currentX = 0, currentY = 0;
+      var maxOffsetX = 0, maxOffsetY = 0;
+
+      function computeOffsets() {
+        maxOffsetX = Math.max(0, (bgImg.offsetWidth  - window.innerWidth)  / 2);
+        maxOffsetY = Math.max(0, (bgImg.offsetHeight - window.innerHeight) / 2);
+      }
+
+      bgImg.addEventListener('load', computeOffsets);
+      window.addEventListener('resize', computeOffsets);
+      if (bgImg.complete) computeOffsets();
+
+      document.addEventListener('mousemove', function(e) {
+        var nx = (e.clientX / window.innerWidth)  * 2 - 1; // -1 … +1
+        var ny = (e.clientY / window.innerHeight) * 2 - 1;
+        targetX = -nx * maxOffsetX;
+        targetY = -ny * maxOffsetY;
+      });
+
+      (function loop() {
+        currentX += (targetX - currentX) * 0.07;
+        currentY += (targetY - currentY) * 0.07;
+        bgImg.style.transform =
+          'translate(calc(-50% + ' + currentX.toFixed(2) + 'px), calc(-50% + ' + currentY.toFixed(2) + 'px))';
+        requestAnimationFrame(loop);
+      })();
+    })();
 
     // ── Footer slide-up from below ─────────────────────────────────────────
     var footerEl = document.querySelector('footer');
