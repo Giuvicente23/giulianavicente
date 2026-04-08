@@ -566,7 +566,8 @@ footer.footer-visible .footer-inner {
   flex: 1;
   overflow: hidden;
   position: relative;
-  padding: 0 24px;
+  padding: 8px 24px 0;
+  margin-bottom: 40px;
 }
 
 /* Stack de cards — JS anima el translateY */
@@ -576,6 +577,7 @@ footer.footer-visible .footer-inner {
   gap: 12px;
   padding-bottom: 48px;
   will-change: transform;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* ── Fila de proyecto ─────────────────────────
@@ -589,13 +591,14 @@ footer.footer-visible .footer-inner {
   border-radius: 36px;
   overflow: hidden;
   box-shadow: 0px 50px 70px 0px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
 }
 
 /* ── Panel de texto (izquierda) ──────────────── */
 .card {
-  background-color: var(--card-bg, #f5f5f5);
-  flex: 0 0 26%;
-  padding: 16px;
+  background: var(--card-gradient, var(--card-bg, #f5f5f5));
+  flex: 0 0 35%;
+  padding: 40px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -681,7 +684,7 @@ footer.footer-visible .footer-inner {
   flex: 1;
   position: relative;
   min-width: 0;
-  background-color: var(--card-bg, #f5f5f5);
+  background: var(--card-img-gradient, var(--card-bg, #f5f5f5));
 }
 
 .card-img img {

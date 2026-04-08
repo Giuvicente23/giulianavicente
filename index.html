@@ -93,26 +93,7 @@
       <div class="cs-track">
         <div class="cs-cards">
 
-          <div class="card-row" style="--card-bg:#b6efb2; --card-text:#0a3518">
-            <div class="card">
-              <div class="card-top">
-                <div class="card-meta">
-                  <span class="card-year">2025</span>
-                  <div class="card-tags">
-                    <span class="tag">Communication Flow</span>
-                  </div>
-                </div>
-                <h3>Advisory Communications</h3>
-                <p>Improve conversion rates across the funnel for Mexico advisors to deliver better customer service.</p>
-              </div>
-              <p class="card-metric">+12% CR Visit</p>
-            </div>
-            <div class="card-img">
-              <img src="images/project01.png" alt="Advisory Communications project">
-            </div>
-          </div>
-
-          <div class="card-row" style="--card-bg:#fffacd; --card-text:#6d6520">
+          <div class="card-row" style="--card-bg:#fbf193; --card-text:#5a4a00; --card-gradient: linear-gradient(to bottom, #fbf193, #f9e63a); --card-img-gradient: linear-gradient(to bottom, #fbf193, #f9e63a);">
             <div class="card">
               <div class="card-top">
                 <div class="card-meta">
@@ -132,11 +113,30 @@
               </div>
             </div>
             <div class="card-img">
-              <img src="images/project03.png" alt="Pronto App project">
+              <img src="images/case_study_03.png" alt="Pronto App project">
             </div>
           </div>
 
-          <div class="card-row" style="--card-bg:#deebff; --card-text:#2c3279">
+          <div class="card-row" style="--card-bg:#3ed473; --card-text:#0a3518; --card-gradient: linear-gradient(to bottom, #3ed473, #afeeaf); --card-img-gradient: linear-gradient(to bottom, #3ed473, #afeeaf);">
+            <div class="card">
+              <div class="card-top">
+                <div class="card-meta">
+                  <span class="card-year">2025</span>
+                  <div class="card-tags">
+                    <span class="tag">Communication Flow</span>
+                  </div>
+                </div>
+                <h3>Advisory Communications</h3>
+                <p>Improve conversion rates across the funnel for Mexico advisors to deliver better customer service.</p>
+              </div>
+              <p class="card-metric">+12% CR Visit</p>
+            </div>
+            <div class="card-img">
+              <img src="images/case_study_01.png" alt="Advisory Communications project">
+            </div>
+          </div>
+
+          <div class="card-row" style="--card-bg:#3b62a0; --card-text:#ffffff; --card-gradient: linear-gradient(to bottom, #3b62a0, #94afdc); --card-img-gradient: linear-gradient(to bottom, #3b62a0, #94afdc);">
             <div class="card">
               <div class="card-top">
                 <div class="card-meta">
@@ -153,7 +153,7 @@
               <p class="card-metric">-80% support tickets</p>
             </div>
             <div class="card-img">
-              <img src="images/project02.png" alt="Property Detail Page project">
+              <img src="images/case_study_02.png" alt="Property Detail Page project">
             </div>
           </div>
 
@@ -423,16 +423,17 @@
       observer.observe(el);
     });
 
-    // ── Case Studies scroll-lock ──────────────────────────────────────────
+    // ── Case Studies scroll-snap por card ────────────────────────────────
     (function() {
       var csSection = document.querySelector('.case-studies');
       var csCards   = document.querySelector('.cs-cards');
       var csTrack   = document.querySelector('.cs-track');
       if (!csSection || !csCards || !csTrack) return;
 
-      var mq = window.matchMedia('(max-width: 768px)');
-
+      var mq       = window.matchMedia('(max-width: 768px)');
       var cardRows = csSection.querySelectorAll('.card-row');
+      var N        = cardRows.length;
+      var GAP      = 12; // px, igual que el gap CSS
 
       function setHeight() {
         if (mq.matches) {
@@ -441,27 +442,36 @@
           cardRows.forEach(function(row) { row.style.height = ''; });
           return;
         }
-        // Set each card-row to exactly the track's real height — no overflow
-        var trackH = csTrack.clientHeight;
+        // Cada card ocupa el track visible menos sus paddings top/bottom
+        var trackStyle  = window.getComputedStyle(csTrack);
+        var padTop      = parseFloat(trackStyle.paddingTop);
+        var padBot      = parseFloat(trackStyle.paddingBottom);
+        var trackH      = csTrack.clientHeight - padTop - padBot;
         cardRows.forEach(function(row) {
           row.style.height = trackH + 'px';
         });
-        var cardsH   = csCards.scrollHeight;
-        var maxTrans = Math.max(0, cardsH - trackH);
-        // Section needs to be tall enough so the user scrolls through all cards
-        csSection.style.height = (maxTrans + window.innerHeight) + 'px';
+        // Cada card tiene un viewport completo de scroll + uno extra de dwell en la última
+        csSection.style.height = (window.innerHeight * (N + 1)) + 'px';
+        // En desktop las cards ocultas por clip nunca disparan el IntersectionObserver → revelarlas ya
+        cardRows.forEach(function(row) { row.classList.add('revealed'); });
       }
 
       function onScroll() {
         if (mq.matches) return;
         var rect      = csSection.getBoundingClientRect();
-        var scrolled  = -rect.top; // how far past section top we are
+        var scrolled  = -rect.top;
         var maxScroll = csSection.offsetHeight - window.innerHeight;
         var progress  = Math.max(0, Math.min(1, scrolled / maxScroll));
-        var trackH    = csTrack.offsetHeight;
-        var cardsH    = csCards.scrollHeight;
-        var maxTrans  = Math.max(0, cardsH - trackH);
-        csCards.style.transform = 'translateY(' + (-progress * maxTrans).toFixed(2) + 'px)';
+
+        // Cada card ocupa 1/N del recorrido; la última tiene dwell hasta el final
+        var rawIndex  = Math.min(progress * N, N - 1);
+        var cardIndex = Math.round(rawIndex);
+        var tStyle    = window.getComputedStyle(csTrack);
+        var pTop      = parseFloat(tStyle.paddingTop);
+        var pBot      = parseFloat(tStyle.paddingBottom);
+        var cardH     = csTrack.clientHeight - pTop - pBot;
+        var snapY     = -(cardIndex * (cardH + GAP));
+        csCards.style.transform = 'translateY(' + snapY.toFixed(2) + 'px)';
       }
 
       setHeight();
