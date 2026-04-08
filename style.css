@@ -76,7 +76,8 @@
   will-change: transform;
 }
 
-body.cursor-on-card #cursor-dot {
+body.cursor-on-card #cursor-dot,
+body.cursor-on-photo #cursor-dot {
   opacity: 0;
   transform: translate(-50%, -50%) scale(0);
 }
@@ -104,6 +105,16 @@ body.cursor-on-card #cursor-dot {
 body.cursor-on-card #cursor-bubble {
   transform: translate(-50%, -50%) scale(1);
   opacity: 1;
+}
+
+body.cursor-on-photo #cursor-bubble {
+  transform: translate(-50%, -50%) scale(1);
+  opacity: 1;
+  background-color: #ffffff;
+}
+
+body.cursor-on-photo #cursor-bubble span {
+  color: #0f0f0f;
 }
 
 #cursor-bubble span {
@@ -244,6 +255,41 @@ a {
   color: var(--white);
   white-space: nowrap;
   transition: opacity 0.2s ease;
+}
+
+.navbar-links a.nav-active {
+  opacity: 0.4;
+}
+
+.navbar--light .navbar-links a.nav-active {
+  opacity: 0.4;
+}
+
+/* Navbar variante clara (sobre fondo blanco) */
+.navbar--light .navbar-inner {
+  background: rgba(245, 245, 245, 0.75);
+  border: 1px solid rgba(0,0,0,0.08);
+}
+
+.navbar--light .navbar-location span,
+.navbar--light .navbar-links a {
+  color: var(--black);
+}
+
+/* Footer variante invertida (fondo negro) */
+footer.footer--dark {
+  background-color: var(--black);
+  border-radius: 24px 24px 0 0;
+  max-width: 100%;
+  margin-top: -24px; /* solapa sobre el about-body */
+  position: relative;
+  z-index: 3;
+}
+
+footer.footer--dark .footer-year,
+footer.footer--dark .footer-tagline,
+footer.footer--dark .footer-social a {
+  color: var(--white);
 }
 
 .navbar-links a:hover {
@@ -786,6 +832,239 @@ footer.footer-visible .footer-inner {
   background-color: transparent;
   border-color: var(--pill-color, var(--white));
   color: var(--pill-color, var(--white));
+}
+
+/* =============================================
+   ABOUT PAGE — REVEAL ANIMATION
+   ============================================= */
+
+@keyframes about-reveal {
+  from {
+    opacity: 0;
+    clip-path: inset(0 0 100% 0);
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    clip-path: inset(0 0 0% 0);
+    transform: translateY(0);
+  }
+}
+
+/* =============================================
+   ABOUT PAGE
+   ============================================= */
+
+.about-page {
+  background-color: var(--black);
+  cursor: none;
+}
+
+.about-main {
+  padding-top: 70px; /* altura navbar */
+}
+
+/* ── Description fold (dark, full viewport) ── */
+.about-description {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  padding: 80px 64px;
+  min-height: 100vh;
+  min-height: 100svh;
+  background-color: var(--black);
+  position: sticky;
+  top: 0;
+  z-index: 0;
+  box-sizing: border-box;
+}
+
+.about-description .label {
+  color: #747474;
+  animation: about-reveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 0.1s;
+}
+
+.about-intro {
+  font-family: 'ApfelGrotezk', sans-serif;
+  font-size: 48px;
+  line-height: 52px;
+  color: var(--white);
+  max-width: 100%;
+  animation: about-reveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation-delay: 0.25s;
+}
+
+/* ── Body: overlap card (light) ── */
+.about-body {
+  display: flex;
+  gap: 37px;
+  padding: 40px 64px 80px;
+  background-color: #f5f5f5;
+  border-radius: 24px 24px 0 0;
+  box-shadow: 0 -16px 48px rgba(0, 0, 0, 0.35);
+  position: relative;
+  z-index: 2;
+}
+
+/* Columna experiencia */
+.about-experience {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.about-jobs {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.about-job {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  align-items: flex-start;
+  padding-top: 20px;
+  border-top: 0.5px solid #747474;
+}
+
+.about-job-title {
+  flex: 0 0 400px;
+  min-width: 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.about-job-title h3 {
+  font-family: 'ApfelGrotezk', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 20px;
+  letter-spacing: -0.32px;
+  color: var(--black);
+}
+
+.about-job-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-family: 'ApfelGrotezk', sans-serif;
+  font-size: 14px;
+  line-height: 18px;
+  color: #747474;
+}
+
+.about-job-desc {
+  flex: 1;
+  min-width: 300px;
+  font-family: 'ApfelGrotezk', sans-serif;
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--black);
+}
+
+.about-job-desc ul {
+  padding-left: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.about-job-desc li {
+  padding-left: 20px;
+  position: relative;
+}
+
+.about-job-desc li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: var(--black);
+}
+
+/* Columna skills */
+.about-skills {
+  flex: 0 0 224px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.about-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* Pills: mismo estilo que la home */
+.about-tag {
+  font-family: 'ApfelGrotezk', sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--black);
+  border: 1px solid var(--black);
+  border-radius: 24px;
+  padding: 6px 8px;
+  white-space: nowrap;
+  position: relative;
+  z-index: 10000;
+  background-color: transparent;
+  transition: border-color 0.25s ease, color 0.25s ease;
+  cursor: none;
+}
+
+.about-tag:hover {
+  border-color: var(--pill-color, var(--black));
+  color: var(--pill-color, var(--black));
+  background-color: transparent;
+}
+
+/* Mobile about */
+@media (max-width: 768px) {
+  .about-description {
+    padding: 40px 16px;
+    min-height: 100svh;
+  }
+
+  .about-intro {
+    font-size: 32px;
+    line-height: 32px;
+  }
+
+  .about-body {
+    flex-direction: column;
+    gap: 0;
+    padding: 20px 16px 40px;
+  }
+
+  .about-experience,
+  .about-skills {
+    width: 100%;
+  }
+
+  .about-skills {
+    padding-top: 20px;
+  }
+
+  .about-job {
+    flex-direction: column;
+  }
+
+  .about-job-title {
+    flex: none;
+    width: 100%;
+  }
+
+  .about-job-meta {
+    flex-direction: row;
+    justify-content: space-between;
+  }
 }
 
 /* =============================================

@@ -14,7 +14,7 @@
 
   <!-- Custom cursor -->
   <div id="cursor-dot"></div>
-  <div id="cursor-bubble"><span>See project</span></div>
+  <div id="cursor-bubble"><span id="cursor-bubble-text">See project</span></div>
 
   <!-- Navbar -->
   <nav class="navbar">
@@ -27,7 +27,7 @@
         <span>Based in Madrid, working globally</span>
       </div>
       <div class="navbar-links">
-        <a href="#about">About me</a>
+        <a href="about.html">About me</a>
         <a href="#work">Work</a>
         <a href="https://www.linkedin.com/in/giuliana-vicente/" target="_blank" rel="noopener">Linked In</a>
         <a href="mailto:giuvicente23@gmail.com">Email</a>
@@ -346,14 +346,29 @@
       }
     });
 
+    var bubbleText = document.getElementById('cursor-bubble-text');
+
     document.querySelectorAll('.card').forEach(function(card) {
       card.addEventListener('mouseenter', function() {
+        bubbleText.textContent = 'See project';
         document.body.classList.add('cursor-on-card');
       });
       card.addEventListener('mouseleave', function() {
         document.body.classList.remove('cursor-on-card');
       });
     });
+
+    // Cursor sobre fotografía (wow-image)
+    var wowImageEl = document.querySelector('.wow-image');
+    if (wowImageEl) {
+      wowImageEl.addEventListener('mouseenter', function() {
+        bubbleText.textContent = 'See more';
+        document.body.classList.add('cursor-on-photo');
+      });
+      wowImageEl.addEventListener('mouseleave', function() {
+        document.body.classList.remove('cursor-on-photo');
+      });
+    }
 
     // ── Hero background parallax ──────────────────────────────────────────
     (function() {
@@ -385,6 +400,24 @@
           'translate(calc(-50% + ' + currentX.toFixed(2) + 'px), calc(-50% + ' + currentY.toFixed(2) + 'px))';
         requestAnimationFrame(loop);
       })();
+    })();
+
+    // ── Navbar active state ────────────────────────────────────────────────
+    (function() {
+      var navWork = document.querySelector('.navbar-links a[href="#work"], .navbar-links a[href="index.html#work"]');
+      if (!navWork) return;
+      var sections = ['#work'];
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            navWork.classList.add('nav-active');
+          } else {
+            navWork.classList.remove('nav-active');
+          }
+        });
+      }, { threshold: 0.1 });
+      var workSection = document.querySelector('#work');
+      if (workSection) observer.observe(workSection);
     })();
 
     // ── Footer slide-up from below ─────────────────────────────────────────
