@@ -19,6 +19,9 @@
   <!-- Navbar -->
   <nav class="navbar">
     <div class="navbar-inner">
+      <a href="index.html" class="navbar-logo">
+        <img src="images/logo.png" alt="Giuliana Vicente">
+      </a>
       <div class="navbar-location">
         <div class="location-dot">
           <span class="dot-ring"></span>
@@ -32,14 +35,34 @@
         <a href="https://www.linkedin.com/in/giuliana-vicente/" target="_blank" rel="noopener">Linked In</a>
         <a href="mailto:giuvicente23@gmail.com">Email</a>
       </div>
+      <button class="navbar-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span class="ham-line"></span>
+        <span class="ham-line"></span>
+        <span class="ham-line"></span>
+      </button>
     </div>
   </nav>
+
+  <!-- Mobile menu overlay -->
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <div class="mobile-menu-inner">
+      <button class="mobile-menu-close" aria-label="Close menu">✕</button>
+      <nav class="mobile-menu-links">
+        <a href="index.html" class="nav-active">Home</a>
+        <a href="about.html">About me</a>
+        <a href="#work">Work</a>
+        <a href="https://www.linkedin.com/in/giuliana-vicente/" target="_blank" rel="noopener">Linked In</a>
+        <a href="mailto:giuvicente23@gmail.com">Email</a>
+      </nav>
+    </div>
+  </div>
 
   <!-- Hero -->
   <section class="hero">
     <div class="hero-bg">
       <picture>
         <source media="(max-width: 768px)" srcset="images/hero-background-mobile.png">
+        <source media="(max-width: 1024px)" srcset="images/hero-background-tablet.png">
         <img class="hero-bg-img" src="images/hero-background.png?v=6" alt="">
       </picture>
     </div>
@@ -348,27 +371,15 @@
 
     var bubbleText = document.getElementById('cursor-bubble-text');
 
-    document.querySelectorAll('.card').forEach(function(card) {
-      card.addEventListener('mouseenter', function() {
+    document.querySelectorAll('.card-row').forEach(function(row) {
+      row.addEventListener('mouseenter', function() {
         bubbleText.textContent = 'See project';
         document.body.classList.add('cursor-on-card');
       });
-      card.addEventListener('mouseleave', function() {
+      row.addEventListener('mouseleave', function() {
         document.body.classList.remove('cursor-on-card');
       });
     });
-
-    // Cursor sobre fotografía (wow-image)
-    var wowImageEl = document.querySelector('.wow-image');
-    if (wowImageEl) {
-      wowImageEl.addEventListener('mouseenter', function() {
-        bubbleText.textContent = 'See more';
-        document.body.classList.add('cursor-on-photo');
-      });
-      wowImageEl.addEventListener('mouseleave', function() {
-        document.body.classList.remove('cursor-on-photo');
-      });
-    }
 
     // ── Hero background parallax ──────────────────────────────────────────
     (function() {
@@ -432,6 +443,35 @@
     }, { threshold: 0.05 });
     footerObserver.observe(footerEl);
 
+    // ── Mobile hamburger menu ──────────────────────────────────────────────
+    (function() {
+      var btn   = document.querySelector('.navbar-hamburger');
+      var menu  = document.getElementById('mobile-menu');
+      var close = document.querySelector('.mobile-menu-close');
+      if (!btn || !menu) return;
+
+      function openMenu() {
+        menu.classList.add('is-open');
+        btn.classList.add('is-active');
+        document.body.classList.add('menu-open');
+        btn.setAttribute('aria-expanded', 'true');
+        menu.setAttribute('aria-hidden', 'false');
+      }
+      function closeMenu() {
+        menu.classList.remove('is-open');
+        btn.classList.remove('is-active');
+        document.body.classList.remove('menu-open');
+        btn.setAttribute('aria-expanded', 'false');
+        menu.setAttribute('aria-hidden', 'true');
+      }
+
+      btn.addEventListener('click', openMenu);
+      if (close) close.addEventListener('click', closeMenu);
+      menu.querySelectorAll('a').forEach(function(a) {
+        a.addEventListener('click', closeMenu);
+      });
+    })();
+
     // ── Scroll reveal for sections ─────────────────────────────────────────
     // Add stagger delays to grouped elements
     document.querySelectorAll('.card-row').forEach(function(el, i) {
@@ -467,7 +507,7 @@
       var csTrack   = document.querySelector('.cs-track');
       if (!csSection || !csCards || !csTrack) return;
 
-      var mq       = window.matchMedia('(max-width: 768px)');
+      var mq       = window.matchMedia('(max-width: 600px)');
       var cardRows = csSection.querySelectorAll('.card-row');
       var N        = cardRows.length;
       var GAP      = 12; // px, igual que el gap CSS

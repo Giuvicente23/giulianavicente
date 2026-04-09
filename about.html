@@ -19,6 +19,9 @@
   <!-- Navbar -->
   <nav class="navbar">
     <div class="navbar-inner">
+      <a href="index.html" class="navbar-logo">
+        <img src="images/logo.png" alt="Giuliana Vicente">
+      </a>
       <div class="navbar-location">
         <div class="location-dot">
           <span class="dot-ring"></span>
@@ -32,8 +35,27 @@
         <a href="https://www.linkedin.com/in/giuliana-vicente/" target="_blank" rel="noopener">Linked In</a>
         <a href="mailto:giuvicente23@gmail.com">Email</a>
       </div>
+      <button class="navbar-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span class="ham-line"></span>
+        <span class="ham-line"></span>
+        <span class="ham-line"></span>
+      </button>
     </div>
   </nav>
+
+  <!-- Mobile menu overlay -->
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <div class="mobile-menu-inner">
+      <button class="mobile-menu-close" aria-label="Close menu">✕</button>
+      <nav class="mobile-menu-links">
+        <a href="index.html">Home</a>
+        <a href="about.html" class="nav-active">About me</a>
+        <a href="index.html#work">Work</a>
+        <a href="https://www.linkedin.com/in/giuliana-vicente/" target="_blank" rel="noopener">Linked In</a>
+        <a href="mailto:giuvicente23@gmail.com">Email</a>
+      </nav>
+    </div>
+  </div>
 
   <!-- Main content -->
   <main class="about-main">
@@ -194,6 +216,35 @@
         });
       }
     });
+
+    // ── Mobile hamburger menu ──────────────────────────────────────────────
+    (function() {
+      var btn   = document.querySelector('.navbar-hamburger');
+      var menu  = document.getElementById('mobile-menu');
+      var close = document.querySelector('.mobile-menu-close');
+      if (!btn || !menu) return;
+
+      function openMenu() {
+        menu.classList.add('is-open');
+        btn.classList.add('is-active');
+        document.body.classList.add('menu-open');
+        btn.setAttribute('aria-expanded', 'true');
+        menu.setAttribute('aria-hidden', 'false');
+      }
+      function closeMenu() {
+        menu.classList.remove('is-open');
+        btn.classList.remove('is-active');
+        document.body.classList.remove('menu-open');
+        btn.setAttribute('aria-expanded', 'false');
+        menu.setAttribute('aria-hidden', 'true');
+      }
+
+      btn.addEventListener('click', openMenu);
+      if (close) close.addEventListener('click', closeMenu);
+      menu.querySelectorAll('a').forEach(function(a) {
+        a.addEventListener('click', closeMenu);
+      });
+    })();
 
     // ── Footer slide-up ────────────────────────────────────────────────────
     var footerEl = document.querySelector('footer');

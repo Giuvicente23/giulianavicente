@@ -198,9 +198,7 @@ a {
 }
 
 .navbar-location {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  display: none;
 }
 
 .navbar-location span {
@@ -265,6 +263,154 @@ a {
   opacity: 0.4;
 }
 
+/* Logo */
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  text-decoration: none;
+}
+
+.navbar-logo img {
+  height: 28px;
+  width: auto;
+  display: block;
+}
+
+/* Hamburger — oculto en desktop */
+.navbar-hamburger {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 32px;
+  height: 32px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  flex-shrink: 0;
+}
+
+.ham-line {
+  display: block;
+  width: 20px;
+  height: 1.5px;
+  background: var(--white);
+  border-radius: 2px;
+  transform-origin: center;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity  0.25s ease;
+}
+
+/* Línea 1 → brazo superior de la X */
+.navbar-hamburger.is-active .ham-line:nth-child(1) {
+  transform: translateY(6.5px) rotate(45deg);
+}
+
+/* Línea 2 → desaparece */
+.navbar-hamburger.is-active .ham-line:nth-child(2) {
+  transform: scaleX(0);
+  opacity: 0;
+}
+
+/* Línea 3 → brazo inferior de la X */
+.navbar-hamburger.is-active .ham-line:nth-child(3) {
+  transform: translateY(-6.5px) rotate(-45deg);
+}
+
+/* Mobile menu overlay — clip-path desde esquina superior derecha */
+.mobile-menu {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  inset: 0;
+  height: 100vh;
+  height: 100svh;
+  z-index: 200;
+  background-color: #ffffff;
+  clip-path: circle(0% at calc(100% - 32px) 38px);
+  pointer-events: none;
+  transition: clip-path 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mobile-menu.is-open {
+  clip-path: circle(170% at calc(100% - 32px) 38px);
+  pointer-events: all;
+}
+
+body.menu-open {
+  overflow: hidden;
+}
+
+.mobile-menu-inner {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 16px 16px 48px;
+  position: relative;
+}
+
+.mobile-menu-close {
+  align-self: flex-end;
+  background: none;
+  border: none;
+  color: var(--black);
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 8px;
+  opacity: 0.4;
+  transition: opacity 0.2s ease;
+  font-family: 'ApfelGrotezk', sans-serif;
+}
+
+.mobile-menu-close:hover {
+  opacity: 1;
+}
+
+.mobile-menu-links {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
+  gap: 32px;
+  padding: 0 8px;
+}
+
+.mobile-menu-links a {
+  font-family: 'ApfelGrotezk', sans-serif;
+  font-size: 40px;
+  line-height: 44px;
+  color: var(--black);
+  text-decoration: none;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              color 0.2s ease;
+}
+
+.mobile-menu.is-open .mobile-menu-links a {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.mobile-menu.is-open .mobile-menu-links a:nth-child(1) { transition-delay: 0.22s; }
+.mobile-menu.is-open .mobile-menu-links a:nth-child(2) { transition-delay: 0.30s; }
+.mobile-menu.is-open .mobile-menu-links a:nth-child(3) { transition-delay: 0.38s; }
+.mobile-menu.is-open .mobile-menu-links a:nth-child(4) { transition-delay: 0.46s; }
+.mobile-menu.is-open .mobile-menu-links a:nth-child(5) { transition-delay: 0.54s; }
+
+.mobile-menu-links a:hover,
+.mobile-menu-links a:active {
+  opacity: 0.4;
+}
+
+.mobile-menu-links a.nav-active {
+  opacity: 0.35;
+}
+
 /* Navbar variante clara (sobre fondo blanco) */
 .navbar--light .navbar-inner {
   background: rgba(245, 245, 245, 0.75);
@@ -280,8 +426,7 @@ a {
 footer.footer--dark {
   background-color: var(--black);
   border-radius: 24px 24px 0 0;
-  max-width: 100%;
-  margin-top: -24px; /* solapa sobre el about-body */
+  margin-top: -24px;
   position: relative;
   z-index: 3;
 }
@@ -409,12 +554,14 @@ footer.footer--dark .footer-social a {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Hero location — only visible on mobile */
+/* Hero location — visible en todos los viewports */
 .hero-location-mobile {
-  display: none;
+  display: flex;
   position: absolute;
   bottom: 24px;
-  left: 16px;
+  left: 0;
+  right: 0;
+  justify-content: center;
   align-items: center;
   gap: 8px;
   z-index: 2;
@@ -576,10 +723,11 @@ footer.footer-visible .footer-inner {
    CASE STUDIES
    ============================================= */
 
-/* Sección: solo posicionamiento, sin visual propia */
+/* Sección: fondo negro para tapar el hero sticky detrás */
 .case-studies {
   position: relative;
   z-index: 2;
+  background-color: var(--black);
 }
 
 /* Sticky viewport — el contenedor visual real */
@@ -638,6 +786,7 @@ footer.footer-visible .footer-inner {
   overflow: hidden;
   box-shadow: 0px 50px 70px 0px rgba(0, 0, 0, 0.08);
   cursor: pointer;
+  background-color: var(--card-bg, #f5f5f5);
 }
 
 /* ── Panel de texto (izquierda) ──────────────── */
@@ -1136,8 +1285,53 @@ footer {
   opacity: 0.5;
 }
 
+/* Way of Working — imagen reducida por debajo de 1300px */
+@media (max-width: 1300px) {
+  .wow-image {
+    width: 360px;
+    height: 256px;
+  }
+}
+
 /* =============================================
-   MOBILE  (≤ 768px)
+   TABLET  (769px – 1024px)
+   ============================================= */
+
+@media (min-width: 769px) and (max-width: 1024px) {
+
+  /* Side margins → 32px */
+  .description        { padding: 80px 32px; }
+  .about-description  { padding: 80px 32px; }
+  .about-body         { padding: 40px 32px 80px; }
+
+  /* Way of Working — márgenes alineados con case studies */
+  .wow { padding: 120px 32px; }
+
+  /* Cards — layout horizontal 50/50 */
+  .card-row {
+    flex-direction: row;
+    height: auto;
+  }
+  .card {
+    flex: 0 0 50%;
+    width: auto;
+    padding: 12px;
+    border-radius: 0;
+  }
+  .card-img {
+    flex: 0 0 50%;
+    width: auto;
+    min-height: 280px;
+  }
+
+  /* Márgenes internos de case studies alineados con wow */
+  .cs-header { padding: 24px 32px 16px; }
+  .cs-track  { padding: 8px 32px 0; }
+
+}
+
+/* =============================================
+   MOBILE  (≤ 767px)
    ============================================= */
 
 @media (max-width: 768px) {
@@ -1145,7 +1339,9 @@ footer {
   /* ── Navbar ───────────────────────────────── */
   .navbar { padding: 12px 16px; }
   .navbar-location { display: none; }
-  .navbar-inner { justify-content: center; }
+  .navbar-inner { justify-content: space-between; }
+  .navbar-links { display: none; }
+  .navbar-hamburger { display: flex; }
 
   /* ── Hero ─────────────────────────────────── */
   .hero {
@@ -1211,58 +1407,15 @@ footer {
 
   /* ── Case Studies ────────────────────────── */
   .case-studies { padding: 0 16px 24px; }
+  .cs-header { padding: 40px 0 16px; }
 
-  /* Desactiva scroll-lock en mobile */
-  .cs-sticky {
-    position: static;
-    height: auto;
-    overflow: visible;
-    padding-top: 0;
-    border-radius: 0;
-    box-shadow: none;
-  }
-
-  .cs-track {
-    overflow: visible;
-    padding: 0;
-    flex: none;
-  }
-
-  .cs-cards {
-    transform: none !important;
-    gap: 12px;
-  }
-
-  .cs-header {
-    padding: 40px 0 16px;
-  }
-
-  /* Cada fila se apila verticalmente */
-  .card-row {
-    flex-direction: column;
-    height: auto !important;
-    border-radius: 24px;
-  }
-
-  /* Panel texto: ocupa el ancho completo */
-  .card {
-    flex: none;
-    width: 100%;
-    border-radius: 0;
-  }
+  /* Cards en mobile: padding texto 12px */
+  .card { padding: 12px; }
 
   .card h3 { font-size: 28px; line-height: 30px; }
 
   .card-top > p,
   .card-metric { font-size: 16px; line-height: 20px; letter-spacing: -0.28px; }
-
-  /* Panel imagen */
-  .card-img {
-    flex: none;
-    width: 100%;
-    min-height: 220px;
-    position: relative;
-  }
 
   /* ── Experience & Skills ─────────────────── */
   .experience-skills {
@@ -1302,6 +1455,57 @@ footer {
     font-size: 32px;
     line-height: 36px;
     white-space: normal;
+  }
+
+}
+
+/* =============================================
+   SMALL MOBILE  (≤ 600px) — cards apiladas
+   ============================================= */
+
+@media (max-width: 600px) {
+
+  /* Desactiva scroll-lock */
+  .cs-sticky {
+    position: static;
+    height: auto;
+    overflow: visible;
+    padding-top: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .cs-track {
+    overflow: visible;
+    padding: 0;
+    flex: none;
+  }
+
+  .cs-cards {
+    transform: none !important;
+    gap: 12px;
+  }
+
+  /* Cada fila se apila verticalmente */
+  .card-row {
+    flex-direction: column;
+    height: auto !important;
+    border-radius: 24px;
+  }
+
+  /* Panel texto: ancho completo */
+  .card {
+    flex: none;
+    width: 100%;
+    border-radius: 0;
+  }
+
+  /* Panel imagen */
+  .card-img {
+    flex: none;
+    width: 100%;
+    min-height: 220px;
+    position: relative;
   }
 
 }
