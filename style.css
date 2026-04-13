@@ -742,7 +742,7 @@ footer.footer-visible .footer-inner {
   box-shadow: 0 -16px 48px rgba(0, 0, 0, 0.35);
   display: flex;
   flex-direction: column;
-  padding-top: 70px; /* altura navbar */
+  padding-top: 16px;
 }
 
 /* Label CASE STUDIES */
@@ -793,7 +793,7 @@ footer.footer-visible .footer-inner {
 .card {
   background: var(--card-gradient, var(--card-bg, #f5f5f5));
   flex: 0 0 35%;
-  padding: 40px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -808,17 +808,18 @@ footer.footer-visible .footer-inner {
 
 .card-meta {
   display: flex;
-  flex-direction: column;
-  gap: 6px;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
 }
 
 .card-year {
   font-family: 'ApfelGrotezk', sans-serif;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 20px;
-  letter-spacing: -0.32px;
-  color: var(--card-text, var(--grey));
+  letter-spacing: -0.28px;
+  color: var(--card-secondary, var(--grey));
   white-space: nowrap;
 }
 
@@ -834,8 +835,8 @@ footer.footer-visible .footer-inner {
   justify-content: center;
   padding: 2px 6px;
   border-radius: 24px;
-  background-color: #f5f5f5;
-  font-family: Arial, sans-serif;
+  background-color: var(--tag-bg, #f5f5f5);
+  font-family: 'ApfelGrotezk', sans-serif;
   font-size: 12px;
   line-height: 16px;
   color: var(--black);
@@ -859,19 +860,37 @@ footer.footer-visible .footer-inner {
   color: var(--card-text, var(--black));
 }
 
-.card-metric {
-  font-family: 'ApfelGrotezk', sans-serif;
-  font-weight: 400;
-  font-size: 24px;
-  line-height: 28px;
-  letter-spacing: -0.48px;
-  color: var(--card-text, var(--black));
+.card-outcome {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
-.card-metrics {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
+.outcome-label {
+  font-family: 'ApfelGrotezk', sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: -0.28px;
+  color: var(--outcome-label-color, var(--card-secondary, var(--grey)));
+  white-space: nowrap;
+}
+
+.card-metric {
+  font-family: 'ApfelGrotezk', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 14px;
+  letter-spacing: -0.28px;
+  color: var(--card-text, var(--black));
+  white-space: nowrap;
+}
+
+.outcome-sep {
+  color: var(--card-secondary, var(--grey));
+  font-size: 14px;
+  line-height: 14px;
 }
 
 /* ── Panel de imagen (derecha) ───────────────── */
@@ -1315,7 +1334,7 @@ footer {
   .card {
     flex: 0 0 50%;
     width: auto;
-    padding: 12px;
+    padding: 20px;
     border-radius: 0;
   }
   .card-img {
@@ -1406,16 +1425,48 @@ footer {
   .wow-item-img { display: block; }
 
   /* ── Case Studies ────────────────────────── */
-  .case-studies { padding: 0 16px 24px; }
-  .cs-header { padding: 40px 0 16px; }
+  .case-studies { padding: 0; }
+  .cs-sticky {
+    position: relative;
+    height: auto;
+    overflow: visible;
+    background-color: #f5f5f5;
+    padding-bottom: 40px;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .cs-header { padding: 24px 16px 16px; }
+  .cs-track  { overflow: visible; flex: none; padding: 0 16px; margin-bottom: 0; }
+  .cs-cards  { transform: none !important; gap: 12px; }
 
-  /* Cards en mobile: padding texto 12px */
-  .card { padding: 12px; }
+  /* Cards <768px: disposición vertical */
+  .card-row {
+    flex-direction: column;
+    height: auto !important;
+    border-radius: 24px;
+    overflow: hidden;
+  }
+  .card {
+    flex: none;
+    width: 100%;
+    padding: 16px;
+    border-radius: 0;
+    justify-content: flex-start;
+    gap: 48px;
+    background: var(--card-bg-mobile, var(--card-bg));
+  }
+  .card-img {
+    flex: none;
+    width: 100%;
+    height: 259px;
+    min-height: unset;
+  }
 
-  .card h3 { font-size: 28px; line-height: 30px; }
+  .card h3 { font-size: 32px; line-height: 32px; }
 
-  .card-top > p,
-  .card-metric { font-size: 16px; line-height: 20px; letter-spacing: -0.28px; }
+  .card-top > p { font-size: 20px; line-height: 22px; letter-spacing: -0.4px; }
+
+  .outcome-label { color: var(--card-secondary, var(--grey)); }
 
   /* ── Experience & Skills ─────────────────── */
   .experience-skills {
@@ -1424,7 +1475,11 @@ footer {
     gap: 40px;
   }
 
-  .experience-col,
+  .experience-col {
+    padding: 0 16px;
+    width: 100%;
+  }
+
   .skills-col {
     padding: 0 16px;
   }
@@ -1463,49 +1518,3 @@ footer {
    SMALL MOBILE  (≤ 600px) — cards apiladas
    ============================================= */
 
-@media (max-width: 600px) {
-
-  /* Desactiva scroll-lock */
-  .cs-sticky {
-    position: static;
-    height: auto;
-    overflow: visible;
-    padding-top: 0;
-    border-radius: 0;
-    box-shadow: none;
-  }
-
-  .cs-track {
-    overflow: visible;
-    padding: 0;
-    flex: none;
-  }
-
-  .cs-cards {
-    transform: none !important;
-    gap: 12px;
-  }
-
-  /* Cada fila se apila verticalmente */
-  .card-row {
-    flex-direction: column;
-    height: auto !important;
-    border-radius: 24px;
-  }
-
-  /* Panel texto: ancho completo */
-  .card {
-    flex: none;
-    width: 100%;
-    border-radius: 0;
-  }
-
-  /* Panel imagen */
-  .card-img {
-    flex: none;
-    width: 100%;
-    min-height: 220px;
-    position: relative;
-  }
-
-}
