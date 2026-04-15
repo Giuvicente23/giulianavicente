@@ -609,7 +609,7 @@ footer.footer-visible .footer-inner {
 }
 
 .card-row.reveal-on-scroll,
-.wow-item.reveal-on-scroll,
+.wow-col.reveal-on-scroll,
 .exp-item.reveal-on-scroll {
   transition-delay: calc(var(--delay, 0) * 0.15s);
 }
@@ -640,83 +640,118 @@ footer.footer-visible .footer-inner {
 }
 
 /* =============================================
-   WAY OF WORKING
+   AREAS OF EXPERTISE (ex Way of Working)
    ============================================= */
 
 .wow {
   display: flex;
-  gap: 64px;
-  align-items: center;
-  justify-content: flex-end;
-  padding: 120px 24px;
+  flex-direction: column;
+  gap: 32px;
+  padding: 80px 64px;
   width: 100%;
-  position: sticky;
-  top: 0;
+  position: relative;
   z-index: 1;
   background-color: var(--black);
 }
 
-.wow-image {
-  width: 649px;
-  height: 462px;
-  flex-shrink: 0;
-  border-radius: 16px;
-  overflow: hidden;
-  background-color: var(--black);
-  position: relative;
-}
-
-.wow-image img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: opacity 0.6s ease;
-}
-
-.wow-image img.wow-img-hidden {
-  opacity: 0;
-}
-
-.wow-text {
-  flex: 1;
+.wow-cols {
   display: flex;
-  flex-direction: column;
   gap: 32px;
-  min-width: 0;
+  align-items: flex-start;
+  width: 100%;
 }
 
-.wow-item {
+.wow-col {
+  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 12px;
   cursor: default;
-  transition: opacity 0.4s ease;
+  transition: color 0.35s ease;
+  color: #747474;
+  min-width: 0;
 }
 
-.wow-item h3 {
+.wow-col h3 {
   font-family: 'ApfelGrotezk', sans-serif;
   font-weight: 500;
   font-size: 20px;
   line-height: 24px;
+  color: inherit;
 }
 
-.wow-item p {
+.wow-col p {
   font-family: 'ApfelGrotezk', sans-serif;
   font-weight: 400;
   font-size: 20px;
   line-height: 24px;
+  color: inherit;
 }
 
-.wow-item--active h3,
-.wow-item--active p {
+.wow-col--active {
   color: var(--white);
 }
 
-.wow-item--muted h3,
-.wow-item--muted p {
-  color: var(--grey);
+/* =============================================
+   PHILOSOPHY
+   ============================================= */
+
+.philosophy {
+  width: 100%;
+  background-color: #23489d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 64px;
+  min-height: 280px;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.philosophy-inner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.philosophy-label {
+  font-family: 'ApfelGrotezk', sans-serif;
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 1;
+  color: #2c3279;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.philosophy-text {
+  font-family: 'ApfelGrotezk', sans-serif;
+  font-weight: 500;
+  font-size: 48px;
+  line-height: 1;
+  color: var(--white);
+  white-space: nowrap;
+}
+
+/* Animated text — each phrase cycles in/out */
+.philosophy-phrase {
+  display: inline-block;
+  animation: philosophy-in 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.philosophy-phrase.philosophy-out {
+  animation: philosophy-out 0.5s cubic-bezier(0.4, 0, 1, 1) both;
+}
+
+@keyframes philosophy-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes philosophy-out {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(-20px); }
 }
 
 /* =============================================
@@ -1060,8 +1095,20 @@ footer.footer-visible .footer-inner {
   line-height: 52px;
   color: var(--white);
   max-width: 100%;
-  animation: about-reveal 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
-  animation-delay: 0.25s;
+}
+
+/* Line-by-line scroll reveal */
+.about-line-wrap {
+  display: block;
+  overflow: hidden;
+}
+.about-line-inner {
+  display: block;
+  transform: translateY(110%);
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.about-line-inner.line-revealed {
+  transform: translateY(0);
 }
 
 /* ── Body: overlap card (light) ── */
@@ -1239,6 +1286,17 @@ footer.footer-visible .footer-inner {
    FOOTER
    ============================================= */
 
+/* Wrapper full-width que cubre el hero en los costados */
+.footer-bg {
+  width: 100%;
+  position: relative;
+  z-index: 3;
+  background-color: var(--black); /* costados negros → footer blanco (index) */
+}
+.footer-bg--light {
+  background-color: #f5f5f5;     /* costados claros → footer negro (about) */
+}
+
 footer {
   background-color: var(--white);
   width: 100%;
@@ -1407,22 +1465,39 @@ footer {
     line-height: 32px;
   }
 
-  /* ── Way of Working ──────────────────────── */
+  /* ── Areas of Expertise ─────────────────── */
   .wow {
-    flex-direction: column;
     padding: 40px 16px;
-    position: relative;
-    z-index: 1;
-    gap: 32px;
-    align-items: flex-start;
-    background-color: var(--black);
+    gap: 24px;
   }
 
-  .wow-image { display: none; }
+  .wow-cols {
+    flex-direction: column;
+    gap: 24px;
+  }
 
-  .wow-text { width: 100%; }
+  .wow-col h3,
+  .wow-col p {
+    font-size: 16px;
+    line-height: 22px;
+  }
 
-  .wow-item-img { display: block; }
+  /* ── Philosophy ──────────────────────────── */
+  .philosophy {
+    padding: 60px 24px;
+    min-height: 200px;
+  }
+
+  .philosophy-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .philosophy-label,
+  .philosophy-text {
+    font-size: 32px;
+  }
 
   /* ── Case Studies ────────────────────────── */
   .case-studies { padding: 0; }

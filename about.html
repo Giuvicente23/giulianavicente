@@ -63,7 +63,40 @@
     <!-- Description -->
     <section class="about-description">
       <span class="label label--dark">ABOUT ME</span>
-      <p class="about-intro">I design B2B &amp; SaaS products grounded in data and research. I transform complexity into clarity, working cross-functionally to deliver solutions that drive real business impact, from strategy to scaled outcomes.</p>
+      <p class="about-intro">I design B2B and SaaS products grounded in data and research. I transform complexity into clarity, working cross-functionally to deliver solutions that generate genuine business impact.</p>
+    </section>
+
+    <!-- Areas of Expertise -->
+    <section class="wow">
+      <span class="label label--dark">AREAS OF EXPERTISE</span>
+      <div class="wow-cols">
+        <div class="wow-col wow-col--active" data-wow-index="0">
+          <h3>Product Strategy &amp; Discovery</h3>
+          <p>From discovery to scaled outcomes, I guide products through research, validation, and data-driven decision-making.</p>
+        </div>
+        <div class="wow-col" data-wow-index="1">
+          <h3>B2B &amp; SaaS Design</h3>
+          <p>Specialized in complex products where clarity and usability directly impact adoption and retention.</p>
+        </div>
+        <div class="wow-col" data-wow-index="2">
+          <h3>Data &amp; User Research</h3>
+          <p>I combine behavioral analytics with qualitative insights to make informed strategic decisions.</p>
+        </div>
+        <div class="wow-col" data-wow-index="3">
+          <h3>Cross-Functional Leadership</h3>
+          <p>I work seamlessly with engineering, product, and business teams to translate insights into reality.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Philosophy -->
+    <section class="philosophy">
+      <div class="philosophy-inner">
+        <span class="philosophy-label">philosophy</span>
+        <span class="philosophy-text">
+          <span class="philosophy-phrase" id="philosophy-phrase">Investigate, don't assume</span>
+        </span>
+      </div>
     </section>
 
     <!-- Experience + Skills -->
@@ -183,6 +216,7 @@
   </main>
 
   <!-- Footer -->
+  <div class="footer-bg footer-bg--light">
   <footer class="footer--dark" id="contact">
     <div class="footer-inner">
       <span class="footer-year">2026</span>
@@ -193,6 +227,7 @@
       </div>
     </div>
   </footer>
+  </div>
 
   <script>
     // ── Custom cursor ──────────────────────────────────────────────────────
@@ -244,6 +279,42 @@
       menu.querySelectorAll('a').forEach(function(a) {
         a.addEventListener('click', closeMenu);
       });
+    })();
+
+    // ── Areas of Expertise: hover por columna ─────────────────────────────
+    (function() {
+      var wowCols = document.querySelectorAll('.wow-col');
+      wowCols.forEach(function(col) {
+        col.addEventListener('mouseenter', function() {
+          wowCols.forEach(function(c) { c.classList.remove('wow-col--active'); });
+          col.classList.add('wow-col--active');
+        });
+      });
+    })();
+
+    // ── Philosophy: text cycling (textos se agregan aquí) ─────────────────
+    (function() {
+      var phrases = [
+        "Investigate, don't assume"
+        // más frases se agregan aquí
+      ];
+      if (phrases.length <= 1) return;
+      var el = document.getElementById('philosophy-phrase');
+      var current = 0;
+
+      function nextPhrase() {
+        el.classList.add('philosophy-out');
+        setTimeout(function() {
+          current = (current + 1) % phrases.length;
+          el.textContent = phrases[current];
+          el.classList.remove('philosophy-out');
+          el.style.animation = 'none';
+          el.offsetHeight; // reflow
+          el.style.animation = '';
+        }, 500);
+      }
+
+      setInterval(nextPhrase, 4000);
     })();
 
     // ── Footer slide-up ────────────────────────────────────────────────────

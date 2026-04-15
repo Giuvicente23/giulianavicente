@@ -83,30 +83,28 @@
   <!-- About Me -->
   <section class="description" id="about">
     <span class="label">ABOUT ME</span>
-    <p>I design B2B &amp; SaaS products grounded in data and research. I transform complexity into clarity, working cross-functionally to deliver solutions that drive real business impact, from strategy to scaled outcomes.</p>
+    <p>I design B2B and SaaS products grounded in data and research. I transform complexity into clarity, working cross-functionally to deliver solutions that generate genuine business impact.</p>
   </section>
 
-  <!-- Way of Working -->
+  <!-- Areas of Expertise -->
   <section class="wow">
-    <div class="wow-image">
-      <img id="wow-img" src="images/wow_01.png" alt="Way of working">
-    </div>
-    <div class="wow-text">
-      <span class="label">WAY OF WORKING</span>
-      <div class="wow-item wow-item--active" data-wow-index="0">
-        <h3>Evidence-Based</h3>
-        <p>Every decision is backed by data and user validation. I don't assume; I investigate. I analyze pathways, behavior through tools like Datadog, and complement with qualitative research.</p>
-        <div class="wow-item-img"><img src="images/wow_01.png" alt="Evidence-Based"></div>
+    <span class="label label--dark">AREAS OF EXPERTISE</span>
+    <div class="wow-cols">
+      <div class="wow-col wow-col--active" data-wow-index="0">
+        <h3>Product Strategy &amp; Discovery</h3>
+        <p>From discovery to scaled outcomes, I guide products through research, validation, and data-driven decision-making.</p>
       </div>
-      <div class="wow-item wow-item--muted" data-wow-index="1">
-        <h3>Strategic Partnership</h3>
-        <p>I work as a partner to the PM and engineering team, not as an executor. Together we balance what's ideal with what's viable, user needs with business objectives.</p>
-        <div class="wow-item-img"><img src="images/wow_02.png" alt="Strategic Partnership"></div>
+      <div class="wow-col" data-wow-index="1">
+        <h3>B2B &amp; SaaS Design</h3>
+        <p>Specialized in complex products where clarity and usability directly impact adoption and retention.</p>
       </div>
-      <div class="wow-item wow-item--muted" data-wow-index="2">
-        <h3>Outcome-Oriented</h3>
-        <p>I design for measurable impact. Every project has clear success criteria, revenue, speed, retention, or efficiency gains. That's my north star, and it shapes every decision I make.</p>
-        <div class="wow-item-img"><img src="images/wow_03.png" alt="Outcome-Oriented"></div>
+      <div class="wow-col" data-wow-index="2">
+        <h3>Data &amp; User Research</h3>
+        <p>I combine behavioral analytics with qualitative insights to make informed strategic decisions.</p>
+      </div>
+      <div class="wow-col" data-wow-index="3">
+        <h3>Cross-Functional Leadership</h3>
+        <p>I work seamlessly with engineering, product, and business teams to translate insights into reality.</p>
       </div>
     </div>
   </section>
@@ -260,6 +258,7 @@
   </section>
 
   <!-- Footer -->
+  <div class="footer-bg">
   <footer id="contact">
     <div class="footer-inner">
       <span class="footer-year">2026</span>
@@ -270,6 +269,7 @@
       </div>
     </div>
   </footer>
+  </div>
 
   <script>
     // ── Hero: mask-clip reveal (left→right per line, then name fade up) ──
@@ -293,67 +293,17 @@
         name.textContent + '</span></span>';
     })();
 
-    // ── Way of Working: auto-cycle + hover ────────────────────────────────
-    var wowItems = document.querySelectorAll('.wow-item');
-    var wowImages = ['images/wow_01.png', 'images/wow_02.png', 'images/wow_03.png'];
-    var wowContainer = document.querySelector('.wow-image');
-    var currentWow = 0;
-    var wowTimer;
-    var isHovering = false;
+    // ── Areas of Expertise: hover por columna ─────────────────────────────
+    var wowCols = document.querySelectorAll('.wow-col');
+    var activeWowCol = wowCols[0]; // primera activa por defecto
 
-    // Pre-load all images; use two overlapping imgs for smooth crossfade
-    var imgA = document.getElementById('wow-img');
-    var imgB = document.createElement('img');
-    imgB.src = wowImages[1];
-    imgB.style.transition = 'opacity 0.6s ease';
-    imgB.classList.add('wow-img-hidden');
-    wowContainer.appendChild(imgB);
-    var frontImg = imgA; // currently visible
-    var backImg  = imgB; // preloaded next
-
-    function setWowActive(idx) {
-      if (idx === currentWow) return;
-      currentWow = idx;
-
-      // update text items
-      wowItems.forEach(function(item, i) {
-        item.classList.toggle('wow-item--active', i === idx);
-        item.classList.toggle('wow-item--muted',  i !== idx);
-      });
-
-      // swap images: load new src into back, then crossfade
-      backImg.src = wowImages[idx];
-      backImg.onload = function() {
-        backImg.classList.remove('wow-img-hidden');
-        frontImg.classList.add('wow-img-hidden');
-        // swap roles
-        var tmp = frontImg;
-        frontImg = backImg;
-        backImg = tmp;
-      };
-    }
-
-    function startWowCycle() {
-      clearInterval(wowTimer);
-      wowTimer = setInterval(function() {
-        if (!isHovering) {
-          setWowActive((currentWow + 1) % wowItems.length);
-        }
-      }, 5000);
-    }
-
-    wowItems.forEach(function(item, i) {
-      item.addEventListener('mouseenter', function() {
-        isHovering = true;
-        setWowActive(i);
-      });
-      item.addEventListener('mouseleave', function() {
-        isHovering = false;
-        startWowCycle();
+    wowCols.forEach(function(col) {
+      col.addEventListener('mouseenter', function() {
+        wowCols.forEach(function(c) { c.classList.remove('wow-col--active'); });
+        col.classList.add('wow-col--active');
+        activeWowCol = col;
       });
     });
-
-    startWowCycle();
 
     // ── Custom cursor ─────────────────────────────────────────────────────
     var cursorDot    = document.getElementById('cursor-dot');
@@ -488,9 +438,12 @@
     document.querySelectorAll('.exp-item').forEach(function(el, i) {
       el.style.setProperty('--delay', i);
     });
+    document.querySelectorAll('.wow-col').forEach(function(el, i) {
+      el.style.setProperty('--delay', i);
+    });
 
     var revealEls = document.querySelectorAll(
-      '.description p, .wow-image, .wow-item, ' +
+      '.description p, .wow-col, ' +
       '.label, .card-row, .exp-item, .skill-tags'
     );
 
