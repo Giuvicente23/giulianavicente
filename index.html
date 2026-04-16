@@ -195,71 +195,9 @@
     </div>
   </section>
 
-  <!-- Experience & Skills -->
-  <section class="experience-skills" id="experience">
-
-    <div class="experience-col">
-      <span class="label reveal-on-scroll" style="--delay:0">EXPERIENCE</span>
-      <div class="exp-item reveal-on-scroll" style="--delay:1">
-        <div class="exp-header">
-          <h3>Product Designer</h3>
-          <span class="exp-date">Jun 2022 – March 2026</span>
-        </div>
-        <p class="exp-company">Mudafy</p>
-      </div>
-      <div class="exp-item reveal-on-scroll" style="--delay:2">
-        <div class="exp-header">
-          <h3>Senior UX Designer</h3>
-          <span class="exp-date">Feb 2022 – May 2022</span>
-        </div>
-        <p class="exp-company">Mercado Libre</p>
-      </div>
-      <div class="exp-item reveal-on-scroll" style="--delay:3">
-        <div class="exp-header">
-          <h3>Mid-Senior UX Designer</h3>
-          <span class="exp-date">Feb 2020 – Jan 2022</span>
-        </div>
-        <p class="exp-company">Mercado Libre</p>
-      </div>
-      <div class="exp-item reveal-on-scroll" style="--delay:4">
-        <div class="exp-header">
-          <h3>UX Designer</h3>
-          <span class="exp-date">Aug 2018 – Jan 2020</span>
-        </div>
-        <p class="exp-company">Mercado Libre</p>
-      </div>
-      <div class="exp-item reveal-on-scroll" style="--delay:5">
-        <div class="exp-header">
-          <h3>Digital Designer</h3>
-          <span class="exp-date">Aug 2017 – Aug 2018</span>
-        </div>
-        <p class="exp-company">Conway &amp; Partners</p>
-      </div>
-    </div>
-
-    <div class="skills-col reveal-on-scroll" style="--delay:2">
-      <span class="label">PRODUCT SKILLS</span>
-      <div class="skill-tags">
-        <span class="skill-tag" style="--pill-color:#BB98EB">Product Analytics</span>
-        <span class="skill-tag" style="--pill-color:#C4F485">Product Thinking</span>
-        <span class="skill-tag" style="--pill-color:#FFDDE3">UX</span>
-        <span class="skill-tag" style="--pill-color:#FFBE00">UI</span>
-        <span class="skill-tag" style="--pill-color:#DFCDAF">Research</span>
-        <span class="skill-tag" style="--pill-color:#669EF4">UX Writing</span>
-        <span class="skill-tag" style="--pill-color:#FF98F6">Design Systems</span>
-        <span class="skill-tag" style="--pill-color:#F07D7D">Data-Driven Design</span>
-        <span class="skill-tag" style="--pill-color:#C9E6F1">Cross-functional collaboration</span>
-        <span class="skill-tag" style="--pill-color:#FFBE00">AI Assist-Design</span>
-        <span class="skill-tag" style="--pill-color:#BB98EB">Stakeholder Management</span>
-        <span class="skill-tag" style="--pill-color:#C4F485">Roadmap Prioritization</span>
-      </div>
-    </div>
-
-  </section>
-
   <!-- Footer -->
-  <div class="footer-bg">
-  <footer id="contact">
+  <div class="footer-bg footer-bg--light">
+  <footer class="footer--dark" id="contact">
     <div class="footer-inner">
       <span class="footer-year">2026</span>
       <p class="footer-tagline">Based in Madrid, working globally.</p>
@@ -426,22 +364,8 @@
       observer.observe(descSection);
     })();
 
-    // ── Scroll reveal (experience + skills) ───────────────────────────────
-    (function() {
-      var revealEls = document.querySelectorAll('.reveal-on-scroll');
-      if (!revealEls.length) return;
-      var observer = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('revealed');
-            observer.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.08 });
-      revealEls.forEach(function(el) { observer.observe(el); });
-    })();
 
-    // ── Footer slide-up from below ─────────────────────────────────────────
+// ── Footer slide-up from below ─────────────────────────────────────────
     var footerEl = document.querySelector('footer');
     var footerObserver = new IntersectionObserver(function(entries) {
       entries.forEach(function(entry) {
