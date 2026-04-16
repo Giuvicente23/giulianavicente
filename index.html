@@ -82,8 +82,8 @@
 
   <!-- About Me -->
   <section class="description" id="about">
-    <span class="label">ABOUT ME</span>
-    <p>I design B2B and SaaS products grounded in data and research. I transform complexity into clarity, working cross-functionally to deliver solutions that generate genuine business impact.</p>
+    <span class="label"><span class="about-line-wrap"><span class="about-line-inner">ABOUT ME</span></span></span>
+    <p><span class="about-line-wrap"><span class="about-line-inner">I design B2B and SaaS products grounded in data and research. I transform complexity into clarity, working cross-functionally to deliver solutions that generate genuine business impact.</span></span></p>
   </section>
 
   <!-- Areas of Expertise -->
@@ -118,7 +118,7 @@
       <div class="cs-track">
         <div class="cs-cards">
 
-          <div class="card-row" style="--card-bg:#fbf193; --card-bg-mobile:#fbf191; --card-text:#6d6520; --card-gradient: linear-gradient(to bottom, #fbf193, #f9e63a); --card-img-gradient: linear-gradient(to bottom, #fbf193, #f9e63a); --card-secondary:#b7a825; --outcome-label-color:#b7a825; --tag-bg:#e0d56d;">
+          <a href="pronto-app.html" class="card-row" style="--card-bg:#fbf193; --card-bg-mobile:#fbf191; --card-text:#6d6520; --card-gradient: linear-gradient(to bottom, #fbf193, #f9e63a); --card-img-gradient: linear-gradient(to bottom, #fbf193, #f9e63a); --card-secondary:#b7a825; --outcome-label-color:#b7a825; --tag-bg:#e0d56d; text-decoration:none; display:flex;">
             <div class="card">
               <div class="card-top">
                 <div class="card-meta">
@@ -142,7 +142,7 @@
             <div class="card-img">
               <img src="images/case_study_03.png" alt="Pronto App project">
             </div>
-          </div>
+          </a>
 
           <div class="card-row" style="--card-bg:#3ed473; --card-bg-mobile:#adeeae; --card-text:#0a3518; --card-gradient: linear-gradient(to bottom, #3ed473, #afeeaf); --card-img-gradient: linear-gradient(to bottom, #3ed473, #afeeaf); --card-secondary:#239a43; --outcome-label-color:#239a43; --tag-bg:#9be9a5;">
             <div class="card">
@@ -199,36 +199,36 @@
   <section class="experience-skills" id="experience">
 
     <div class="experience-col">
-      <span class="label">EXPERIENCE</span>
-      <div class="exp-item">
+      <span class="label reveal-on-scroll" style="--delay:0">EXPERIENCE</span>
+      <div class="exp-item reveal-on-scroll" style="--delay:1">
         <div class="exp-header">
           <h3>Product Designer</h3>
           <span class="exp-date">Jun 2022 – March 2026</span>
         </div>
         <p class="exp-company">Mudafy</p>
       </div>
-      <div class="exp-item">
+      <div class="exp-item reveal-on-scroll" style="--delay:2">
         <div class="exp-header">
           <h3>Senior UX Designer</h3>
           <span class="exp-date">Feb 2022 – May 2022</span>
         </div>
         <p class="exp-company">Mercado Libre</p>
       </div>
-      <div class="exp-item">
+      <div class="exp-item reveal-on-scroll" style="--delay:3">
         <div class="exp-header">
           <h3>Mid-Senior UX Designer</h3>
           <span class="exp-date">Feb 2020 – Jan 2022</span>
         </div>
         <p class="exp-company">Mercado Libre</p>
       </div>
-      <div class="exp-item">
+      <div class="exp-item reveal-on-scroll" style="--delay:4">
         <div class="exp-header">
           <h3>UX Designer</h3>
           <span class="exp-date">Aug 2018 – Jan 2020</span>
         </div>
         <p class="exp-company">Mercado Libre</p>
       </div>
-      <div class="exp-item">
+      <div class="exp-item reveal-on-scroll" style="--delay:5">
         <div class="exp-header">
           <h3>Digital Designer</h3>
           <span class="exp-date">Aug 2017 – Aug 2018</span>
@@ -237,7 +237,7 @@
       </div>
     </div>
 
-    <div class="skills-col">
+    <div class="skills-col reveal-on-scroll" style="--delay:2">
       <span class="label">PRODUCT SKILLS</span>
       <div class="skill-tags">
         <span class="skill-tag" style="--pill-color:#BB98EB">Product Analytics</span>
@@ -293,17 +293,38 @@
         name.textContent + '</span></span>';
     })();
 
-    // ── Areas of Expertise: hover por columna ─────────────────────────────
-    var wowCols = document.querySelectorAll('.wow-col');
-    var activeWowCol = wowCols[0]; // primera activa por defecto
+    // ── Areas of Expertise: hover + auto-cycling ──────────────────────────
+    (function() {
+      var wowCols = document.querySelectorAll('.wow-col');
+      var current = 0;
+      var hovering = false;
 
-    wowCols.forEach(function(col) {
-      col.addEventListener('mouseenter', function() {
+      function setActive(i) {
         wowCols.forEach(function(c) { c.classList.remove('wow-col--active'); });
-        col.classList.add('wow-col--active');
-        activeWowCol = col;
+        wowCols[i].classList.add('wow-col--active');
+        current = i;
+      }
+
+      wowCols.forEach(function(col, i) {
+        col.addEventListener('mouseenter', function() {
+          hovering = true;
+          setActive(i);
+        });
       });
-    });
+
+      var wowSection = document.querySelector('.wow');
+      if (wowSection) {
+        wowSection.addEventListener('mouseleave', function() {
+          hovering = false;
+        });
+      }
+
+      setInterval(function() {
+        if (!hovering) {
+          setActive((current + 1) % wowCols.length);
+        }
+      }, 3000);
+    })();
 
     // ── Custom cursor ─────────────────────────────────────────────────────
     var cursorDot    = document.getElementById('cursor-dot');
@@ -387,6 +408,37 @@
       }, { threshold: 0.1 });
       var workSection = document.querySelector('#work');
       if (workSection) observer.observe(workSection);
+    })();
+
+    // ── Description section line reveal ───────────────────────────────────
+    (function() {
+      var descSection = document.querySelector('.description');
+      if (!descSection) return;
+      var descLines = descSection.querySelectorAll('.about-line-inner');
+      var observer = new IntersectionObserver(function(entries) {
+        if (entries[0].isIntersecting) {
+          descLines.forEach(function(line, i) {
+            setTimeout(function() { line.classList.add('line-revealed'); }, 60 + i * 140);
+          });
+          observer.unobserve(descSection);
+        }
+      }, { threshold: 0.15 });
+      observer.observe(descSection);
+    })();
+
+    // ── Scroll reveal (experience + skills) ───────────────────────────────
+    (function() {
+      var revealEls = document.querySelectorAll('.reveal-on-scroll');
+      if (!revealEls.length) return;
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08 });
+      revealEls.forEach(function(el) { observer.observe(el); });
     })();
 
     // ── Footer slide-up from below ─────────────────────────────────────────

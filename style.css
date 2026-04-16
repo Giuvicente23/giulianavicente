@@ -598,20 +598,15 @@ footer.footer-visible .footer-inner {
 /* ── Scroll reveal ─────────────────────── */
 .reveal-on-scroll {
   opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: calc(var(--delay, 0) * 0.1s);
 }
 
 .reveal-on-scroll.revealed {
   opacity: 1;
   transform: translateY(0);
-}
-
-.card-row.reveal-on-scroll,
-.wow-col.reveal-on-scroll,
-.exp-item.reveal-on-scroll {
-  transition-delay: calc(var(--delay, 0) * 0.15s);
 }
 
 /* =============================================
@@ -650,8 +645,11 @@ footer.footer-visible .footer-inner {
   padding: 80px 64px;
   width: 100%;
   position: relative;
-  z-index: 1;
+  z-index: 2;
   background-color: var(--black);
+  border-radius: 24px 24px 0 0;
+  box-shadow: 0 -16px 48px rgba(0,0,0,0.12);
+  margin-top: -24px;
 }
 
 .wow-cols {
@@ -786,11 +784,11 @@ footer.footer-visible .footer-inner {
 /* Label CASE STUDIES */
 .cs-header {
   flex-shrink: 0;
-  padding: 24px 24px 16px;
+  padding: 24px 24px 16px 64px;
 }
 
 .label--dark {
-  color: var(--grey);
+  color: #747474;
 }
 
 /* Track: recorta el stack de cards */
@@ -1062,7 +1060,7 @@ footer.footer-visible .footer-inner {
    ============================================= */
 
 .about-page {
-  background-color: var(--black);
+  background-color: #f5f5f5;
   cursor: none;
 }
 
@@ -1070,34 +1068,49 @@ footer.footer-visible .footer-inner {
   padding-top: 70px; /* altura navbar */
 }
 
-/* ── Description fold (dark, full viewport) ── */
+/* ── Description fold ── */
 .about-description {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 10px;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 40px;
   padding: 80px 64px;
-  min-height: 100vh;
-  min-height: 100svh;
-  background-color: var(--black);
-  position: sticky;
-  top: 0;
+  min-height: 600px;
+  background-color: #f5f5f5;
+  position: relative;
   z-index: 0;
-  box-sizing: border-box;
 }
 
-.about-description .label {
+.about-desc-left {
+  flex: 0 0 200px;
+  display: flex;
+  align-items: flex-start;
+  padding-top: 4px;
+}
+
+.about-desc-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.about-me-label {
+  font-family: 'ApfelGrotezk', sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 20px;
+  letter-spacing: 2.88px;
   color: #747474;
-  animation: about-reveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
-  animation-delay: 0.1s;
+  text-transform: uppercase;
 }
 
 .about-intro {
   font-family: 'ApfelGrotezk', sans-serif;
   font-size: 48px;
   line-height: 52px;
-  color: var(--white);
-  max-width: 100%;
+  color: #0f0f0f;
+  max-width: 583px;
 }
 
 /* Line-by-line scroll reveal */
@@ -1114,16 +1127,13 @@ footer.footer-visible .footer-inner {
   transform: translateY(0);
 }
 
-/* ── Body: overlap card (light) ── */
+/* ── Body: experience + skills ── */
 .about-body {
   display: flex;
   gap: 37px;
   padding: 40px 64px 80px;
   background-color: #f5f5f5;
-  border-radius: 24px 24px 0 0;
-  box-shadow: 0 -16px 48px rgba(0, 0, 0, 0.35);
-  position: relative;
-  z-index: 2;
+  align-items: flex-start;
 }
 
 /* Columna experiencia */
@@ -1208,10 +1218,13 @@ footer.footer-visible .footer-inner {
 
 /* Columna skills */
 .about-skills {
-  flex: 0 0 224px;
+  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 20px;
+  position: sticky;
+  top: 110px;
+  align-self: flex-start;
 }
 
 .about-tags {
@@ -1238,21 +1251,34 @@ footer.footer-visible .footer-inner {
 }
 
 .about-tag:hover {
-  border-color: var(--pill-color, var(--black));
-  color: var(--pill-color, var(--black));
-  background-color: transparent;
+  background-color: #0f0f0f;
+  color: #f5f5f5;
 }
 
 /* Mobile about */
 @media (max-width: 768px) {
   .about-description {
-    padding: 40px 16px;
-    min-height: 100svh;
+    flex-direction: column;
+    padding: 80px 24px 48px;
+    min-height: auto;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .about-desc-left {
+    flex: none;
+    align-items: flex-start;
+  }
+
+  .about-desc-right {
+    flex: none;
+    width: 100%;
   }
 
   .about-intro {
     font-size: 32px;
-    line-height: 32px;
+    line-height: 38px;
+    max-width: 100%;
   }
 
   .about-body {
@@ -1268,6 +1294,7 @@ footer.footer-visible .footer-inner {
 
   .about-skills {
     padding-top: 20px;
+    position: static;
   }
 
   .about-job {

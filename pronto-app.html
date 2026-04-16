@@ -1,0 +1,876 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pronto App — Giuliana Vicente</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+  <link rel="icon" type="image/x-icon" href="favicon/favicon.ico">
+  <link rel="manifest" href="favicon/site.webmanifest">
+  <link rel="stylesheet" href="style.css?v=14">
+  <style>
+    .project-page { background-color: #f5f5f5; }
+
+    /* ── Header ─────────────────────────────── */
+    .project-header {
+      background-color: #0f0f0f;
+      padding: 60px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+    .project-header-title {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .project-h1 {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-weight: 700;
+      font-size: 72px;
+      line-height: 86px;
+      letter-spacing: -1.44px;
+      color: #f5f5f5;
+      margin: 0;
+    }
+    .project-subtitle {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-weight: 700;
+      font-size: 28px;
+      line-height: 36px;
+      letter-spacing: -0.56px;
+      color: #f5f5f5;
+      margin: 0;
+    }
+    .project-meta {
+      border-top: 1px solid #222;
+      padding-top: 24px;
+      display: flex;
+      gap: 80px;
+    }
+    .project-meta-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .project-meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .project-meta-label {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-weight: 400;
+      font-size: 11px;
+      line-height: 14px;
+      color: #c7c7c7;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+    .project-meta-value {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-weight: 400;
+      font-size: 12px;
+      color: #f5f5f5;
+    }
+    .project-meta-team-row {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-weight: 400;
+      font-size: 12px;
+      color: #f5f5f5;
+      display: block;
+    }
+
+    /* ── Hero ───────────────────────────────── */
+    .project-hero {
+      width: 100%;
+      overflow: hidden;
+    }
+    .project-hero img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    /* ── Shared typography ───────────────────── */
+    .project-eyebrow {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 18px;
+      color: #c7c7c7;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      margin: 0;
+    }
+    .project-eyebrow--dark {
+      color: #6e6e6e;
+    }
+    .project-h3 {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-weight: 700;
+      font-size: 48px;
+      line-height: 52px;
+      letter-spacing: -0.96px;
+      color: #0f0f0f;
+      margin: 0;
+    }
+    .project-h3--light { color: #f5f5f5; }
+    .project-h5 {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-weight: 700;
+      font-size: 24px;
+      line-height: 28px;
+      letter-spacing: -0.48px;
+      color: #0f0f0f;
+      margin: 0;
+    }
+    .project-body {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 22px;
+      color: #0f0f0f;
+      margin: 0;
+    }
+    .project-body--light { color: #f5f5f5; }
+    .project-body-large {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-weight: 700;
+      font-size: 24px;
+      line-height: 30px;
+      letter-spacing: -0.48px;
+      color: #0f0f0f;
+      margin: 0;
+    }
+
+    /* ── Intro ───────────────────────────────── */
+    .project-intro {
+      padding: 80px 240px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      background-color: #f5f5f5;
+    }
+    .project-section-block {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding-bottom: 40px;
+    }
+    .project-section-block + .project-section-block {
+      border-top: 1px solid #ddd;
+      padding-top: 40px;
+    }
+    .project-section-img {
+      width: 100%;
+      display: block;
+      border: 1px solid #0f0f0f;
+    }
+    .project-kr-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    /* ── Solution ────────────────────────────── */
+    .project-solution {
+      background-color: #0f0f0f;
+      padding: 80px 120px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 20px;
+    }
+    .project-solution-text {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-weight: 700;
+      font-size: 48px;
+      line-height: 56px;
+      letter-spacing: -0.96px;
+      color: #f5f5f5;
+      max-width: 620px;
+      margin: 0;
+    }
+
+    /* ── Research ────────────────────────────── */
+    .project-research {
+      padding: 80px 32px;
+      display: flex;
+      gap: 60px;
+      align-items: flex-start;
+      background-color: #f5f5f5;
+    }
+    .project-step-aside {
+      flex: 0 0 320px;
+      position: sticky;
+      top: 80px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .project-step-heading {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-weight: 700;
+      font-size: 48px;
+      line-height: 52px;
+      letter-spacing: -0.96px;
+      color: #0f0f0f;
+      margin: 0;
+    }
+    .project-step-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .project-step-item {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding-bottom: 40px;
+    }
+    .project-step-item + .project-step-item {
+      border-top: 1px solid #ddd;
+      padding-top: 40px;
+    }
+    .project-step-img {
+      width: 100%;
+      display: block;
+      border-radius: 4px;
+    }
+
+    /* ── Userflows ───────────────────────────── */
+    .project-userflows {
+      background-color: #0f0f0f;
+      padding: 80px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      align-items: center;
+    }
+    .project-userflows-header {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+    }
+    .project-flows-grid {
+      display: flex;
+      gap: 16px;
+      width: 100%;
+    }
+    .project-flow-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .project-flow-img {
+      width: 100%;
+      display: block;
+      border-radius: 6px;
+      box-shadow: 0 4px 20px 2px rgba(0,0,0,0.4);
+    }
+    .project-flow-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .project-flow-tag {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-weight: 400;
+      font-size: 12px;
+      color: #6e6e6e;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .project-flow-desc {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 20px;
+      color: #f5f5f5;
+      margin: 0;
+    }
+
+    /* ── Design Phase ────────────────────────── */
+    .project-design {
+      background-color: #f5f5f5;
+      padding: 80px 32px;
+      display: flex;
+      gap: 60px;
+      align-items: center;
+      overflow: hidden;
+    }
+    .project-design-left {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+    .project-design-header {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .project-design-features {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .project-design-feature {
+      border-top: 1px solid #c7c7c7;
+      padding: 12px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .project-design-feature-title {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 18px;
+      color: #0f0f0f;
+    }
+    .project-design-feature-desc {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 18px;
+      color: #6e6e6e;
+    }
+    .project-design-right {
+      flex: 1;
+      background-color: #e7eeff;
+      border-radius: 16px;
+      padding: 80px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      min-height: 420px;
+    }
+    .project-design-stages {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+    .project-design-stage {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      color: #c7c7c7;
+      letter-spacing: 0.3px;
+    }
+    .project-design-stage--active {
+      color: #3d51d5;
+      font-weight: 700;
+    }
+
+    /* ── Usability Test ──────────────────────── */
+    .project-usability {
+      background-color: #0f0f0f;
+      padding: 80px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      align-items: center;
+    }
+    .project-usability-header {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+    }
+    .project-steps-grid {
+      display: flex;
+      gap: 16px;
+      width: 100%;
+    }
+    .project-step-card {
+      flex: 1;
+      background-color: #161616;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px 2px rgba(0,0,0,0.35);
+      display: flex;
+      flex-direction: column;
+    }
+    .project-step-card-top {
+      padding: 20px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      flex: 1;
+    }
+    .project-step-num {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background-color: #e7eeff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-weight: 700;
+      font-size: 16px;
+      color: #3d51d5;
+      flex-shrink: 0;
+    }
+    .project-step-card-text {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-weight: 400;
+      font-size: 13px;
+      line-height: 18px;
+      color: #f5f5f5;
+      margin: 0;
+    }
+    .project-step-card-bottom {
+      height: 100px;
+      background-color: #222;
+      flex-shrink: 0;
+    }
+
+    /* ── Key Results ─────────────────────────── */
+    .project-results {
+      padding: 80px 40px;
+      display: flex;
+      gap: 40px;
+      background: radial-gradient(ellipse at top right, #3d51d5 0%, #24489e 35%, #24489e 68%, #3d51d5 100%);
+    }
+    .project-results-title-col {
+      flex: 0 0 380px;
+      display: flex;
+      align-items: flex-start;
+    }
+    .project-results-title {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-weight: 700;
+      font-size: 48px;
+      line-height: 52px;
+      letter-spacing: -0.96px;
+      color: #f5f5f5;
+      margin: 0;
+    }
+    .project-results-stats {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .project-results-period {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 18px;
+      color: #f5f5f5;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .project-stat {
+      border-top: 1px solid #3d51d5;
+      padding-top: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .project-stat-number {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-weight: 700;
+      font-size: 64px;
+      line-height: 72px;
+      letter-spacing: -1.28px;
+      color: #9bb8ff;
+      margin: 0;
+    }
+    .project-stat-title {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-weight: 700;
+      font-size: 22px;
+      line-height: 28px;
+      letter-spacing: -0.44px;
+      color: #ccdbff;
+      margin: 0;
+    }
+    .project-stat-desc {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-weight: 400;
+      font-size: 15px;
+      line-height: 20px;
+      color: #ccdbff;
+      margin: 0;
+    }
+
+    /* ── Responsive ──────────────────────────── */
+    @media (max-width: 900px) {
+      .project-intro { padding: 60px 24px; }
+      .project-h1 { font-size: 40px; line-height: 48px; }
+      .project-subtitle { font-size: 20px; line-height: 28px; }
+      .project-meta { gap: 32px; flex-wrap: wrap; }
+      .project-h3 { font-size: 32px; line-height: 38px; }
+      .project-body-large { font-size: 20px; line-height: 26px; }
+      .project-solution { padding: 60px 24px; }
+      .project-solution-text { font-size: 30px; line-height: 38px; }
+      .project-research { flex-direction: column; padding: 48px 24px; gap: 32px; }
+      .project-step-aside { position: static; flex: none; }
+      .project-step-heading { font-size: 32px; }
+      .project-userflows { padding: 60px 24px; }
+      .project-flows-grid { flex-direction: column; }
+      .project-design { flex-direction: column; padding: 60px 24px; }
+      .project-design-right { min-height: 200px; }
+      .project-usability { padding: 60px 24px; }
+      .project-steps-grid { flex-direction: column; }
+      .project-results { flex-direction: column; padding: 60px 24px; }
+      .project-results-title-col { flex: none; }
+      .project-results-title { font-size: 36px; }
+      .project-stat-number { font-size: 44px; line-height: 52px; }
+    }
+  </style>
+</head>
+<body class="project-page">
+
+  <!-- Custom cursor -->
+  <div id="cursor-dot"></div>
+  <div id="cursor-bubble"><span id="cursor-bubble-text">See project</span></div>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <a href="index.html" class="navbar-logo">
+        <img src="images/logo.png" alt="Giuliana Vicente">
+      </a>
+      <div class="navbar-location">
+        <div class="location-dot">
+          <span class="dot-ring"></span>
+          <span class="dot-core"></span>
+        </div>
+        <span>Based in Madrid, working globally</span>
+      </div>
+      <div class="navbar-links">
+        <a href="about.html">About</a>
+        <a href="index.html#work">Work</a>
+        <a href="https://www.linkedin.com/in/giuliana-vicente/" target="_blank" rel="noopener">Linked In</a>
+        <a href="mailto:giuvicente23@gmail.com">Email</a>
+      </div>
+      <button class="navbar-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span class="ham-line"></span>
+        <span class="ham-line"></span>
+        <span class="ham-line"></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <div class="mobile-menu-inner">
+      <button class="mobile-menu-close" aria-label="Close menu">✕</button>
+      <nav class="mobile-menu-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="index.html#work">Work</a>
+        <a href="https://www.linkedin.com/in/giuliana-vicente/" target="_blank" rel="noopener">Linked In</a>
+        <a href="mailto:giuvicente23@gmail.com">Email</a>
+      </nav>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- Header -->
+    <header class="project-header">
+      <div class="project-header-title">
+        <h1 class="project-h1">Pronto App</h1>
+        <p class="project-subtitle">Empowering supermarket partners to scale their CPG business within Mercado Libre through seamless order management and high-precision operations.</p>
+      </div>
+      <div class="project-meta">
+        <div class="project-meta-group">
+          <div class="project-meta-item">
+            <span class="project-meta-label">My Role</span>
+            <span class="project-meta-value">Senior UX Designer</span>
+          </div>
+          <div class="project-meta-item">
+            <span class="project-meta-label">Project Time</span>
+            <span class="project-meta-value">3 months</span>
+          </div>
+        </div>
+        <div class="project-meta-item">
+          <span class="project-meta-label">Team</span>
+          <span class="project-meta-team-row">1 Senior UX Designer</span>
+          <span class="project-meta-team-row">1 UX Writer</span>
+          <span class="project-meta-team-row">1 Researcher</span>
+          <span class="project-meta-team-row">12 Developers</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero -->
+    <div class="project-hero">
+      <img src="images/project_prontoapp/pronto_cover.png" alt="Pronto App cover">
+    </div>
+
+    <!-- Intro: Context / Problem / UX Goal / OKR -->
+    <section class="project-intro">
+      <div class="project-section-block">
+        <h2 class="project-h3">Context</h2>
+        <p class="project-body">Mercado Libre aims to expand its CPG (Consumer Packaged Goods) business unit. To achieve this, it is partnering with existing supermarket chains to integrate their entire product catalogs into the marketplace.</p>
+      </div>
+      <div class="project-section-block">
+        <h2 class="project-h3">Problem</h2>
+        <p class="project-body">Supermarkets lack an efficient tool to manage Mercado Libre orders. This results in slow picking, high error rates, and inconsistent order quality, which could negatively impact the customer experience.</p>
+        <img src="images/project_prontoapp/pronto_intro.png" alt="CPG products" class="project-section-img">
+      </div>
+      <div class="project-section-block">
+        <h2 class="project-h3">UX Goal</h2>
+        <p class="project-body-large">Ensure that CPG purchase orders are prepared accurately and on time to safeguard the customer experience.</p>
+      </div>
+      <div class="project-section-block">
+        <h2 class="project-h3">OKR</h2>
+        <p class="project-body-large">Dominate the CPG market by transforming our Marketplace into the preferred one-stop-shop platform.</p>
+        <div class="project-kr-list">
+          <p class="project-body">KR 1 (Efficiency): Maintain the average picking time below 40 minutes.</p>
+          <p class="project-body">KR 2 (Quality): Reduce the rate of "wrong item" incidents from 12% to 0%.</p>
+          <p class="project-body">KR 3 (Growth): Successfully onboard the supermarket partner's top 3 stores in São Paulo.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Solution -->
+    <section class="project-solution">
+      <p class="project-eyebrow">Potential Solution</p>
+      <p class="project-solution-text">Design a tool that supports supermarket employees during the order fulfillment process.</p>
+    </section>
+
+    <!-- Research -->
+    <div class="project-research">
+      <aside class="project-step-aside">
+        <span class="project-eyebrow project-eyebrow--dark">STEP #1</span>
+        <h2 class="project-step-heading">Research</h2>
+      </aside>
+      <div class="project-step-content">
+        <div class="project-step-item">
+          <h3 class="project-h5">Know the user</h3>
+          <p class="project-body">The Operations team held meetings with the operations managers of each partner to understand the pickers' tasks, the most common problems, and the scenarios they face when processing purchase orders. I analyzed all the meeting notes and created two proto-personas.</p>
+          <img src="images/project_prontoapp/pronto_research_01.png" alt="User research" class="project-step-img">
+        </div>
+        <div class="project-step-item">
+          <h3 class="project-h5">Define JTBD</h3>
+          <p class="project-body">I defined the Jobs To Be Done that we needed to consider before starting to build the user flow.</p>
+          <img src="images/project_prontoapp/pronto_research_02.png" alt="Jobs to be done" class="project-step-img">
+        </div>
+        <div class="project-step-item">
+          <h3 class="project-h5">Competitive Benchmark</h3>
+          <p class="project-body">I analyzed four competitors from the US, Colombia, and Brazil using sources such as apps, YouTube, and blogs.</p>
+          <p class="project-body">I reviewed their main features, key screens, and user flows to understand common patterns in navigation and content hierarchy. This helped me build a reference to guide the product design.</p>
+          <img src="images/project_prontoapp/pronto_research_03.png" alt="Competitive benchmark" class="project-step-img">
+        </div>
+      </div>
+    </div>
+
+    <!-- Userflows -->
+    <section class="project-userflows">
+      <div class="project-userflows-header">
+        <p class="project-eyebrow">STEP #2</p>
+        <h2 class="project-h3 project-h3--light">Userflows</h2>
+        <p class="project-body project-body--light" style="max-width:700px; margin:0 auto; font-weight:500;">I defined the user flow for the two main MVP tasks. I then validated it with stakeholders and moved forward with the app's design and experience.</p>
+      </div>
+      <div class="project-flows-grid">
+        <div class="project-flow-item">
+          <img src="images/project_prontoapp/pronto_userflow_01.png" alt="Picking flow" class="project-flow-img">
+          <div class="project-flow-meta">
+            <span class="project-flow-tag">Picking Flow</span>
+            <p class="project-flow-desc">View the contents of a customer order, pick all the products correctly, or mark any missing items if necessary.</p>
+          </div>
+        </div>
+        <div class="project-flow-item">
+          <img src="images/project_prontoapp/pronto_userflow_02.png" alt="Stage in flow" class="project-flow-img">
+          <div class="project-flow-meta">
+            <span class="project-flow-tag">Stage in Flow</span>
+            <p class="project-flow-desc">After preparation, store the containers with the products in the corresponding storage area.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Design Phase -->
+    <div class="project-design">
+      <div class="project-design-left">
+        <div class="project-design-header">
+          <span class="project-eyebrow project-eyebrow--dark">STEP #3</span>
+          <h2 class="project-step-heading">Design phase</h2>
+          <p class="project-body" style="font-weight:500;">I designed the product from the initial stage to high-fidelity prototypes, presenting and explaining each phase of the process to the project stakeholders.</p>
+        </div>
+        <div class="project-design-features">
+          <div class="project-design-feature">
+            <span class="project-design-feature-title">Quick product identification</span>
+            <span class="project-design-feature-desc">Minimize errors and speed up picking.</span>
+          </div>
+          <div class="project-design-feature">
+            <span class="project-design-feature-title">Optimized order</span>
+            <span class="project-design-feature-desc">Logical grouping of products, inspired by supermarket layouts.</span>
+          </div>
+          <div class="project-design-feature">
+            <span class="project-design-feature-title">Always visible status</span>
+            <span class="project-design-feature-desc">Clear progress and real-time control of missing items.</span>
+          </div>
+          <div class="project-design-feature">
+            <span class="project-design-feature-title">Clear instructions</span>
+            <span class="project-design-feature-desc">Simple and direct guides for each step of the process.</span>
+          </div>
+        </div>
+      </div>
+      <div class="project-design-right">
+        <div class="project-design-stages">
+          <span class="project-design-stage project-design-stage--active">STRUCTURE</span>
+          <span class="project-design-stage">LO-FI</span>
+          <span class="project-design-stage">MID-FI</span>
+          <span class="project-design-stage">HI-FI</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Usability Test -->
+    <section class="project-usability">
+      <div class="project-usability-header">
+        <p class="project-eyebrow">STEP #4</p>
+        <h2 class="project-h3 project-h3--light">Usability Test</h2>
+        <p class="project-body project-body--light" style="max-width:700px; margin:0 auto; font-weight:700;">I conducted the application tests together with the researcher assigned to the project, covering both main flows.</p>
+      </div>
+      <div class="project-steps-grid">
+        <div class="project-step-card">
+          <div class="project-step-card-top">
+            <div class="project-step-num">1</div>
+            <p class="project-step-card-text">As a team, we defined the objective and methodology that the user tests would have.</p>
+          </div>
+          <div class="project-step-card-bottom"></div>
+        </div>
+        <div class="project-step-card">
+          <div class="project-step-card-top">
+            <div class="project-step-num">2</div>
+            <p class="project-step-card-text">I co-built, together with the researcher, the script we would use to ensure it was aligned with our objective.</p>
+          </div>
+          <div class="project-step-card-bottom"></div>
+        </div>
+        <div class="project-step-card">
+          <div class="project-step-card-top">
+            <div class="project-step-num">3</div>
+            <p class="project-step-card-text">I monitored the tests remotely since they were conducted in São Paulo. I documented everything that happened, including the pain points.</p>
+          </div>
+          <div class="project-step-card-bottom"></div>
+        </div>
+        <div class="project-step-card">
+          <div class="project-step-card-top">
+            <div class="project-step-num">4</div>
+            <p class="project-step-card-text">I prioritized the pain points that represented an issue in daily operations and adjusted the proposal to clarify the experience.</p>
+          </div>
+          <div class="project-step-card-bottom"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Results -->
+    <div class="project-results">
+      <div class="project-results-title-col">
+        <h2 class="project-results-title">Key results</h2>
+      </div>
+      <div class="project-results-stats">
+        <p class="project-results-period">Q1 2022 — 3 months after launching</p>
+        <div class="project-stat">
+          <p class="project-stat-number">4 stores</p>
+          <p class="project-stat-title">Stores operating, 3 in São Paulo and 1 in CDMX</p>
+          <p class="project-stat-desc">Mercado Libre generated a net revenue of USD 604K within the first 3 months.</p>
+        </div>
+        <div class="project-stat">
+          <p class="project-stat-number">25 minutes</p>
+          <p class="project-stat-title">We achieved an acceptable average picking time per order.</p>
+        </div>
+        <div class="project-stat">
+          <p class="project-stat-number">3% picking errors</p>
+          <p class="project-stat-title">Due to scanning incorrect products.</p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Footer -->
+  <div class="footer-bg footer-bg--light">
+    <footer class="footer--dark" id="contact">
+      <div class="footer-inner">
+        <span class="footer-year">2026</span>
+        <p class="footer-tagline">Based in Madrid, working globally.</p>
+        <div class="footer-social">
+          <a href="https://www.linkedin.com/in/giuliana-vicente/" target="_blank" rel="noopener">Linked In</a>
+          <a href="mailto:giuvicente23@gmail.com">Email</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    var cursorDot    = document.getElementById('cursor-dot');
+    var cursorBubble = document.getElementById('cursor-bubble');
+    var cursorX = window.innerWidth / 2;
+    var cursorY = window.innerHeight / 2;
+    var rafPending = false;
+
+    document.addEventListener('mousemove', function(e) {
+      cursorX = e.clientX;
+      cursorY = e.clientY;
+      if (!rafPending) {
+        rafPending = true;
+        requestAnimationFrame(function() {
+          cursorDot.style.left    = cursorX + 'px';
+          cursorDot.style.top     = cursorY + 'px';
+          cursorBubble.style.left = cursorX + 'px';
+          cursorBubble.style.top  = cursorY + 'px';
+          rafPending = false;
+        });
+      }
+    });
+
+    (function() {
+      var btn   = document.querySelector('.navbar-hamburger');
+      var menu  = document.getElementById('mobile-menu');
+      var close = document.querySelector('.mobile-menu-close');
+      if (!btn || !menu) return;
+      function openMenu() {
+        menu.classList.add('is-open');
+        btn.classList.add('is-active');
+        document.body.classList.add('menu-open');
+        btn.setAttribute('aria-expanded', 'true');
+        menu.setAttribute('aria-hidden', 'false');
+      }
+      function closeMenu() {
+        menu.classList.remove('is-open');
+        btn.classList.remove('is-active');
+        document.body.classList.remove('menu-open');
+        btn.setAttribute('aria-expanded', 'false');
+        menu.setAttribute('aria-hidden', 'true');
+      }
+      btn.addEventListener('click', openMenu);
+      if (close) close.addEventListener('click', closeMenu);
+      menu.querySelectorAll('a').forEach(function(a) {
+        a.addEventListener('click', closeMenu);
+      });
+    })();
+
+    var footerEl = document.querySelector('footer');
+    var footerObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          footerEl.classList.add('footer-visible');
+          footerObserver.unobserve(footerEl);
+        }
+      });
+    }, { threshold: 0.05 });
+    footerObserver.observe(footerEl);
+  </script>
+
+</body>
+</html>
