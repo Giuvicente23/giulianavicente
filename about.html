@@ -9,9 +9,10 @@
   <link rel="icon" type="image/x-icon" href="favicon/favicon.ico">
   <link rel="manifest" href="favicon/site.webmanifest">
   <link rel="stylesheet" href="style.css?v=14">
-  <style>body { animation: page-fade-in 0.45s ease both; }</style>
 </head>
 <body class="about-page">
+
+  <div id="page-curtain"></div>
 
   <!-- Custom cursor -->
   <div id="cursor-dot"></div>
@@ -252,16 +253,17 @@
 
   <script>
     // ── Page transition ───────────────────────────────────────────────────
+    var curtain = document.getElementById('page-curtain');
+    curtain.classList.add('curtain-exit');
     document.addEventListener('click', function(e) {
       var link = e.target.closest('a');
       if (!link) return;
       var href = link.getAttribute('href');
       if (!href || link.target === '_blank' || href.startsWith('http') || href.startsWith('mailto') || href.startsWith('tel') || href.startsWith('#')) return;
       e.preventDefault();
-      document.body.style.animation = 'none';
-      document.body.style.transition = 'opacity 0.3s ease';
-      document.body.style.opacity = '0';
-      setTimeout(function() { window.location.href = href; }, 300);
+      curtain.classList.remove('curtain-exit');
+      curtain.classList.add('curtain-enter');
+      setTimeout(function() { window.location.href = href; }, 550);
     });
 
     // ── Custom cursor ──────────────────────────────────────────────────────

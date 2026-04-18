@@ -10,21 +10,29 @@
   <link rel="manifest" href="favicon/site.webmanifest">
   <link rel="stylesheet" href="style.css?v=14">
   <style>
-    body { animation: page-fade-in 0.45s ease both; }
     .project-page { background-color: #f5f5f5; }
 
     /* ── Header ─────────────────────────────── */
     .project-header {
       background-color: #0f0f0f;
-      padding: 60px 32px;
+      padding: 60px 64px;
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       gap: 32px;
+      align-items: flex-start;
     }
-    .project-header-title {
+    .project-header-left {
       display: flex;
       flex-direction: column;
       gap: 16px;
+      flex: 1;
+      color: #f5f5f5;
+    }
+    .project-header-right {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex-shrink: 0;
     }
     .project-h1 {
       font-family: 'ApfelGrotezk', sans-serif;
@@ -37,23 +45,12 @@
     }
     .project-subtitle {
       font-family: 'ApfelGrotezk', sans-serif;
-      font-weight: 700;
-      font-size: 28px;
-      line-height: 36px;
-      letter-spacing: -0.56px;
+      font-weight: 400;
+      font-size: 36px;
+      line-height: 40px;
+      letter-spacing: -0.72px;
       color: #f5f5f5;
       margin: 0;
-    }
-    .project-meta {
-      border-top: 1px solid #222;
-      padding-top: 24px;
-      display: flex;
-      gap: 80px;
-    }
-    .project-meta-group {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
     }
     .project-meta-item {
       display: flex;
@@ -65,22 +62,30 @@
       font-weight: 400;
       font-size: 11px;
       line-height: 14px;
-      color: #c7c7c7;
+      color: #747474;
       text-transform: uppercase;
       letter-spacing: 0.8px;
     }
     .project-meta-value {
       font-family: 'ApfelGrotezk', sans-serif;
       font-weight: 400;
-      font-size: 12px;
+      font-size: 14px;
       color: #f5f5f5;
     }
-    .project-meta-team-row {
+    .project-meta-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .project-tag {
+      background-color: #2b2c2c;
+      border-radius: 24px;
+      padding: 2px 6px;
       font-family: 'ApfelGrotezk', sans-serif;
-      font-weight: 400;
       font-size: 12px;
+      line-height: 16px;
       color: #f5f5f5;
-      display: block;
+      white-space: nowrap;
     }
 
     /* ── Hero ───────────────────────────────── */
@@ -151,28 +156,59 @@
       padding: 80px 240px;
       display: flex;
       flex-direction: column;
-      gap: 0;
+      gap: 40px;
       background-color: #f5f5f5;
     }
     .project-section-block {
       display: flex;
       flex-direction: column;
-      gap: 16px;
-      padding-bottom: 40px;
+      gap: 12px;
     }
-    .project-section-block + .project-section-block {
-      border-top: 1px solid #ddd;
-      padding-top: 40px;
+    .project-section-block--border {
+      border-top: 1px solid #f5f5f5;
+    }
+    .project-section-label {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-weight: 500;
+      font-size: 24px;
+      line-height: 30px;
+      letter-spacing: -0.48px;
+      color: #0f0f0f;
+      margin: 0;
     }
     .project-section-img {
       width: 100%;
       display: block;
-      border: 1px solid #0f0f0f;
     }
-    .project-kr-list {
+    .project-kr-cards {
+      display: flex;
+      gap: 8px;
+      width: 100%;
+    }
+    .project-kr-card {
+      flex: 1;
+      background-color: #f1eded;
+      border-radius: 8px;
+      padding: 12px;
       display: flex;
       flex-direction: column;
       gap: 8px;
+    }
+    .project-kr-card-label {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 20px;
+      color: #747474;
+      margin: 0;
+    }
+    .project-kr-card-text {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 20px;
+      color: #0f0f0f;
+      margin: 0;
     }
 
     /* ── Solution ────────────────────────────── */
@@ -182,17 +218,22 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      text-align: center;
       gap: 20px;
+    }
+    .project-solution-inner {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      align-items: flex-start;
     }
     .project-solution-text {
       font-family: 'ApfelGrotezk', sans-serif;
-      font-weight: 700;
+      font-weight: 400;
       font-size: 48px;
-      line-height: 56px;
+      line-height: 52px;
       letter-spacing: -0.96px;
       color: #f5f5f5;
-      max-width: 620px;
+      max-width: 800px;
       margin: 0;
     }
 
@@ -510,12 +551,13 @@
 
     /* ── Responsive ──────────────────────────── */
     @media (max-width: 900px) {
+      .project-header { flex-direction: column; padding: 48px 24px; }
       .project-intro { padding: 60px 24px; }
       .project-h1 { font-size: 40px; line-height: 48px; }
-      .project-subtitle { font-size: 20px; line-height: 28px; }
-      .project-meta { gap: 32px; flex-wrap: wrap; }
+      .project-subtitle { font-size: 22px; line-height: 30px; }
+      .project-section-label { font-size: 20px; }
+      .project-kr-cards { flex-direction: column; }
       .project-h3 { font-size: 32px; line-height: 38px; }
-      .project-body-large { font-size: 20px; line-height: 26px; }
       .project-solution { padding: 60px 24px; }
       .project-solution-text { font-size: 30px; line-height: 38px; }
       .project-research { flex-direction: column; padding: 48px 24px; gap: 32px; }
@@ -535,6 +577,8 @@
   </style>
 </head>
 <body class="project-page">
+
+  <div id="page-curtain"></div>
 
   <!-- Custom cursor -->
   <div id="cursor-dot"></div>
@@ -585,27 +629,27 @@
 
     <!-- Header -->
     <header class="project-header">
-      <div class="project-header-title">
+      <div class="project-header-left">
         <h1 class="project-h1">Pronto App</h1>
-        <p class="project-subtitle">Empowering supermarket partners to scale their CPG business within Mercado Libre through seamless order management and high-precision operations.</p>
+        <p class="project-subtitle">Cómo optimizar la preparación de órdenes, reduciendo tiempos de trabajo y evitando errores de picking.</p>
       </div>
-      <div class="project-meta">
-        <div class="project-meta-group">
-          <div class="project-meta-item">
-            <span class="project-meta-label">My Role</span>
-            <span class="project-meta-value">Senior UX Designer</span>
-          </div>
-          <div class="project-meta-item">
-            <span class="project-meta-label">Project Time</span>
-            <span class="project-meta-value">3 months</span>
-          </div>
+      <div class="project-header-right">
+        <div class="project-meta-item">
+          <span class="project-meta-label">My Role</span>
+          <span class="project-meta-value">Senior UX Designer</span>
         </div>
         <div class="project-meta-item">
-          <span class="project-meta-label">Team</span>
-          <span class="project-meta-team-row">1 Senior UX Designer</span>
-          <span class="project-meta-team-row">1 UX Writer</span>
-          <span class="project-meta-team-row">1 Researcher</span>
-          <span class="project-meta-team-row">12 Developers</span>
+          <span class="project-meta-label">Project Time</span>
+          <span class="project-meta-value">3 months</span>
+        </div>
+        <div class="project-meta-item">
+          <span class="project-meta-label">Year</span>
+          <span class="project-meta-value">2022</span>
+        </div>
+        <div class="project-meta-tags">
+          <span class="project-tag">Android App</span>
+          <span class="project-tag">0 to 1 Design</span>
+          <span class="project-tag">Internal Tool</span>
         </div>
       </div>
     </header>
@@ -615,36 +659,43 @@
       <img src="images/project_prontoapp/pronto_cover.png" alt="Pronto App cover">
     </div>
 
-    <!-- Intro: Context / Problem / UX Goal / OKR -->
+    <!-- Intro: Context / Problem / Business OKR / UX Goal -->
     <section class="project-intro">
       <div class="project-section-block">
-        <h2 class="project-h3">Context</h2>
+        <p class="project-section-label">Context</p>
         <p class="project-body">Mercado Libre aims to expand its CPG (Consumer Packaged Goods) business unit. To achieve this, it is partnering with existing supermarket chains to integrate their entire product catalogs into the marketplace.</p>
-      </div>
-      <div class="project-section-block">
-        <h2 class="project-h3">Problem</h2>
-        <p class="project-body">Supermarkets lack an efficient tool to manage Mercado Libre orders. This results in slow picking, high error rates, and inconsistent order quality, which could negatively impact the customer experience.</p>
         <img src="images/project_prontoapp/pronto_intro.png" alt="CPG products" class="project-section-img">
       </div>
       <div class="project-section-block">
-        <h2 class="project-h3">UX Goal</h2>
-        <p class="project-body-large">Ensure that CPG purchase orders are prepared accurately and on time to safeguard the customer experience.</p>
+        <p class="project-section-label">Problem</p>
+        <p class="project-body">Supermarkets lack an efficient tool to manage Mercado Libre orders. This results in slow picking, high error rates, and inconsistent order quality, which could negatively impact the customer experience.</p>
       </div>
-      <div class="project-section-block">
-        <h2 class="project-h3">OKR</h2>
-        <p class="project-body-large">Dominate the CPG market by transforming our Marketplace into the preferred one-stop-shop platform.</p>
-        <div class="project-kr-list">
-          <p class="project-body">KR 1 (Efficiency): Maintain the average picking time below 40 minutes.</p>
-          <p class="project-body">KR 2 (Quality): Reduce the rate of "wrong item" incidents from 12% to 0%.</p>
-          <p class="project-body">KR 3 (Growth): Successfully onboard the supermarket partner's top 3 stores in São Paulo.</p>
+      <div class="project-section-block project-section-block--border">
+        <p class="project-section-label">Business OKR</p>
+        <p class="project-body">Dominate the CPG market by transforming our Marketplace into the preferred one-stop-shop platform.</p>
+      </div>
+      <div class="project-section-block project-section-block--border">
+        <p class="project-section-label">UX Goal</p>
+        <p class="project-body">Ensure that CPG purchase orders are prepared accurately and on time to safeguard the customer experience.</p>
+        <div class="project-kr-cards">
+          <div class="project-kr-card">
+            <p class="project-kr-card-label">KR 1 - Efficiency</p>
+            <p class="project-kr-card-text">Maintain the average picking time below 40 minutes.</p>
+          </div>
+          <div class="project-kr-card">
+            <p class="project-kr-card-label">KR 2 - Quality</p>
+            <p class="project-kr-card-text">Reduce the rate of "wrong item" incidents from 12% to 0%.</p>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- Solution -->
     <section class="project-solution">
-      <p class="project-eyebrow">Potential Solution</p>
-      <p class="project-solution-text">Design a tool that supports supermarket employees during the order fulfillment process.</p>
+      <div class="project-solution-inner">
+        <p class="project-eyebrow">Potential Solution</p>
+        <p class="project-solution-text">Design a tool that supports supermarket employees during the order fulfillment process.</p>
+      </div>
     </section>
 
     <!-- Research -->
@@ -815,16 +866,17 @@
 
   <script>
     // ── Page transition ───────────────────────────────────────────────────
+    var curtain = document.getElementById('page-curtain');
+    curtain.classList.add('curtain-exit');
     document.addEventListener('click', function(e) {
       var link = e.target.closest('a');
       if (!link) return;
       var href = link.getAttribute('href');
       if (!href || link.target === '_blank' || href.startsWith('http') || href.startsWith('mailto') || href.startsWith('tel') || href.startsWith('#')) return;
       e.preventDefault();
-      document.body.style.animation = 'none';
-      document.body.style.transition = 'opacity 0.3s ease';
-      document.body.style.opacity = '0';
-      setTimeout(function() { window.location.href = href; }, 300);
+      curtain.classList.remove('curtain-exit');
+      curtain.classList.add('curtain-enter');
+      setTimeout(function() { window.location.href = href; }, 550);
     });
 
     var cursorDot    = document.getElementById('cursor-dot');
