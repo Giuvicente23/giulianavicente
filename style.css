@@ -1224,6 +1224,27 @@ footer.footer-visible .footer-inner {
   gap: 12px;
 }
 
+.about-job-role {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.about-job-company {
+  font-family: 'ApfelGrotezk', sans-serif;
+  font-size: 14px;
+  line-height: 18px;
+  color: #747474;
+}
+
+.about-job-dates {
+  font-family: 'ApfelGrotezk', sans-serif;
+  font-size: 14px;
+  line-height: 18px;
+  color: #747474;
+}
+
 .about-job-title h3 {
   font-family: 'ApfelGrotezk', sans-serif;
   font-weight: 500;
@@ -1361,6 +1382,14 @@ footer.footer-visible .footer-inner {
   .about-job-title {
     flex: none;
     width: 100%;
+  }
+
+  .about-job-role {
+    flex-wrap: wrap;
+  }
+
+  .about-job-desc {
+    margin-top: 16px;
   }
 
   .about-job-meta {
