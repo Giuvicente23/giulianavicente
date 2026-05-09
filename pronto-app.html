@@ -386,6 +386,16 @@
       color: #0f0f0f;
       margin: 0;
     }
+    .pa-card-content-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .pa-card-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
     .pa-card-benchmark {
       display: flex;
       align-items: center;
@@ -943,34 +953,50 @@
         <!-- ── RESEARCH ────────────────────── -->
         <section id="section-research" class="pa-research">
           <div class="pa-research-header">
-            <span class="pa-badge">DISCOVERY</span>
-            <h2 class="pa-research-title">Research</h2>
+            <span class="pa-badge">RESEARCH</span>
+            <h2 class="pa-research-title">Discovery</h2>
           </div>
 
           <!-- Interviews card -->
           <div class="pa-card pa-card-interviews">
             <div class="pa-card-interviews-img">
-              <img src="images/project_prontoapp/pronto_research_01.png" alt="User research — interviews">
+              <img src="images/project_prontoapp/desktop/discovery_interviews_desktop.png" alt="User research — interviews">
             </div>
             <div class="pa-card-text">
-              <span class="pa-card-eyebrow">Know the user</span>
-              <h3 class="pa-card-title">Interviews</h3>
-              <p class="pa-card-body">The Operations team held meetings with the operations managers of each partner to understand the pickers' tasks, the most common problems, and the scenarios they face when processing purchase orders.</p>
-              <p class="pa-card-body">I analyzed all the meeting notes and created two proto-personas.</p>
+              <span class="pa-card-eyebrow">USER &amp; CURRENT OPERATION</span>
+              <div class="pa-card-content-group">
+                <h3 class="pa-card-title">Interviews</h3>
+                <p class="pa-card-body">The Operations team had meetings with the operations managers in Brazil.</p>
+              </div>
+              <div class="pa-card-meta">
+                <span class="pa-card-eyebrow">GOAL</span>
+                <p class="pa-card-body">Understand the pickers' daily tasks, problems, and the scenarios they face when processing orders.</p>
+              </div>
+              <div class="pa-card-meta">
+                <span class="pa-card-eyebrow">OUTPUT</span>
+                <p class="pa-card-body">Protopersonas</p>
+              </div>
             </div>
           </div>
 
           <!-- Benchmark card -->
           <div class="pa-card pa-card-benchmark">
             <div class="pa-card-text">
-              <span class="pa-card-eyebrow">Players and solutions in market</span>
+              <span class="pa-card-eyebrow">PLAYERS AND SOLUTIONS IN MARKET</span>
               <h3 class="pa-card-title">Benchmark</h3>
-              <p class="pa-card-body">I analyzed four competitors from the US, Colombia, and Brazil using sources such as apps, YouTube, and blogs.</p>
-              <p class="pa-card-body">I reviewed their main features, key screens, and user flows to understand common patterns in navigation and content hierarchy.</p>
+              <p class="pa-card-body">I analyzed 4 competitors using sources such as apps, YouTube, and blogs.</p>
+              <div class="pa-card-meta">
+                <span class="pa-card-eyebrow">GOAL</span>
+                <p class="pa-card-body">Review main features, key screens, and flows to understand common patterns in navigation and content hierarchy.</p>
+              </div>
+              <div class="pa-card-meta">
+                <span class="pa-card-eyebrow">OUTPUT</span>
+                <p class="pa-card-body">Presentation</p>
+              </div>
             </div>
             <div class="pa-card-benchmark-right">
-              <img src="images/project_prontoapp/pronto_research_02.png" alt="Competitive benchmark — 1">
-              <img src="images/project_prontoapp/pronto_research_03.png" alt="Competitive benchmark — 2">
+              <img src="images/project_prontoapp/desktop/discovery_benchmark1_desktop.png" alt="Competitive benchmark — 1">
+              <img src="images/project_prontoapp/desktop/discovery_benchmark2_desktop.png" alt="Competitive benchmark — 2">
             </div>
           </div>
         </section>
