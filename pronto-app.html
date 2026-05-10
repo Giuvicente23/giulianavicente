@@ -696,70 +696,87 @@
     /* ── Results section ─────────────────────── */
     .pa-results {
       background: #0f0f0f;
-      padding: 80px 64px 80px 32px;
+      padding: 80px 64px 120px 32px;
       display: flex;
       flex-direction: column;
-      gap: 32px;
+      gap: 40px;
     }
     .pa-results-header {
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 8px;
     }
     .pa-results-title {
       font-family: 'ApfelGrotezk', sans-serif;
       font-weight: 500;
-      font-size: 32px;
-      line-height: 36px;
+      font-size: 48px;
+      line-height: 52px;
+      letter-spacing: -0.96px;
       color: #f5f5f5;
+      margin: 0;
+    }
+    .pa-results-subtitle {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-size: 12px;
+      line-height: 16px;
+      letter-spacing: 1.44px;
+      text-transform: uppercase;
+      color: #747474;
       margin: 0;
     }
     .pa-stats {
       display: flex;
-      flex-direction: column;
       gap: 0;
     }
     .pa-stat {
-      border-top: 1px solid #2b2c2c;
-      padding: 24px 0;
-      display: flex;
-      gap: 40px;
-      align-items: flex-start;
-    }
-    .pa-stat-left {
-      flex: 0 0 280px;
-    }
-    .pa-stat-number {
-      font-family: 'ApfelGrotezk', sans-serif;
-      font-weight: 700;
-      font-size: 64px;
-      line-height: 72px;
-      letter-spacing: -1.28px;
-      color: #9bb8ff;
-      margin: 0;
-    }
-    .pa-stat-title {
-      font-family: 'ApfelGrotezk', sans-serif;
-      font-weight: 500;
-      font-size: 16px;
-      line-height: 20px;
-      letter-spacing: -0.32px;
-      color: #e3e3e3;
-      margin: 0;
-    }
-    .pa-stat-right {
       flex: 1;
       display: flex;
-      gap: 20px;
+      flex-direction: column;
+      gap: 16px;
+      padding-right: 40px;
+    }
+    .pa-stat + .pa-stat {
+      padding-left: 40px;
+      padding-right: 40px;
+      border-left: 1px solid #2b2c2c;
+    }
+    .pa-stat:last-child {
+      padding-right: 0;
+    }
+    .pa-stat-eyebrow {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-size: 12px;
+      line-height: 16px;
+      letter-spacing: 1.44px;
+      text-transform: uppercase;
+      color: #747474;
+    }
+    .pa-stat-description {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-weight: 500;
+      font-size: 22px;
+      line-height: 28px;
+      letter-spacing: -0.44px;
+      color: #f5f5f5;
+      margin: 0;
+      flex: 1;
+    }
+    .pa-stat-divider {
+      height: 1px;
+      background: #2b2c2c;
+    }
+    .pa-stat-values {
+      display: flex;
+      gap: 32px;
     }
     .pa-stat-meta {
       display: flex;
       flex-direction: column;
-      gap: 4px;
+      gap: 2px;
     }
     .pa-stat-meta-label {
       font-family: 'ApfelGrotezk', sans-serif;
-      font-size: 12px;
+      font-size: 11px;
       line-height: 16px;
       letter-spacing: 1.44px;
       text-transform: uppercase;
@@ -768,10 +785,13 @@
     .pa-stat-meta-value {
       font-family: 'ApfelGrotezk', sans-serif;
       font-weight: 500;
-      font-size: 16px;
-      line-height: 20px;
-      letter-spacing: -0.32px;
-      color: #e3e3e3;
+      font-size: 20px;
+      line-height: 24px;
+      letter-spacing: -0.4px;
+      color: #f5f5f5;
+    }
+    .pa-stat-meta-value--result {
+      color: #9bb8ff;
     }
 
     /* ── Responsive ──────────────────────────── */
@@ -805,8 +825,8 @@
       .pa-testing-cards { flex-direction: column; }
       .pa-testing-card { height: auto; }
       .pa-results { padding: 60px 24px; }
-      .pa-stat { flex-direction: column; gap: 16px; }
-      .pa-stat-number { font-size: 40px; line-height: 48px; }
+      .pa-stats { flex-direction: column; gap: 32px; }
+      .pa-stat { padding-right: 0 !important; padding-left: 0 !important; border-left: none !important; border-top: 1px solid #2b2c2c; padding-top: 24px; }
     }
   </style>
 </head>
@@ -1150,55 +1170,52 @@
         <!-- ── RESULTS ─────────────────────── -->
         <section id="section-results" class="pa-results">
           <div class="pa-results-header">
-            <span class="pa-badge pa-badge--dark">RESULTS</span>
-            <h2 class="pa-results-title">Key results</h2>
+            <h2 class="pa-results-title">Results</h2>
+            <p class="pa-results-subtitle">Q2 2022 — 3 months after launching</p>
           </div>
           <div class="pa-stats">
             <div class="pa-stat">
-              <div class="pa-stat-left">
-                <p class="pa-stat-number">25 min</p>
-                <p class="pa-stat-title">Average picking time per order.</p>
-              </div>
-              <div class="pa-stat-right">
+              <span class="pa-stat-eyebrow">KR#1 — Efficency</span>
+              <p class="pa-stat-description">Maintain the average picking time below 30 minutes.</p>
+              <div class="pa-stat-divider"></div>
+              <div class="pa-stat-values">
                 <div class="pa-stat-meta">
                   <span class="pa-stat-meta-label">Target</span>
-                  <span class="pa-stat-meta-value">40 min</span>
+                  <span class="pa-stat-meta-value">30 min.</span>
                 </div>
                 <div class="pa-stat-meta">
                   <span class="pa-stat-meta-label">Result</span>
-                  <span class="pa-stat-meta-value">25 min</span>
+                  <span class="pa-stat-meta-value pa-stat-meta-value--result">25 min.</span>
                 </div>
               </div>
             </div>
             <div class="pa-stat">
-              <div class="pa-stat-left">
-                <p class="pa-stat-number">3%</p>
-                <p class="pa-stat-title">Picking errors due to scanning incorrect products.</p>
-              </div>
-              <div class="pa-stat-right">
+              <span class="pa-stat-eyebrow">KR#1 — Quality</span>
+              <p class="pa-stat-description">Reduce the rate of "wrong item" incidents from 12% to 0%.</p>
+              <div class="pa-stat-divider"></div>
+              <div class="pa-stat-values">
                 <div class="pa-stat-meta">
                   <span class="pa-stat-meta-label">Target</span>
                   <span class="pa-stat-meta-value">0%</span>
                 </div>
                 <div class="pa-stat-meta">
                   <span class="pa-stat-meta-label">Result</span>
-                  <span class="pa-stat-meta-value">3%</span>
+                  <span class="pa-stat-meta-value pa-stat-meta-value--result">3%</span>
                 </div>
               </div>
             </div>
             <div class="pa-stat">
-              <div class="pa-stat-left">
-                <p class="pa-stat-number">4 stores</p>
-                <p class="pa-stat-title">Stores operating, 3 in São Paulo and 1 in CDMX.</p>
-              </div>
-              <div class="pa-stat-right">
+              <span class="pa-stat-eyebrow">KR#3 — Growth</span>
+              <p class="pa-stat-description">Successfully onboard 3 stores in São Paulo.</p>
+              <div class="pa-stat-divider"></div>
+              <div class="pa-stat-values">
                 <div class="pa-stat-meta">
                   <span class="pa-stat-meta-label">Target</span>
                   <span class="pa-stat-meta-value">3 stores</span>
                 </div>
                 <div class="pa-stat-meta">
                   <span class="pa-stat-meta-label">Result</span>
-                  <span class="pa-stat-meta-value">4 stores</span>
+                  <span class="pa-stat-meta-value pa-stat-meta-value--result">4 stores</span>
                 </div>
               </div>
             </div>
