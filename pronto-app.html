@@ -212,8 +212,8 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 0 12px;
-      height: 28px;
+      padding: 0 10px;
+      height: 18px;
       background-color: #e4e8f9;
       border-radius: 20px;
       font-family: 'ApfelGrotezk', sans-serif;
@@ -309,7 +309,7 @@
       padding: 80px 64px 80px 32px;
       display: flex;
       flex-direction: column;
-      gap: 32px;
+      gap: 16px;
     }
     .pa-research-header {
       display: flex;
@@ -418,7 +418,7 @@
 
     /* ── Userflows section ──────────────────── */
     .pa-userflows {
-      background: white;
+      background: #f5f5f5;
       padding: 80px 64px 80px 32px;
       display: flex;
       flex-direction: column;
@@ -438,13 +438,33 @@
       flex: 1;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      background: #ffffff;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+      height: 378px;
+    }
+    .pa-flow-img-wrap {
+      flex: 1;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 20px 0;
     }
     .pa-flow-img {
       width: 100%;
-      border-radius: 16px;
-      box-shadow: 0 4px 20px 2px rgba(0,0,0,0.08);
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      border-radius: 0;
       display: block;
+    }
+    .pa-flow-text {
+      padding: 12px 16px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
     }
     .pa-flow-eyebrow {
       font-family: 'ApfelGrotezk', sans-serif;
@@ -453,6 +473,7 @@
       letter-spacing: 1.44px;
       text-transform: uppercase;
       color: #747474;
+      margin: 0;
     }
     .pa-flow-desc {
       font-family: 'ApfelGrotezk', sans-serif;
@@ -1010,17 +1031,21 @@
           </div>
           <div class="pa-flows-grid">
             <div class="pa-flow-item">
-              <img src="images/project_prontoapp/pronto_userflow_01.png" alt="Picking flow" class="pa-flow-img">
-              <div>
+              <div class="pa-flow-img-wrap">
+                <img src="images/project_prontoapp/desktop/userflow_picking_desktop.png" alt="Picking flow" class="pa-flow-img">
+              </div>
+              <div class="pa-flow-text">
                 <p class="pa-flow-eyebrow">Picking Flow</p>
                 <p class="pa-flow-desc">View the contents of a customer order, pick all the products correctly, or mark any missing items if necessary.</p>
               </div>
             </div>
             <div class="pa-flow-item">
-              <img src="images/project_prontoapp/pronto_userflow_02.png" alt="Stage in flow" class="pa-flow-img">
-              <div>
+              <div class="pa-flow-img-wrap">
+                <img src="images/project_prontoapp/desktop/userflow_stage_in_desktop.png" alt="Stage in flow" class="pa-flow-img">
+              </div>
+              <div class="pa-flow-text">
                 <p class="pa-flow-eyebrow">Stage In Flow</p>
-                <p class="pa-flow-desc">After preparation, store the containers with the products in the corresponding storage area.</p>
+                <p class="pa-flow-desc">Store the containers with the products in the corresponding storage area.</p>
               </div>
             </div>
           </div>
