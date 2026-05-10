@@ -487,7 +487,59 @@
     /* ── Design / Building the solution ─────── */
     .pa-design {
       background: white;
-      padding: 24px 64px 80px 32px;
+      padding: 40px 64px 80px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+    .pa-design-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      text-align: center;
+    }
+    .pa-design-title {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-weight: 500;
+      font-size: 32px;
+      line-height: 36px;
+      color: #0f0f0f;
+      margin: 0;
+    }
+    .pa-design-subtitle {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-size: 14px;
+      line-height: 18px;
+      letter-spacing: -0.28px;
+      color: #2b2c2c;
+      margin: 0;
+    }
+    .pa-stages-bar {
+      background: #f5f5f5;
+      border-radius: 12px;
+      padding: 8px;
+      display: flex;
+      gap: 0;
+      max-width: 360px;
+      align-self: center;
+    }
+    .pa-stage {
+      flex: 1;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-size: 12px;
+      line-height: 20px;
+      text-align: center;
+      color: #0f0f0f;
+      white-space: nowrap;
+    }
+    .pa-stage--active {
+      background: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    .pa-design-body {
       display: flex;
       gap: 32px;
       align-items: flex-start;
@@ -526,61 +578,18 @@
       letter-spacing: -0.28px;
       color: #6e6e6e;
     }
-    .pa-design-right {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 32px;
-    }
-    .pa-design-header {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 12px;
-    }
-    .pa-design-title {
-      font-family: 'ApfelGrotezk', sans-serif;
-      font-weight: 500;
-      font-size: 32px;
-      line-height: 36px;
-      color: #0f0f0f;
-      margin: 0;
-    }
-    .pa-design-subtitle {
-      font-family: 'ApfelGrotezk', sans-serif;
-      font-size: 14px;
-      line-height: 18px;
-      letter-spacing: -0.28px;
-      color: #2b2c2c;
-      margin: 0;
-    }
-    .pa-stages-bar {
-      background: #f5f5f5;
-      border-radius: 12px;
-      padding: 8px;
-      display: flex;
-      gap: 0;
-    }
-    .pa-stage {
-      flex: 1;
-      padding: 8px 12px;
-      border-radius: 8px;
-      font-family: 'ApfelGrotezk', sans-serif;
-      font-size: 12px;
-      line-height: 20px;
-      text-align: center;
-      color: #0f0f0f;
-    }
-    .pa-stage--active {
-      background: white;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    }
     .pa-wireframes {
+      flex: 1;
       display: flex;
       gap: 16px;
     }
-    .pa-wireframe-card {
+    .pa-wireframe-item {
       flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .pa-wireframe-card {
       background: white;
       border-radius: 12px;
       box-shadow: 0 4.65px 14.23px rgba(0,0,0,0.08);
@@ -589,6 +598,7 @@
       flex-direction: column;
       gap: 8px;
       padding: 12px;
+      height: 406px;
     }
     .pa-wireframe-bar {
       height: 39px;
@@ -600,10 +610,12 @@
       font-family: 'ApfelGrotezk', sans-serif;
       font-size: 12px;
       color: white;
+      flex-shrink: 0;
     }
     .pa-wireframe-bar--nav { background-color: #84a2b4; }
-    .pa-wireframe-bar--header { background-color: #a0a2ab; }
+    .pa-wireframe-bar--header { background-color: #a0a2ab; height: 57px; }
     .pa-wireframe-bar--content { background-color: #d7d7d7; color: #6e6e6e; flex: 1; }
+    .pa-wireframe-bar--photo { background-color: #b8d4f0; color: #6e6e6e; flex: 1; }
     .pa-wireframe-bar--action { background-color: #386af3; }
     .pa-wireframe-label {
       font-family: 'ApfelGrotezk', sans-serif;
@@ -799,8 +811,7 @@
       .pa-hero-left { flex: 0 0 40%; padding: 48px 24px 48px 40px; }
       .pa-intro { grid-template-columns: 1fr 1fr; }
       .pa-intro-left { min-width: 0; }
-      .pa-design { flex-direction: column; }
-      .pa-design-left { flex: none; flex-direction: row; flex-wrap: wrap; gap: 12px; }
+      .pa-design-left { flex-direction: row; flex-wrap: wrap; gap: 12px; }
     }
     @media (max-width: 768px) {
       .pa-hero { flex-direction: column; min-height: 100svh; }
@@ -819,7 +830,9 @@
       .pa-card-benchmark-right { flex-direction: column; height: 200px; }
       .pa-userflows { padding: 60px 24px; }
       .pa-flows-grid { flex-direction: column; }
-      .pa-design { padding: 40px 24px 60px; flex-direction: column; }
+      .pa-design { padding: 40px 24px 60px; }
+      .pa-design-body { flex-direction: column; }
+      .pa-design-left { flex: none; }
       .pa-wireframes { flex-direction: column; }
       .pa-testing { padding: 60px 24px; }
       .pa-testing-cards { flex-direction: column; }
@@ -1073,58 +1086,62 @@
 
         <!-- ── DESIGN ──────────────────────── -->
         <section id="section-design" class="pa-design">
-          <div class="pa-design-left">
-            <span class="pa-design-focus">Focus</span>
-            <div class="pa-design-point">
-              <span class="pa-design-point-title">Screen-to-screen goal definition</span>
-              <span class="pa-design-point-desc">What function each one fulfills and what information it should contain.</span>
-            </div>
-            <div class="pa-design-point">
-              <span class="pa-design-point-title">Information architecture</span>
-              <span class="pa-design-point-desc">Define the order of data on screen.</span>
-            </div>
+          <!-- Header centrado -->
+          <div class="pa-design-header">
+            <span class="pa-badge">DESIGN</span>
+            <h2 class="pa-design-title">Building the solution</h2>
+            <p class="pa-design-subtitle">I designed the product from the initial stage to high-fidelity prototypes, presenting and explaining each phase of the process to the project stakeholders.</p>
           </div>
-          <div class="pa-design-right">
-            <div class="pa-design-header">
-              <span class="pa-badge">DESIGN</span>
-              <h2 class="pa-design-title">Building the solution</h2>
-              <p class="pa-design-subtitle">I designed the product from the initial stage to high-fidelity prototypes, presenting and explaining each phase of the process to the project stakeholders.</p>
-            </div>
-            <div class="pa-stages-bar">
-              <div class="pa-stage pa-stage--active">Structure</div>
-              <div class="pa-stage">Lo-Fi</div>
-              <div class="pa-stage">Hi-Fi</div>
-              <div class="pa-stage">Iteration</div>
+          <!-- Stages bar centrada -->
+          <div class="pa-stages-bar">
+            <div class="pa-stage pa-stage--active">Structure</div>
+            <div class="pa-stage">Lo-Fi</div>
+            <div class="pa-stage">Hi-Fi</div>
+            <div class="pa-stage">Iteration</div>
+          </div>
+          <!-- Focus sidebar + wireframes -->
+          <div class="pa-design-body">
+            <div class="pa-design-left">
+              <span class="pa-design-focus">Focus</span>
+              <div class="pa-design-point">
+                <span class="pa-design-point-title">Screen-to-screen goal definition</span>
+                <span class="pa-design-point-desc">What function each one fulfills and what information it should contain.</span>
+              </div>
+              <div class="pa-design-point">
+                <span class="pa-design-point-title">Information architecture</span>
+                <span class="pa-design-point-desc">Define the order of data on screen.</span>
+              </div>
             </div>
             <div class="pa-wireframes">
-              <div>
-                <div class="pa-wireframe-card" style="height:406px;">
+              <div class="pa-wireframe-item">
+                <div class="pa-wireframe-card">
                   <div class="pa-wireframe-bar pa-wireframe-bar--nav">Navegación</div>
-                  <div class="pa-wireframe-bar pa-wireframe-bar--header" style="height:57px;">Número de orden</div>
-                  <div class="pa-wireframe-bar pa-wireframe-bar--content" style="flex:1;">Contenido de la orden</div>
-                  <div class="pa-wireframe-bar pa-wireframe-bar--action" style="height:43px;">Acciones</div>
+                  <div class="pa-wireframe-bar pa-wireframe-bar--header">Número de orden</div>
+                  <div class="pa-wireframe-bar pa-wireframe-bar--content">Contenido de la orden</div>
+                  <div class="pa-wireframe-bar pa-wireframe-bar--action">Acciones</div>
                 </div>
-                <p class="pa-wireframe-label" style="margin-top:12px;">Order Resume</p>
+                <p class="pa-wireframe-label">Order Resume</p>
               </div>
-              <div>
-                <div class="pa-wireframe-card" style="height:406px;">
+              <div class="pa-wireframe-item">
+                <div class="pa-wireframe-card">
                   <div class="pa-wireframe-bar pa-wireframe-bar--nav">Navegación</div>
-                  <div class="pa-wireframe-bar pa-wireframe-bar--header" style="height:57px;">Número de orden</div>
-                  <div class="pa-wireframe-bar pa-wireframe-bar--content" style="flex:1; min-height:40px;">Producto 1</div>
-                  <div class="pa-wireframe-bar pa-wireframe-bar--content" style="flex:1; min-height:40px;">Producto 2</div>
-                  <div class="pa-wireframe-bar pa-wireframe-bar--content" style="flex:1; min-height:40px;">Producto 3</div>
-                  <div class="pa-wireframe-bar pa-wireframe-bar--content" style="flex:1; min-height:40px;">Producto 4</div>
+                  <div class="pa-wireframe-bar pa-wireframe-bar--header">Número de orden</div>
+                  <div class="pa-wireframe-bar pa-wireframe-bar--content">Producto 1</div>
+                  <div class="pa-wireframe-bar pa-wireframe-bar--content">Producto 2</div>
+                  <div class="pa-wireframe-bar pa-wireframe-bar--content">Producto 3</div>
+                  <div class="pa-wireframe-bar pa-wireframe-bar--content">Producto 4</div>
+                  <div class="pa-wireframe-bar pa-wireframe-bar--content">Producto 5</div>
                 </div>
-                <p class="pa-wireframe-label" style="margin-top:12px;">Shopping List</p>
+                <p class="pa-wireframe-label">Shopping List</p>
               </div>
-              <div>
-                <div class="pa-wireframe-card" style="height:406px;">
+              <div class="pa-wireframe-item">
+                <div class="pa-wireframe-card">
                   <div class="pa-wireframe-bar pa-wireframe-bar--nav">Navegación</div>
-                  <div class="pa-wireframe-bar pa-wireframe-bar--header" style="height:57px;">Producto seleccionado</div>
-                  <div class="pa-wireframe-bar pa-wireframe-bar--content" style="flex:1;">Detalle del producto</div>
-                  <div class="pa-wireframe-bar pa-wireframe-bar--action" style="height:43px;">Confirmar</div>
+                  <div class="pa-wireframe-bar pa-wireframe-bar--photo">Foto</div>
+                  <div class="pa-wireframe-bar pa-wireframe-bar--content">Información del producto</div>
+                  <div class="pa-wireframe-bar pa-wireframe-bar--action">Acciones</div>
                 </div>
-                <p class="pa-wireframe-label" style="margin-top:12px;">Product Detail</p>
+                <p class="pa-wireframe-label">Product Detail</p>
               </div>
             </div>
           </div>
