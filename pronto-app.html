@@ -509,7 +509,7 @@
     /* ── Design / Building the solution ─────── */
     .pa-design {
       background: white;
-      padding: 40px 64px 40px 32px;
+      padding: 40px 64px 32px 32px;
       display: flex;
       flex-direction: column;
       gap: 32px;
@@ -767,7 +767,7 @@
     /* ── Results section ─────────────────────── */
     .pa-results {
       background: #0f0f0f;
-      padding: 80px 64px 80px 32px;
+      padding: 80px 64px 160px 32px;
       display: flex;
       flex-direction: column;
       gap: 40px;
@@ -944,9 +944,9 @@
       /* Design */
       .pa-design { padding: 40px 12px 48px; }
       .pa-design-header { align-items: center; text-align: center; }
-      .pa-design-body { min-height: unset; }
-      .pa-design-stage { position: static; flex-direction: column; gap: 24px; opacity: 0; pointer-events: none; display: none; }
-      .pa-design-stage.is-active { opacity: 1; pointer-events: auto; display: flex; }
+      .pa-design-body { min-height: unset; display: grid; }
+      .pa-design-stage { display: flex; flex-direction: column; gap: 24px; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; grid-column: 1; grid-row: 1; position: static; }
+      .pa-design-stage.is-active { opacity: 1; pointer-events: auto; }
       .pa-design-left { flex: none; order: 2; background: #f5f5f5; border-radius: 16px; padding: 16px; gap: 12px; }
       .pa-design-body { margin-top: -24px; }
       .pa-wireframes { display: none; }
@@ -967,10 +967,19 @@
       .pa-testing-card-visual picture img { object-fit: cover; width: 100%; height: 100%; }
 
       /* Results */
-      .pa-results { padding: 40px 12px; }
+      .pa-results { padding: 40px 12px 80px; gap: 16px; }
+      .pa-results-title { font-size: 32px; line-height: 36px; letter-spacing: -0.64px; }
+      .pa-results-subtitle { font-size: 14px; line-height: 18px; color: #e3e3e3; }
       .pa-stats { flex-direction: column; gap: 0; }
-      .pa-stat { padding-right: 0 !important; padding-left: 0 !important; border-left: none !important; border-top: 1px solid #2b2c2c; padding-top: 24px; }
-      .pa-stat:first-child { border-top: none; padding-top: 0; }
+      .pa-stat { gap: 0; padding: 12px 0 !important; border-left: none !important; border-top: 1px solid #2b2c2c; }
+      .pa-stat:first-child { border-top: none; padding-top: 0 !important; }
+      .pa-stat:last-child { padding-bottom: 0 !important; }
+      .pa-stat-eyebrow { margin-bottom: 4px; }
+      .pa-stat-description { font-size: 22px; line-height: 28px; letter-spacing: -0.44px; color: #e3e3e3; margin: 0 0 12px; }
+      .pa-stat-divider { display: none; }
+      .pa-stat-values { border-top: none; padding-top: 0; gap: 20px; }
+      .pa-stat-meta-value { font-size: 16px; line-height: 20px; letter-spacing: -0.32px; color: #e3e3e3; }
+      .pa-stat-meta-value--result { color: #e3e3e3; }
     }
 
     /* ── Other Projects ─────────────────────────────────────────────── */
@@ -980,7 +989,7 @@
       gap: 16px;
       padding: 56px 64px;
       position: relative;
-      z-index: 1;
+      z-index: 2;
       margin-top: -80px;
       border-radius: 32px 32px 0 0;
     }
@@ -1088,7 +1097,8 @@
     }
     .pa-other-results-value--blue { color: #021d49; }
     @media (max-width: 768px) {
-      .pa-other-projects { flex-direction: column; padding: 40px 24px; margin-top: -40px; }
+      .pa-other-projects { flex-direction: column; padding: 40px 12px; margin-top: -40px; }
+      .pa-other-card { width: 100%; box-sizing: border-box; }
       .pa-other-img-wrap { min-height: 200px; }
     }
 
@@ -1580,7 +1590,7 @@
               </div>
             </div>
             <div class="pa-stat">
-              <span class="pa-stat-eyebrow">KR#1 — Quality</span>
+              <span class="pa-stat-eyebrow">KR#2 — Quality</span>
               <p class="pa-stat-description">Reduce the rate of "wrong item" incidents from 12% to 0%.</p>
               <div class="pa-stat-divider"></div>
               <div class="pa-stat-values">
