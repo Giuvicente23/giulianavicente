@@ -338,6 +338,11 @@
       border-radius: 24px;
       box-shadow: 0 50px 35px rgba(0,0,0,0.08);
       overflow: hidden;
+      transition: box-shadow 0.25s ease, transform 0.25s ease;
+    }
+    .pa-card:hover {
+      box-shadow: 0 50px 35px rgba(0,0,0,0.08), 0 8px 24px rgba(0,0,0,0.07);
+      transform: translateY(-4px);
     }
     .pa-card-interviews {
       display: flex;
@@ -443,6 +448,11 @@
       overflow: hidden;
       box-shadow: 0 2px 16px rgba(0,0,0,0.06);
       height: 378px;
+      transition: box-shadow 0.25s ease, transform 0.25s ease;
+    }
+    .pa-flow-item:hover {
+      box-shadow: 0 2px 16px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.07);
+      transform: translateY(-4px);
     }
     .pa-flow-img-wrap {
       flex: 1;
@@ -545,15 +555,12 @@
       border-radius: 12px;
       overflow: hidden;
       width: 271px;
-      height: 487px;
       flex-shrink: 0;
       background: transparent;
     }
     .pa-wireframe-img-card img {
       width: 100%;
-      height: 100%;
-      object-fit: contain;
-      object-position: top center;
+      height: auto;
       display: block;
     }
     .pa-design-body {
@@ -617,7 +624,7 @@
       width: 271px;
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 0;
     }
     .pa-wireframe-card {
       background: white;
@@ -691,11 +698,16 @@
       background: white;
       border-radius: 24px;
       box-shadow: 0 50px 35px rgba(0,0,0,0.08);
+      transition: box-shadow 0.25s ease, transform 0.25s ease;
       padding: 12px;
       display: flex;
       flex-direction: column;
       gap: 12px;
       height: 400px;
+    }
+    .pa-testing-card:hover {
+      box-shadow: 0 50px 35px rgba(0,0,0,0.08), 0 8px 24px rgba(0,0,0,0.07);
+      transform: translateY(-4px);
     }
     .pa-testing-card-step {
       font-family: 'ApfelGrotezk', sans-serif;
@@ -873,6 +885,17 @@
       .pa-results { padding: 60px 24px; }
       .pa-stats { flex-direction: column; gap: 32px; }
       .pa-stat { padding-right: 0 !important; padding-left: 0 !important; border-left: none !important; border-top: 1px solid #2b2c2c; padding-top: 24px; }
+    }
+
+    /* ── Scroll reveal ───────────────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
     }
   </style>
 </head>
@@ -1351,7 +1374,7 @@
   </main>
 
   <!-- Footer -->
-  <div class="footer-bg footer-bg--light" style="position:relative;z-index:1;">
+  <div class="footer-bg footer-bg--light" style="position:relative;z-index:1;padding-top:48px;">
     <footer class="footer--dark" id="contact">
       <div class="footer-inner">
         <span class="footer-year">2026</span>
@@ -1430,16 +1453,34 @@
       var stagesBar = document.getElementById('pa-stages-bar');
       if (!stagesBar) return;
       var stages = document.querySelectorAll('.pa-design-stage');
+      var tabs = Array.from(stagesBar.querySelectorAll('.pa-stage'));
+      var autoTimer;
 
-      stagesBar.querySelectorAll('.pa-stage').forEach(function(tab) {
+      function activateTab(tab) {
+        tabs.forEach(function(t) { t.classList.remove('pa-stage--active'); });
+        tab.classList.add('pa-stage--active');
+        stages.forEach(function(s) {
+          s.classList.toggle('is-active', s.dataset.stage === tab.dataset.stage);
+        });
+      }
+
+      function startAuto() {
+        autoTimer = setInterval(function() {
+          var currentIndex = tabs.findIndex(function(t) { return t.classList.contains('pa-stage--active'); });
+          var nextIndex = (currentIndex + 1) % tabs.length;
+          activateTab(tabs[nextIndex]);
+        }, 4000);
+      }
+
+      tabs.forEach(function(tab) {
         tab.addEventListener('click', function() {
-          stagesBar.querySelectorAll('.pa-stage').forEach(function(t) { t.classList.remove('pa-stage--active'); });
-          tab.classList.add('pa-stage--active');
-          stages.forEach(function(s) {
-            s.classList.toggle('is-active', s.dataset.stage === tab.dataset.stage);
-          });
+          clearInterval(autoTimer);
+          activateTab(tab);
+          startAuto();
         });
       });
+
+      startAuto();
     })();
 
     // ── TOC active state ─────────────────────────────────────────────────
@@ -1457,6 +1498,35 @@
         });
       }, { rootMargin: '-30% 0px -60% 0px' });
       sections.forEach(function(s) { observer.observe(s); });
+    })();
+
+    // ── Scroll reveal ────────────────────────────────────────────────────
+    (function() {
+      var revealSelectors = [
+        '.pa-hero-tag', '.pa-hero-title', '.pa-hero-subtitle', '.pa-hero-meta',
+        '.pa-meta-row', '.pa-body-text', '.pa-body-text + .pa-body-text',
+        '.pa-section-eyebrow', '.pa-section-title', '.pa-section-subtitle',
+        '.pa-research-title', '.pa-research-subtitle',
+        '.pa-card', '.pa-testing-card',
+        '.pa-flow-img',
+        '.pa-design-header', '.pa-stages-bar',
+        '.pa-results-title', '.pa-results-subtitle', '.pa-stat',
+        '.pa-definitions-block',
+        'section > *'
+      ];
+      var elements = document.querySelectorAll(revealSelectors.join(','));
+      elements.forEach(function(el) {
+        el.classList.add('reveal');
+      });
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+      elements.forEach(function(el) { observer.observe(el); });
     })();
 
     // ── Footer reveal ────────────────────────────────────────────────────
