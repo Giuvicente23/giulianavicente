@@ -852,39 +852,84 @@
     }
 
     /* ── Responsive ──────────────────────────── */
+    .pa-wireframe-mobile { display: none; }
+
     @media (max-width: 1024px) {
       .pa-hero-left { flex: 0 0 40%; padding: 48px 24px 48px 40px; }
       .pa-intro { grid-template-columns: 1fr 1fr; }
       .pa-intro-left { min-width: 0; }
       .pa-design-left { flex-direction: row; flex-wrap: wrap; gap: 12px; }
     }
+
     @media (max-width: 768px) {
+      /* Hero */
       .pa-hero { flex-direction: column; min-height: 100svh; }
-      .pa-hero-left { flex: none; padding: 120px 24px 40px; }
-      .pa-hero-right { height: 50vw; min-height: 260px; flex: none; }
-      .pa-hero-right img { object-position: center; }
+      .pa-hero-left { flex: none; padding: 100px 16px 32px; }
+      .pa-hero-right { height: 56vw; min-height: 240px; flex: none; }
+      .pa-hero-right img, .pa-hero-right picture { object-position: center; width: 100%; height: 100%; object-fit: cover; display: block; }
+
+      /* Sidebar & layout */
       .pa-sidebar { display: none; }
-      .pa-meta-bar { padding: 48px 24px 20px; }
-      .pa-intro { grid-template-columns: 1fr; padding: 40px 24px 60px; }
-      .pa-intro-right { grid-column: 1; grid-row: 3; }
-      .pa-intro-asset { height: 280px; }
-      .pa-research { padding: 60px 24px; }
-      .pa-card-interviews { flex-direction: column; height: auto; padding: 16px; }
-      .pa-card-interviews-img { width: 100%; flex: none; height: 200px; }
-      .pa-card-benchmark { flex-direction: column; height: auto; padding: 16px; }
-      .pa-card-benchmark-right { flex-direction: column; height: 200px; }
-      .pa-userflows { padding: 60px 24px; }
-      .pa-flows-grid { flex-direction: column; }
-      .pa-design { padding: 40px 24px 60px; }
-      .pa-design-body { flex-direction: column; }
-      .pa-design-left { flex: none; }
-      .pa-wireframes { flex-direction: column; }
-      .pa-testing { padding: 60px 24px; }
-      .pa-testing-cards { flex-direction: column; }
-      .pa-testing-card { height: auto; }
-      .pa-results { padding: 60px 24px; }
-      .pa-stats { flex-direction: column; gap: 32px; }
+
+      /* Meta bar */
+      .pa-meta-bar { padding: 20px 12px; gap: 16px 44px; }
+
+      /* Intro */
+      .pa-intro { grid-template-columns: 1fr; padding: 40px 16px 48px; row-gap: 24px; }
+      .pa-intro-badge { grid-column: 1; grid-row: 1; }
+      .pa-intro-left { grid-column: 1; grid-row: 2; gap: 24px; }
+      .pa-intro-right { grid-column: 1; grid-row: 3; position: static; }
+      .pa-intro-asset { height: 420px; border-radius: 24px; overflow: hidden; }
+      .pa-intro-asset picture, .pa-intro-asset img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 24px; }
+
+      /* Research */
+      .pa-research { padding: 40px 12px; gap: 16px; }
+      .pa-research-header { align-items: center; text-align: center; }
+      .pa-card { box-shadow: 0 25px 35px rgba(0,0,0,0.08); }
+      .pa-card-interviews { flex-direction: column; height: auto; padding: 16px; gap: 16px; }
+      .pa-card-interviews-img { width: 100%; flex: none; height: 200px; border-radius: 16px; order: 2; }
+      .pa-card-text { order: 1; }
+      .pa-card-benchmark { flex-direction: column; height: auto; padding: 16px; gap: 16px; }
+      .pa-card-benchmark-right { flex-direction: row; height: 150px; gap: 12px; }
+      .pa-card-benchmark-right picture, .pa-card-benchmark-right img { flex: 1; width: 0; height: 100%; object-fit: cover; border-radius: 16px; }
+
+      /* Userflows */
+      .pa-userflows { padding: 40px 12px; }
+      .pa-userflows-header { text-align: center; align-items: center; }
+      .pa-flows-grid { flex-direction: column; gap: 16px; }
+      .pa-flow-item { height: auto; flex-direction: column-reverse; }
+      .pa-flow-img-wrap { height: 160px; flex: none; padding: 0; }
+      .pa-flow-img-wrap picture { width: 100%; height: 100%; display: block; }
+      .pa-flow-img-wrap picture img { width: 100%; height: 100%; object-fit: cover; }
+      .pa-flow-text { padding: 12px 16px 0; }
+
+      /* Design */
+      .pa-design { padding: 40px 12px 48px; }
+      .pa-design-header { align-items: center; text-align: center; }
+      .pa-design-body { min-height: unset; }
+      .pa-design-stage { position: static; flex-direction: column; gap: 24px; opacity: 0; pointer-events: none; display: none; }
+      .pa-design-stage.is-active { opacity: 1; pointer-events: auto; display: flex; }
+      .pa-design-left { flex: none; order: 2; }
+      .pa-wireframes { display: none; }
+      .pa-wireframe-mobile { display: flex; justify-content: center; order: 1; }
+      .pa-wireframe-mobile img { width: 100%; max-width: 320px; height: auto; border-radius: 12px; }
+
+      /* Testing */
+      .pa-testing { padding: 40px 12px; }
+      .pa-testing-header { align-items: center; text-align: center; }
+      .pa-testing-cards { flex-direction: column; gap: 12px; }
+      .pa-testing-card { flex-direction: row; height: auto; align-items: center; gap: 12px; padding: 12px; }
+      .pa-testing-card-step { display: none; }
+      .pa-testing-card-body { flex: 1; min-width: 0; order: 2; }
+      .pa-testing-card-visual { flex: none; width: 124px; height: 124px; border-radius: 16px; order: 1; }
+      .pa-testing-card-visual img, .pa-testing-card-visual picture { width: 100%; height: 100%; display: block; }
+      .pa-testing-card-visual picture img { object-fit: cover; width: 100%; height: 100%; }
+
+      /* Results */
+      .pa-results { padding: 40px 12px; }
+      .pa-stats { flex-direction: column; gap: 0; }
       .pa-stat { padding-right: 0 !important; padding-left: 0 !important; border-left: none !important; border-top: 1px solid #2b2c2c; padding-top: 24px; }
+      .pa-stat:first-child { border-top: none; padding-top: 0; }
     }
 
     /* ── Other Projects ─────────────────────────────────────────────── */
@@ -1082,7 +1127,10 @@
         <p class="pa-hero-subtitle">Cómo optimizar la preparación de órdenes, reduciendo tiempos de trabajo y evitando errores de picking.</p>
       </div>
       <div class="pa-hero-right">
-        <img src="images/project_prontoapp/desktop/project_hero_desktop.png" alt="Pronto App — pantallas de la aplicación">
+        <picture>
+          <source media="(max-width: 768px)" srcset="images/project_prontoapp/mobile/project_hero_mobile.png">
+          <img src="images/project_prontoapp/desktop/project_hero_desktop.png" alt="Pronto App — pantallas de la aplicación">
+        </picture>
       </div>
     </section>
 
@@ -1174,7 +1222,10 @@
           </div>
           <div class="pa-intro-right">
             <div class="pa-intro-asset">
-              <img src="images/project_prontoapp/desktop/intro_asset_desktop.png" alt="Pronto App — pantalla de la aplicación">
+              <picture>
+                <source media="(max-width: 768px)" srcset="images/project_prontoapp/mobile/intro_asset_mobile.png">
+                <img src="images/project_prontoapp/desktop/intro_asset_desktop.png" alt="Pronto App — pantalla de la aplicación">
+              </picture>
             </div>
           </div>
         </section>
@@ -1189,7 +1240,10 @@
           <!-- Interviews card -->
           <div class="pa-card pa-card-interviews">
             <div class="pa-card-interviews-img">
-              <img src="images/project_prontoapp/desktop/discovery_interviews_desktop.png" alt="User research — interviews">
+              <picture>
+                <source media="(max-width: 768px)" srcset="images/project_prontoapp/mobile/discovery_interviews_mobile.png">
+                <img src="images/project_prontoapp/desktop/discovery_interviews_desktop.png" alt="User research — interviews">
+              </picture>
             </div>
             <div class="pa-card-text">
               <span class="pa-card-eyebrow">USER &amp; CURRENT OPERATION</span>
@@ -1224,8 +1278,14 @@
               </div>
             </div>
             <div class="pa-card-benchmark-right">
-              <img src="images/project_prontoapp/desktop/discovery_benchmark1_desktop.png" alt="Competitive benchmark — 1">
-              <img src="images/project_prontoapp/desktop/discovery_benchmark2_desktop.png" alt="Competitive benchmark — 2">
+              <picture>
+                <source media="(max-width: 768px)" srcset="images/project_prontoapp/mobile/discovery_benchmark1_mobile.png">
+                <img src="images/project_prontoapp/desktop/discovery_benchmark1_desktop.png" alt="Competitive benchmark — 1">
+              </picture>
+              <picture>
+                <source media="(max-width: 768px)" srcset="images/project_prontoapp/mobile/discovery_benchmark2_mobile.png">
+                <img src="images/project_prontoapp/desktop/discovery_benchmark2_desktop.png" alt="Competitive benchmark — 2">
+              </picture>
             </div>
           </div>
         </section>
@@ -1240,7 +1300,10 @@
           <div class="pa-flows-grid">
             <div class="pa-flow-item">
               <div class="pa-flow-img-wrap">
-                <img src="images/project_prontoapp/desktop/userflow_picking_desktop.png" alt="Picking flow" class="pa-flow-img">
+                <picture>
+                  <source media="(max-width: 768px)" srcset="images/project_prontoapp/mobile/userflow_picking_mobile.png">
+                  <img src="images/project_prontoapp/desktop/userflow_picking_desktop.png" alt="Picking flow" class="pa-flow-img">
+                </picture>
               </div>
               <div class="pa-flow-text">
                 <p class="pa-flow-eyebrow">Picking Flow</p>
@@ -1249,7 +1312,10 @@
             </div>
             <div class="pa-flow-item">
               <div class="pa-flow-img-wrap">
-                <img src="images/project_prontoapp/desktop/userflow_stage_in_desktop.png" alt="Stage in flow" class="pa-flow-img">
+                <picture>
+                  <source media="(max-width: 768px)" srcset="images/project_prontoapp/mobile/userflow_stage_in_mobile.png">
+                  <img src="images/project_prontoapp/desktop/userflow_stage_in_desktop.png" alt="Stage in flow" class="pa-flow-img">
+                </picture>
               </div>
               <div class="pa-flow-text">
                 <p class="pa-flow-eyebrow">Stage In Flow</p>
@@ -1309,6 +1375,9 @@
                   <p class="pa-wireframe-label">Product Detail</p>
                 </div>
               </div>
+              <div class="pa-wireframe-mobile">
+                <img src="images/project_prontoapp/mobile/structure_mobile.png" alt="Structure mobile">
+              </div>
             </div>
 
             <!-- LO-FI -->
@@ -1343,6 +1412,9 @@
                   </div>
                   <p class="pa-wireframe-label">Product Detail</p>
                 </div>
+              </div>
+              <div class="pa-wireframe-mobile">
+                <img src="images/project_prontoapp/mobile/lo-fi_mobile.png" alt="Lo-Fi mobile">
               </div>
             </div>
 
@@ -1387,6 +1459,9 @@
                   <p class="pa-wireframe-label">Product Detail</p>
                 </div>
               </div>
+              <div class="pa-wireframe-mobile">
+                <img src="images/project_prontoapp/mobile/hi-fi_mobile.png" alt="Hi-Fi mobile">
+              </div>
             </div>
 
           </div>
@@ -1406,7 +1481,10 @@
                 <p class="pa-testing-card-text">Define the testing conditions and main objectives, and co-create the script with the team.</p>
               </div>
               <div class="pa-testing-card-visual">
-                <img src="images/project_prontoapp/desktop/testing_1_desktop.png" alt="Pre-testing">
+                <picture>
+                  <source media="(max-width: 768px)" srcset="images/project_prontoapp/mobile/Testing_1_mobile.png">
+                  <img src="images/project_prontoapp/desktop/testing_1_desktop.png" alt="Pre-testing">
+                </picture>
               </div>
             </div>
             <div class="pa-testing-card">
@@ -1416,7 +1494,10 @@
                 <p class="pa-testing-card-text">During the interviews, I played the role of observer, taking notes on each test performed.</p>
               </div>
               <div class="pa-testing-card-visual">
-                <img src="images/project_prontoapp/desktop/testing_2_desktop.png" alt="During testing">
+                <picture>
+                  <source media="(max-width: 768px)" srcset="images/project_prontoapp/mobile/Testing_2_mobile.png">
+                  <img src="images/project_prontoapp/desktop/testing_2_desktop.png" alt="During testing">
+                </picture>
               </div>
             </div>
             <div class="pa-testing-card">
@@ -1426,7 +1507,10 @@
                 <p class="pa-testing-card-text">Prioritization of main pain points that represented an issue in daily operations and adjusted the proposal to clarify the experience.</p>
               </div>
               <div class="pa-testing-card-visual pa-testing-card-visual--gray">
-                <img src="images/project_prontoapp/desktop/testing_3_desktop.png" alt="Post-testing prioritization">
+                <picture>
+                  <source media="(max-width: 768px)" srcset="images/project_prontoapp/mobile/Testing_3_mobile.png">
+                  <img src="images/project_prontoapp/desktop/testing_3_desktop.png" alt="Post-testing prioritization">
+                </picture>
               </div>
             </div>
           </div>
