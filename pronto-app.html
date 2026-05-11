@@ -414,11 +414,18 @@
       display: flex;
       gap: 8px;
     }
-    .pa-card-benchmark-right img {
+    .pa-card-benchmark-right picture {
       flex: 1;
       height: 100%;
-      object-fit: cover;
+      display: block;
       border-radius: 16px;
+      overflow: hidden;
+    }
+    .pa-card-benchmark-right picture img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     /* ── Userflows section ──────────────────── */
@@ -462,11 +469,16 @@
       justify-content: center;
       padding: 20px 20px 0;
     }
+    .pa-flow-img-wrap picture {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
     .pa-flow-img {
       width: 100%;
       height: 100%;
       object-fit: contain;
-      object-position: center;
+      object-position: center top;
       border-radius: 0;
       display: block;
     }
@@ -497,7 +509,7 @@
     /* ── Design / Building the solution ─────── */
     .pa-design {
       background: white;
-      padding: 24px 64px 80px 32px;
+      padding: 40px 64px 40px 32px;
       display: flex;
       flex-direction: column;
       gap: 32px;
@@ -566,6 +578,7 @@
     .pa-design-body {
       position: relative;
       min-height: 560px;
+      margin-top: -16px;
     }
     .pa-design-stage {
       position: absolute;
@@ -669,7 +682,7 @@
 
     /* ── Testing section ─────────────────────── */
     .pa-testing {
-      background: white;
+      background: #f5f5f5;
       padding: 80px 64px 80px 32px;
       display: flex;
       flex-direction: column;
@@ -678,7 +691,8 @@
     .pa-testing-header {
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
+      align-items: center;
+      text-align: center;
       gap: 12px;
     }
     .pa-testing-title {
@@ -753,7 +767,7 @@
     /* ── Results section ─────────────────────── */
     .pa-results {
       background: #0f0f0f;
-      padding: 80px 64px 120px 32px;
+      padding: 80px 64px 80px 32px;
       display: flex;
       flex-direction: column;
       gap: 40px;
@@ -896,7 +910,7 @@
       .pa-meta-bar { padding: 20px 12px; gap: 16px 44px; }
 
       /* Intro */
-      .pa-intro { grid-template-columns: 1fr; padding: 40px 16px 48px; row-gap: 24px; }
+      .pa-intro { grid-template-columns: 1fr; padding: 40px 12px 48px; row-gap: 24px; }
       .pa-intro-badge { grid-column: 1; grid-row: 1; }
       .pa-intro-left { grid-column: 1; grid-row: 2; gap: 24px; }
       .pa-intro-right { grid-column: 1; grid-row: 3; position: static; }
@@ -908,20 +922,23 @@
       .pa-research-header { align-items: center; text-align: center; }
       .pa-card { box-shadow: 0 25px 35px rgba(0,0,0,0.08); }
       .pa-card-interviews { flex-direction: column; height: auto; padding: 16px; gap: 16px; }
-      .pa-card-interviews-img { width: 100%; flex: none; height: 200px; border-radius: 16px; order: 2; }
+      .pa-card-interviews-img { width: 100%; flex: none; height: 200px; border-radius: 16px; overflow: hidden; order: 2; }
+      .pa-card-interviews-img picture { display: block; width: 100%; height: 100%; }
+      .pa-card-interviews-img picture img { width: 100%; height: 100%; object-fit: cover; display: block; }
       .pa-card-text { order: 1; }
-      .pa-card-benchmark { flex-direction: column; height: auto; padding: 16px; gap: 16px; }
-      .pa-card-benchmark-right { flex-direction: row; height: 150px; gap: 12px; }
-      .pa-card-benchmark-right picture, .pa-card-benchmark-right img { flex: 1; width: 0; height: 100%; object-fit: cover; border-radius: 16px; }
+      .pa-card-benchmark { flex-direction: column; align-items: stretch; height: auto; padding: 16px; gap: 16px; }
+      .pa-card-benchmark-right { flex-direction: row; height: 150px; gap: 12px; width: 100%; }
+      .pa-card-benchmark-right picture { flex: 1; min-width: 0; height: 100%; display: block; border-radius: 16px; overflow: hidden; }
+      .pa-card-benchmark-right picture img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
       /* Userflows */
       .pa-userflows { padding: 40px 12px; }
       .pa-userflows-header { text-align: center; align-items: center; }
       .pa-flows-grid { flex-direction: column; gap: 16px; }
       .pa-flow-item { height: auto; flex-direction: column-reverse; }
-      .pa-flow-img-wrap { height: 160px; flex: none; padding: 0; }
-      .pa-flow-img-wrap picture { width: 100%; height: 100%; display: block; }
-      .pa-flow-img-wrap picture img { width: 100%; height: 100%; object-fit: cover; }
+      .pa-flow-img-wrap { flex: none; padding: 12px 12px 0; display: block; overflow: hidden; }
+      .pa-flow-img-wrap picture { display: block; width: 100%; }
+      .pa-flow-img-wrap picture img { width: 100%; height: auto; display: block; }
       .pa-flow-text { padding: 12px 16px 0; }
 
       /* Design */
@@ -930,9 +947,12 @@
       .pa-design-body { min-height: unset; }
       .pa-design-stage { position: static; flex-direction: column; gap: 24px; opacity: 0; pointer-events: none; display: none; }
       .pa-design-stage.is-active { opacity: 1; pointer-events: auto; display: flex; }
-      .pa-design-left { flex: none; order: 2; }
+      .pa-design-left { flex: none; order: 2; background: #f5f5f5; border-radius: 16px; padding: 16px; gap: 12px; }
+      .pa-design-body { margin-top: -24px; }
       .pa-wireframes { display: none; }
-      .pa-wireframe-mobile { display: flex; justify-content: center; order: 1; }
+      .pa-wireframe-mobile { display: flex; justify-content: center; order: 1; width: 100%; }
+      .pa-stages-bar { width: 100%; box-sizing: border-box; }
+      .pa-stage { flex: 1; text-align: center; }
       .pa-wireframe-mobile img { width: 100%; max-width: 320px; height: auto; border-radius: 12px; }
 
       /* Testing */
@@ -1481,7 +1501,7 @@
                 </div>
               </div>
               <div class="pa-wireframe-mobile">
-                <img src="images/project_prontoapp/mobile/hi-fi_mobile.png" alt="Hi-Fi mobile">
+                <img src="images/project_prontoapp/mobile/hi-fi_mobile.png?v=2" alt="Hi-Fi mobile">
               </div>
             </div>
 
