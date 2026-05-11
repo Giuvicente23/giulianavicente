@@ -887,6 +887,125 @@
       .pa-stat { padding-right: 0 !important; padding-left: 0 !important; border-left: none !important; border-top: 1px solid #2b2c2c; padding-top: 24px; }
     }
 
+    /* ── Other Projects ─────────────────────────────────────────────── */
+    .pa-other-projects {
+      background: #f5f5f5;
+      display: flex;
+      gap: 16px;
+      padding: 56px 64px;
+      position: relative;
+      z-index: 1;
+      margin-top: -80px;
+      border-radius: 32px 32px 0 0;
+    }
+    .pa-other-card {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 8px;
+      border-radius: 24px;
+      text-decoration: none;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .pa-other-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.10);
+    }
+    .pa-other-card--green { background: #adeeae; }
+    .pa-other-card--blue  { background: #96b1de; }
+    .pa-other-img-wrap {
+      flex: 1;
+      border-radius: 20px;
+      overflow: hidden;
+      min-height: 260px;
+    }
+    .pa-other-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .pa-other-body {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 12px 8px;
+    }
+    .pa-other-meta-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .pa-other-year {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+      letter-spacing: -0.28px;
+      color: #0a3518;
+    }
+    .pa-other-year--blue { color: #021d49; }
+    .pa-other-tag {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 16px;
+      padding: 2px 6px;
+      border-radius: 24px;
+    }
+    .pa-other-tag--green { background: #52d87e; color: #0f0f0f; }
+    .pa-other-tag--blue  { background: #d6e6ff; color: #1a335b; }
+    .pa-other-title {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-size: 28px;
+      font-weight: 500;
+      line-height: 32px;
+      color: #0a3518;
+      margin: 0;
+    }
+    .pa-other-title--blue { color: #021d49; }
+    .pa-other-desc {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 20px;
+      letter-spacing: -0.32px;
+      color: #0a3518;
+      margin: 0;
+    }
+    .pa-other-desc--blue { color: #021d49; }
+    .pa-other-results {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 4px;
+    }
+    .pa-other-results-label {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 16px;
+      letter-spacing: 1.32px;
+      text-transform: uppercase;
+    }
+    .pa-other-results-label--green { color: #239a43; }
+    .pa-other-results-label--blue  { color: #3b5f96; }
+    .pa-other-results-value {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 14px;
+      letter-spacing: -0.28px;
+      color: #0a3518;
+    }
+    .pa-other-results-value--blue { color: #021d49; }
+    @media (max-width: 768px) {
+      .pa-other-projects { flex-direction: column; padding: 40px 24px; margin-top: -40px; }
+      .pa-other-img-wrap { min-height: 200px; }
+    }
+
     /* ── Scroll reveal ───────────────────────────────────────────────── */
     .reveal {
       opacity: 0;
@@ -1373,8 +1492,48 @@
 
   </main>
 
+  <!-- Other Projects -->
+  <section class="pa-other-projects">
+    <a href="advisory.html" class="pa-other-card pa-other-card--green">
+      <div class="pa-other-img-wrap">
+        <img src="images/other_advisory.png" alt="Advisory Communications">
+      </div>
+      <div class="pa-other-body">
+        <div class="pa-other-meta-row">
+          <span class="pa-other-year">2025</span>
+          <span class="pa-other-tag pa-other-tag--green">Communication Flow</span>
+        </div>
+        <h3 class="pa-other-title">Advisory Communications</h3>
+        <p class="pa-other-desc">Improve conversion rates across the funnel for Mexico advisors to deliver better customer service.</p>
+        <div class="pa-other-results">
+          <span class="pa-other-results-label pa-other-results-label--green">RESULTS</span>
+          <span class="pa-other-results-value">+12% CR Visit</span>
+        </div>
+      </div>
+    </a>
+    <a href="property.html" class="pa-other-card pa-other-card--blue">
+      <div class="pa-other-img-wrap">
+        <img src="images/other_property.png" alt="Property Detail Page">
+      </div>
+      <div class="pa-other-body">
+        <div class="pa-other-meta-row">
+          <span class="pa-other-year pa-other-year--blue">2024</span>
+          <span class="pa-other-tag pa-other-tag--blue">Web Responsive</span>
+          <span class="pa-other-tag pa-other-tag--blue">Redesign</span>
+          <span class="pa-other-tag pa-other-tag--blue">SaaS</span>
+        </div>
+        <h3 class="pa-other-title pa-other-title--blue">Property Detail Page</h3>
+        <p class="pa-other-desc pa-other-desc--blue">Optimizing the Property Detail Page to reduce support tickets.</p>
+        <div class="pa-other-results">
+          <span class="pa-other-results-label pa-other-results-label--blue">RESULTS</span>
+          <span class="pa-other-results-value pa-other-results-value--blue">-80% support tickets</span>
+        </div>
+      </div>
+    </a>
+  </section>
+
   <!-- Footer -->
-  <div class="footer-bg footer-bg--light" style="position:relative;z-index:1;padding-top:48px;">
+  <div class="footer-bg footer-bg--light" style="position:relative;z-index:1;padding-top:24px;">
     <footer class="footer--dark" id="contact">
       <div class="footer-inner">
         <span class="footer-year">2026</span>
