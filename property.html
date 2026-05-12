@@ -235,14 +235,18 @@
       font-family: 'ApfelGrotezk', sans-serif;
       font-size: 16px;
       line-height: 20px;
-      color: #2b2c2c;
+      color: #0f0f0f;
       margin: 0;
     }
     .pp-body-text ul {
-      margin: 0;
-      padding-left: 20px;
+      margin: 4px 0 0 0;
+      padding-left: 0;
+      list-style-position: inside;
     }
-    .pp-body-text li { margin-bottom: 0; }
+    .pp-body-text li {
+      margin-bottom: 0;
+      color: #0f0f0f;
+    }
     .pp-section-block { display: flex; flex-direction: column; gap: 8px; }
 
     .pp-krs { display: flex; flex-direction: column; padding: 12px 0; }
@@ -280,12 +284,20 @@
       align-items: center;
       justify-content: center;
     }
+    .pp-intro-asset picture {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+    }
     .pp-intro-asset img {
       width: 80%;
       height: auto;
       display: block;
       object-fit: contain;
     }
+    .pp-intro-asset--mobile-only { display: none; }
 
     /* ─────────────────────────────────────────
        RESEARCH / DISCOVERY SECTION
@@ -351,7 +363,6 @@
       width: 32px;
       height: 32px;
       border-radius: 8px;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.08);
       overflow: hidden;
       flex-shrink: 0;
     }
@@ -360,14 +371,14 @@
       gap: 8px;
     }
     .pp-discovery-logo img {
-      width: 100%;
-      height: 100%;
+      width: 32px;
+      height: 32px;
       object-fit: cover;
       display: block;
     }
-    .pp-discovery-logo--white { background: white; }
-    .pp-discovery-logo--gray  { background: #e0e0e0; }
-    .pp-discovery-logo--yellow { background: #fed702; }
+    .pp-discovery-logo--white { background: none; }
+    .pp-discovery-logo--gray  { background: none; }
+    .pp-discovery-logo--yellow { background: none; }
     .pp-discovery-card-title {
       font-family: 'ApfelGrotezk', sans-serif;
       font-weight: 500;
@@ -403,7 +414,7 @@
     ───────────────────────────────────────── */
     .pp-userflow {
       background-color: #f5f5f5;
-      padding: 80px 64px 80px 32px;
+      padding: 64px 64px 64px 32px;
       display: flex;
       flex-direction: column;
       gap: 24px;
@@ -464,6 +475,7 @@
       display: flex;
       flex-direction: column;
       gap: 12px;
+      align-items: flex-start;
     }
     .pp-testing-title {
       font-family: 'ApfelGrotezk', sans-serif;
@@ -805,9 +817,10 @@
       }
       .pp-intro-badge { grid-column: 1; grid-row: 1; }
       .pp-intro-left  { grid-column: 1; grid-row: 2; gap: 24px; }
-      .pp-intro-right { grid-column: 1; grid-row: 3; position: static; }
+      .pp-intro-right { display: none; }
       .pp-intro-asset { height: 420px; }
       .pp-intro-asset img { width: 90%; }
+      .pp-intro-asset--mobile-only { display: flex; }
 
       /* Research */
       .pp-research { padding: 40px 12px; gap: 16px; }
@@ -1006,14 +1019,20 @@
             </div>
             <div class="pp-section-block">
               <h2 class="pp-section-title">Problem</h2>
-              <p class="pp-body-text">We grouped the issues into 3 main problems:
+              <div class="pp-body-text">
+                <p style="margin:0">We grouped the issues into 3 main problems:</p>
                 <ul>
                   <li>Confusing information architecture and page structure.</li>
                   <li>Workflows weren't intuitive.</li>
                   <li>Poor performance.</li>
                 </ul>
-                Plus: UI wasn't consistent with new brand guidelines.
-              </p>
+                <p style="margin:0">Plus: UI wasn't consistent with new brand guidelines.</p>
+              </div>
+            </div>
+            <div class="pp-intro-asset pp-intro-asset--mobile-only">
+              <picture>
+                <img src="images/project_property/mobile/intro_mobile.png" alt="Property Detail Page — pantalla principal">
+              </picture>
             </div>
             <div class="pp-section-block">
               <h2 class="pp-section-title">Goal</h2>
