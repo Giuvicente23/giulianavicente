@@ -1,0 +1,1800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Property Detail Page — Giuliana Vicente</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+  <link rel="icon" type="image/x-icon" href="favicon/favicon.ico">
+  <link rel="manifest" href="favicon/site.webmanifest">
+  <link rel="stylesheet" href="style.css?v=14">
+  <style>
+    /* ── Hero ───────────────────────────────── */
+    .pa-hero {
+      min-height: 100vh;
+      display: flex;
+      background: linear-gradient(to bottom, #2c5597, #a4bde7);
+      position: sticky;
+      top: 0;
+      z-index: 0;
+    }
+    .pa-hero-left {
+      flex: 0 0 35%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 64px 40px 64px 64px;
+      gap: 16px;
+    }
+    .pa-hero-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .pa-hero-year {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-size: 14px;
+      line-height: 16px;
+      letter-spacing: -0.28px;
+      color: #021d49;
+    }
+    .pa-hero-tags {
+      display: flex;
+      gap: 6px;
+    }
+    .pa-hero-tag {
+      background-color: #d6e6ff;
+      border-radius: 24px;
+      padding: 2px 8px;
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-size: 12px;
+      line-height: 16px;
+      color: #0f0f0f;
+      white-space: nowrap;
+    }
+    .pa-hero-title {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-weight: 500;
+      font-size: 36px;
+      line-height: 36px;
+      color: #021d49;
+      margin: 0;
+    }
+    .pa-hero-subtitle {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-size: 24px;
+      line-height: 28px;
+      letter-spacing: -0.48px;
+      color: #021d49;
+      margin: 0;
+    }
+    .pa-hero-right {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      border-radius: 0 24px 24px 0;
+    }
+    .pa-hero-right img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    /* ── Page project layout ────────────────── */
+    .project-page { background-color: #f5f5f5; }
+    .pa-layout {
+      display: flex;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── Sidebar ────────────────────────────── */
+    .pa-sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      flex: 0 0 205px;
+      width: 205px;
+      background-color: #f5f5f5;
+      box-shadow: 8px 0 25px rgba(0,0,0,0.12);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 12px;
+      padding: 180px 0 24px 32px;
+      z-index: 10;
+      overflow: hidden;
+    }
+    .pa-sidebar-back {
+      position: absolute;
+      top: 80px;
+      left: 32px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-size: 14px;
+      line-height: 16px;
+      color: #0f0f0f;
+      text-decoration: none;
+    }
+    .pa-sidebar-back:hover { opacity: 0.7; }
+    .pa-sidebar-back svg {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+    }
+    .pa-sidebar-project {
+      position: absolute;
+      top: 116px;
+      left: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .pa-sidebar-project-year {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-size: 14px;
+      line-height: 16px;
+      letter-spacing: -0.28px;
+      color: #747474;
+    }
+    .pa-sidebar-project-name {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-weight: 500;
+      font-size: 24px;
+      line-height: 28px;
+      color: #0f0f0f;
+    }
+    .pa-toc {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .pa-toc-link {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-size: 16px;
+      line-height: 20px;
+      color: #747474;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .pa-toc-link:hover,
+    .pa-toc-link.is-active { color: #0f0f0f; }
+
+    /* ── Main content ───────────────────────── */
+    .pa-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    /* ── Meta bar ───────────────────────────── */
+    .pa-meta-bar {
+      background-color: #f5f5f5;
+      padding: 100px 64px 20px 32px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 42px 44px;
+      font-family: 'ApfelGrotezk', sans-serif;
+    }
+    .pa-meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .pa-meta-label {
+      font-size: 12px;
+      line-height: 20px;
+      letter-spacing: 1.44px;
+      text-transform: uppercase;
+      color: #747474;
+    }
+    .pa-meta-value {
+      font-size: 14px;
+      color: #2b2c2c;
+    }
+    .pa-meta-team {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .pa-meta-team-values {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    /* ── Section badge ──────────────────────── */
+    .pa-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 10px;
+      height: 18px;
+      background-color: #d6e6ff;
+      border-radius: 20px;
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-size: 14px;
+      line-height: 18px;
+      letter-spacing: 1.68px;
+      color: #2c5597;
+      text-transform: uppercase;
+      flex-shrink: 0;
+    }
+    .pa-badge--dark {
+      background-color: rgba(255,255,255,0.1);
+      color: #9bb8ff;
+    }
+
+    /* ── Intro section ──────────────────────── */
+    .pa-intro {
+      background: white;
+      padding: 40px 64px 80px 32px;
+      display: grid;
+      grid-template-columns: 478px 1fr;
+      grid-template-rows: auto 1fr;
+      column-gap: 28px;
+      row-gap: 32px;
+    }
+    .pa-intro-badge { grid-column: 1; grid-row: 1; }
+    .pa-intro-left { grid-column: 1; grid-row: 2; display: flex; flex-direction: column; gap: 36px; }
+    .pa-intro-right { grid-column: 2; grid-row: 1 / 3; position: sticky; top: 80px; align-self: start; }
+    .pa-section-title {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-weight: 500;
+      font-size: 32px;
+      line-height: 36px;
+      color: #0f0f0f;
+      margin: 0;
+    }
+    .pa-body-text {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-size: 16px;
+      line-height: 22px;
+      color: #2b2c2c;
+      margin: 0;
+    }
+    .pa-section-block {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .pa-krs {
+      display: flex;
+      flex-direction: column;
+      padding: 12px 0;
+    }
+    .pa-kr {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      padding: 12px 0;
+      border-top: 1px solid #e3e3e3;
+    }
+    .pa-kr:last-child { border-bottom: 1px solid #e3e3e3; }
+    .pa-kr-label {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-size: 12px;
+      line-height: 16px;
+      letter-spacing: 1.44px;
+      color: #747474;
+      flex-shrink: 0;
+    }
+    .pa-kr-value {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-size: 14px;
+      line-height: 18px;
+      letter-spacing: -0.28px;
+      color: #2b2c2c;
+    }
+    .pa-intro-asset {
+      background-color: #f0f5ff;
+      border-radius: 24px;
+      overflow: hidden;
+      height: 420px;
+    }
+    .pa-intro-asset img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    /* ── Research / Discovery section ──────── */
+    .pa-research {
+      background-color: #f5f5f5;
+      padding: 80px 64px 80px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .pa-research-header {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .pa-research-title {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-weight: 500;
+      font-size: 32px;
+      line-height: 36px;
+      color: #0f0f0f;
+      margin: 0;
+    }
+    .pa-research-subtitle {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-size: 14px;
+      line-height: 20px;
+      letter-spacing: -0.28px;
+      color: #747474;
+      margin: 0;
+    }
+    .pa-card {
+      background-color: #f5f5f5;
+      border-radius: 24px;
+      box-shadow: 0 50px 35px rgba(0,0,0,0.08);
+      overflow: hidden;
+      transition: box-shadow 0.25s ease, transform 0.25s ease;
+    }
+    .pa-card:hover {
+      box-shadow: 0 50px 35px rgba(0,0,0,0.08), 0 8px 24px rgba(0,0,0,0.07);
+      transform: translateY(-4px);
+    }
+    .pa-card-interviews {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      height: 280px;
+      padding: 12px 24px 12px 12px;
+    }
+    .pa-card-interviews-img {
+      flex: 1;
+      height: 100%;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .pa-card-interviews-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .pa-card-text {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .pa-card-eyebrow {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-size: 12px;
+      line-height: 16px;
+      letter-spacing: 1.44px;
+      text-transform: uppercase;
+      color: #747474;
+    }
+    .pa-card-title {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-weight: 500;
+      font-size: 24px;
+      line-height: 28px;
+      color: #0f0f0f;
+      margin: 0;
+    }
+    .pa-card-body {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-size: 14px;
+      line-height: 20px;
+      color: #0f0f0f;
+      margin: 0;
+    }
+    .pa-card-content-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .pa-card-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .pa-card-benchmark {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      height: 280px;
+      padding: 12px 12px 12px 24px;
+    }
+    .pa-card-benchmark-right {
+      flex: 1;
+      height: 100%;
+      display: flex;
+      gap: 8px;
+    }
+    .pa-card-benchmark-right picture {
+      flex: 1;
+      height: 100%;
+      display: block;
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .pa-card-benchmark-right picture img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* ── Userflows section ──────────────────── */
+    .pa-userflows {
+      background: #f5f5f5;
+      padding: 80px 64px 80px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+    .pa-userflows-header {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .pa-flows-grid {
+      display: flex;
+      gap: 16px;
+    }
+    .pa-flow-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: #ffffff;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+      height: 378px;
+      transition: box-shadow 0.25s ease, transform 0.25s ease;
+    }
+    .pa-flow-item:hover {
+      box-shadow: 0 2px 16px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.07);
+      transform: translateY(-4px);
+    }
+    .pa-flow-img-wrap {
+      flex: 1;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 20px 0;
+    }
+    .pa-flow-img-wrap picture {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+    .pa-flow-img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center top;
+      border-radius: 0;
+      display: block;
+    }
+    .pa-flow-text {
+      padding: 12px 16px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .pa-flow-eyebrow {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-size: 12px;
+      line-height: 16px;
+      letter-spacing: 1.44px;
+      text-transform: uppercase;
+      color: #747474;
+      margin: 0;
+    }
+    .pa-flow-desc {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-size: 14px;
+      line-height: 18px;
+      letter-spacing: -0.28px;
+      color: #2b2c2c;
+      margin: 0;
+    }
+
+    /* ── Design / Building the solution ─────── */
+    .pa-design {
+      background: white;
+      padding: 40px 64px 32px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+    .pa-design-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      text-align: center;
+    }
+    .pa-design-title {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-weight: 500;
+      font-size: 32px;
+      line-height: 36px;
+      color: #0f0f0f;
+      margin: 0;
+    }
+    .pa-design-subtitle {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-size: 14px;
+      line-height: 18px;
+      letter-spacing: -0.28px;
+      color: #2b2c2c;
+      margin: 0;
+    }
+    .pa-stages-bar {
+      background: #f0f0f0;
+      border-radius: 10px;
+      padding: 4px;
+      display: flex;
+      gap: 0;
+      align-self: center;
+    }
+    .pa-stage {
+      padding: 6px 20px;
+      border-radius: 7px;
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-size: 13px;
+      line-height: 20px;
+      text-align: center;
+      color: #747474;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+      user-select: none;
+    }
+    .pa-stage--active {
+      background: white;
+      color: #0f0f0f;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.12), 0 0 0 0.5px rgba(0,0,0,0.06);
+    }
+    .pa-wireframe-img-card {
+      border-radius: 12px;
+      overflow: hidden;
+      width: 271px;
+      flex-shrink: 0;
+      background: transparent;
+    }
+    .pa-wireframe-img-card img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .pa-design-body {
+      position: relative;
+      min-height: 560px;
+      margin-top: -16px;
+    }
+    .pa-design-stage {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      gap: 32px;
+      align-items: flex-start;
+      opacity: 0;
+      transition: opacity 0.45s ease;
+      pointer-events: none;
+    }
+    .pa-design-stage.is-active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .pa-design-left {
+      flex: 0 0 200px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .pa-design-focus {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-size: 12px;
+      line-height: 16px;
+      letter-spacing: 1.44px;
+      text-transform: uppercase;
+      color: #747474;
+    }
+    .pa-design-point {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .pa-design-point-title {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 18px;
+      color: #0f0f0f;
+    }
+    .pa-design-point-desc {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-size: 14px;
+      line-height: 18px;
+      letter-spacing: -0.28px;
+      color: #6e6e6e;
+    }
+    .pa-wireframes {
+      flex: 1;
+      display: flex;
+      gap: 8px;
+    }
+    .pa-wireframe-item {
+      flex: 0 0 271px;
+      width: 271px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .pa-wireframe-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4.65px 14.23px rgba(0,0,0,0.08);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 12px;
+      width: 271px;
+      height: 487px;
+      flex-shrink: 0;
+    }
+    .pa-wireframe-label {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-size: 11px;
+      line-height: 16px;
+      letter-spacing: 1.32px;
+      text-transform: uppercase;
+      color: #747474;
+      text-align: center;
+      margin: 0;
+    }
+    .pa-wireframe-mobile { display: none; }
+
+    /* ── Testing section ─────────────────────── */
+    .pa-testing {
+      background: #f5f5f5;
+      padding: 80px 64px 80px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+    .pa-testing-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 12px;
+    }
+    .pa-testing-title {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-weight: 500;
+      font-size: 32px;
+      line-height: 36px;
+      color: #0f0f0f;
+      margin: 0;
+    }
+    .pa-testing-cards {
+      display: flex;
+      gap: 12px;
+    }
+    .pa-testing-card {
+      flex: 1;
+      background: white;
+      border-radius: 24px;
+      box-shadow: 0 50px 35px rgba(0,0,0,0.08);
+      transition: box-shadow 0.25s ease, transform 0.25s ease;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      height: 400px;
+    }
+    .pa-testing-card:hover {
+      box-shadow: 0 50px 35px rgba(0,0,0,0.08), 0 8px 24px rgba(0,0,0,0.07);
+      transform: translateY(-4px);
+    }
+    .pa-testing-card-step {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-size: 11px;
+      line-height: 16px;
+      letter-spacing: 1.32px;
+      text-transform: uppercase;
+      color: #747474;
+    }
+    .pa-testing-card-body {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .pa-testing-card-title {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 20px;
+      color: #0f0f0f;
+      margin: 0;
+    }
+    .pa-testing-card-text {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-size: 14px;
+      line-height: 18px;
+      color: #2b2c2c;
+      margin: 0;
+    }
+    .pa-testing-card-visual {
+      flex: 1;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #d6e6ff;
+    }
+    .pa-testing-card-visual--gray { background: #efefef; }
+    .pa-testing-card-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* ── Results section ─────────────────────── */
+    .pa-results {
+      background: #0f0f0f;
+      padding: 80px 64px 160px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+    .pa-results-header {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .pa-results-title {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-weight: 500;
+      font-size: 48px;
+      line-height: 52px;
+      letter-spacing: -0.96px;
+      color: #f5f5f5;
+      margin: 0;
+    }
+    .pa-results-subtitle {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-size: 12px;
+      line-height: 16px;
+      letter-spacing: 1.44px;
+      text-transform: uppercase;
+      color: #747474;
+      margin: 0;
+    }
+    .pa-stats {
+      display: flex;
+      gap: 0;
+    }
+    .pa-stat {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding-right: 40px;
+    }
+    .pa-stat + .pa-stat {
+      padding-left: 40px;
+      padding-right: 40px;
+      border-left: 1px solid #2b2c2c;
+    }
+    .pa-stat:last-child {
+      padding-right: 0;
+    }
+    .pa-stat-eyebrow {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-size: 12px;
+      line-height: 16px;
+      letter-spacing: 1.44px;
+      text-transform: uppercase;
+      color: #747474;
+    }
+    .pa-stat-description {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-weight: 500;
+      font-size: 22px;
+      line-height: 28px;
+      letter-spacing: -0.44px;
+      color: #f5f5f5;
+      margin: 0;
+      flex: 1;
+    }
+    .pa-stat-divider {
+      height: 1px;
+      background: #2b2c2c;
+    }
+    .pa-stat-values {
+      display: flex;
+      gap: 32px;
+    }
+    .pa-stat-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .pa-stat-meta-label {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-size: 11px;
+      line-height: 16px;
+      letter-spacing: 1.44px;
+      text-transform: uppercase;
+      color: #747474;
+    }
+    .pa-stat-meta-value {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 24px;
+      letter-spacing: -0.4px;
+      color: #f5f5f5;
+    }
+    .pa-stat-meta-value--result {
+      color: #9bb8ff;
+    }
+
+    /* ── Other Projects ─────────────────────────────────────────────── */
+    .pa-other-projects {
+      background: #f5f5f5;
+      display: flex;
+      gap: 16px;
+      padding: 56px 64px;
+      position: relative;
+      z-index: 2;
+      margin-top: -80px;
+      border-radius: 32px 32px 0 0;
+    }
+    .pa-other-card {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 8px;
+      border-radius: 24px;
+      text-decoration: none;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .pa-other-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.10);
+    }
+    .pa-other-card--green { background: #adeeae; }
+    .pa-other-card--yellow { background: #fbf193; }
+    .pa-other-img-wrap {
+      flex: 1;
+      border-radius: 20px;
+      overflow: hidden;
+      min-height: 260px;
+    }
+    .pa-other-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .pa-other-body {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 12px 8px;
+    }
+    .pa-other-meta-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .pa-other-year {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+      letter-spacing: -0.28px;
+      color: #0a3518;
+    }
+    .pa-other-year--yellow { color: #6d6520; }
+    .pa-other-tag {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-size: 12px;
+      font-weight: 400;
+      line-height: 16px;
+      padding: 2px 6px;
+      border-radius: 24px;
+    }
+    .pa-other-tag--green  { background: #52d87e; color: #0f0f0f; }
+    .pa-other-tag--yellow { background: #e0d56d; color: #0f0f0f; }
+    .pa-other-title {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-size: 28px;
+      font-weight: 500;
+      line-height: 32px;
+      color: #0a3518;
+      margin: 0;
+    }
+    .pa-other-title--yellow { color: #6d6520; }
+    .pa-other-desc {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 20px;
+      letter-spacing: -0.32px;
+      color: #0a3518;
+      margin: 0;
+    }
+    .pa-other-desc--yellow { color: #6d6520; }
+    .pa-other-results {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 4px;
+    }
+    .pa-other-results-label {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 16px;
+      letter-spacing: 1.32px;
+      text-transform: uppercase;
+    }
+    .pa-other-results-label--green  { color: #239a43; }
+    .pa-other-results-label--yellow { color: #b7a825; }
+    .pa-other-results-value {
+      font-family: 'ApfelGrotezk', sans-serif;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 14px;
+      letter-spacing: -0.28px;
+      color: #0a3518;
+    }
+    .pa-other-results-value--yellow { color: #6d6520; }
+
+    /* ── Scroll reveal ───────────────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── Responsive ──────────────────────────── */
+    .pa-wireframe-mobile { display: none; }
+
+    @media (max-width: 1024px) {
+      .pa-hero-left { flex: 0 0 40%; padding: 48px 24px 48px 40px; }
+      .pa-intro { grid-template-columns: 1fr 1fr; }
+      .pa-intro-left { min-width: 0; }
+      .pa-design-left { flex-direction: row; flex-wrap: wrap; gap: 12px; }
+    }
+
+    @media (max-width: 768px) {
+      /* Hero */
+      .pa-hero {
+        flex-direction: column;
+        min-height: 100svh;
+        padding: 8px;
+        gap: 8px;
+        background: #96b1de;
+      }
+      .pa-hero-right {
+        flex: 1;
+        min-height: 0;
+        height: auto;
+        order: -1;
+        border-radius: 20px;
+        overflow: hidden;
+      }
+      .pa-hero-right picture { display: block; width: 100%; height: 100%; }
+      .pa-hero-right picture img { width: 100%; height: 100%; object-fit: cover; display: block; object-position: center; }
+      .pa-hero-left {
+        flex: none;
+        padding: 4px 8px 12px;
+        gap: 8px;
+        order: 1;
+      }
+      .pa-hero-title { font-size: 28px; line-height: 32px; }
+      .pa-hero-subtitle { font-size: 16px; line-height: 20px; }
+
+      /* Sidebar & layout */
+      .pa-sidebar { display: none; }
+
+      /* Meta bar */
+      .pa-meta-bar { padding: 20px 12px; gap: 16px 44px; }
+
+      /* Intro */
+      .pa-intro { grid-template-columns: 1fr; padding: 40px 12px 48px; row-gap: 24px; }
+      .pa-intro-badge { grid-column: 1; grid-row: 1; }
+      .pa-intro-left { grid-column: 1; grid-row: 2; gap: 24px; }
+      .pa-intro-right { grid-column: 1; grid-row: 3; position: static; }
+      .pa-intro-asset { height: 420px; border-radius: 24px; overflow: hidden; }
+      .pa-intro-asset picture, .pa-intro-asset img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 24px; }
+
+      /* Research */
+      .pa-research { padding: 40px 12px; gap: 16px; }
+      .pa-research-header { align-items: center; text-align: center; }
+      .pa-card { box-shadow: 0 25px 35px rgba(0,0,0,0.08); }
+      .pa-card-interviews { flex-direction: column; height: auto; padding: 16px; gap: 16px; }
+      .pa-card-interviews-img { width: 100%; flex: none; height: 200px; border-radius: 16px; overflow: hidden; order: 2; }
+      .pa-card-interviews-img picture { display: block; width: 100%; height: 100%; }
+      .pa-card-interviews-img picture img { width: 100%; height: 100%; object-fit: cover; display: block; }
+      .pa-card-text { order: 1; }
+      .pa-card-benchmark { flex-direction: column; align-items: stretch; height: auto; padding: 16px; gap: 16px; }
+      .pa-card-benchmark-right { flex-direction: row; height: 150px; gap: 12px; width: 100%; }
+      .pa-card-benchmark-right picture { flex: 1; min-width: 0; height: 100%; display: block; border-radius: 16px; overflow: hidden; }
+      .pa-card-benchmark-right picture img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+      /* Userflows */
+      .pa-userflows { padding: 40px 12px; }
+      .pa-userflows-header { text-align: center; align-items: center; }
+      .pa-flows-grid { flex-direction: column; gap: 16px; }
+      .pa-flow-item { height: auto; flex-direction: column-reverse; }
+      .pa-flow-img-wrap { flex: none; padding: 12px 12px 0; display: block; overflow: hidden; }
+      .pa-flow-img-wrap picture { display: block; width: 100%; }
+      .pa-flow-img-wrap picture img { width: 100%; height: auto; display: block; }
+      .pa-flow-text { padding: 12px 16px 0; }
+
+      /* Design */
+      .pa-design { padding: 40px 12px 48px; }
+      .pa-design-header { align-items: center; text-align: center; }
+      .pa-design-body { min-height: unset; display: grid; }
+      .pa-design-stage { display: flex; flex-direction: column; gap: 24px; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; grid-column: 1; grid-row: 1; position: static; }
+      .pa-design-stage.is-active { opacity: 1; pointer-events: auto; }
+      .pa-design-left { flex: none; order: 2; background: #f5f5f5; border-radius: 16px; padding: 16px; gap: 12px; }
+      .pa-design-body { margin-top: -24px; }
+      .pa-wireframes { display: none; }
+      .pa-wireframe-mobile { display: flex; justify-content: center; order: 1; width: 100%; }
+      .pa-stages-bar { width: 100%; box-sizing: border-box; }
+      .pa-stage { flex: 1; text-align: center; }
+      .pa-wireframe-mobile img { width: 100%; max-width: 320px; height: auto; border-radius: 12px; }
+
+      /* Testing */
+      .pa-testing { padding: 40px 12px; }
+      .pa-testing-header { align-items: center; text-align: center; }
+      .pa-testing-cards { flex-direction: column; gap: 12px; }
+      .pa-testing-card { flex-direction: row; height: auto; align-items: center; gap: 12px; padding: 12px; }
+      .pa-testing-card-step { display: none; }
+      .pa-testing-card-body { flex: 1; min-width: 0; order: 2; }
+      .pa-testing-card-visual { flex: none; width: 124px; height: 124px; border-radius: 16px; order: 1; }
+      .pa-testing-card-visual img, .pa-testing-card-visual picture { width: 100%; height: 100%; display: block; }
+      .pa-testing-card-visual picture img { object-fit: cover; width: 100%; height: 100%; }
+
+      /* Results */
+      .pa-results { padding: 40px 12px 80px; gap: 16px; }
+      .pa-results-title { font-size: 32px; line-height: 36px; letter-spacing: -0.64px; }
+      .pa-results-subtitle { font-size: 14px; line-height: 18px; color: #e3e3e3; }
+      .pa-stats { flex-direction: column; gap: 0; }
+      .pa-stat { gap: 0; padding: 12px 0 !important; border-left: none !important; border-top: 1px solid #2b2c2c; }
+      .pa-stat:first-child { border-top: none; padding-top: 0 !important; }
+      .pa-stat:last-child { padding-bottom: 0 !important; }
+      .pa-stat-eyebrow { margin-bottom: 4px; }
+      .pa-stat-description { font-size: 22px; line-height: 28px; letter-spacing: -0.44px; color: #e3e3e3; margin: 0 0 12px; }
+      .pa-stat-divider { display: none; }
+      .pa-stat-values { border-top: none; padding-top: 0; gap: 20px; }
+      .pa-stat-meta-value { font-size: 16px; line-height: 20px; letter-spacing: -0.32px; color: #e3e3e3; }
+      .pa-stat-meta-value--result { color: #e3e3e3; }
+
+      /* Other */
+      .pa-other-projects { flex-direction: column; padding: 40px 12px; margin-top: -40px; }
+      .pa-other-card { width: 100%; box-sizing: border-box; }
+      .pa-other-img-wrap { min-height: 200px; }
+    }
+  </style>
+</head>
+<body class="project-page">
+
+  <div id="page-curtain"></div>
+  <div id="cursor-dot"></div>
+  <div id="cursor-bubble"><span id="cursor-bubble-text">See project</span></div>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="navbar-inner">
+      <a href="index.html" class="navbar-logo">
+        <img src="images/logo.png" alt="Giuliana Vicente">
+      </a>
+      <div class="navbar-location">
+        <div class="location-dot">
+          <span class="dot-ring"></span>
+          <span class="dot-core"></span>
+        </div>
+        <span>Based in Madrid, working globally</span>
+      </div>
+      <div class="navbar-links">
+        <a href="about.html">About</a>
+        <a href="work.html">Work</a>
+        <a href="https://www.linkedin.com/in/giuliana-vicente/" target="_blank" rel="noopener">Linked In</a>
+        <a href="mailto:giuvicente23@gmail.com">Email</a>
+      </div>
+      <button class="navbar-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span class="ham-line"></span>
+        <span class="ham-line"></span>
+        <span class="ham-line"></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <div class="mobile-menu-inner">
+      <button class="mobile-menu-close" aria-label="Close menu">✕</button>
+      <nav class="mobile-menu-links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="work.html">Work</a>
+        <a href="https://www.linkedin.com/in/giuliana-vicente/" target="_blank" rel="noopener">Linked In</a>
+        <a href="mailto:giuvicente23@gmail.com">Email</a>
+      </nav>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- Hero -->
+    <section class="pa-hero">
+      <div class="pa-hero-left">
+        <div class="pa-hero-meta">
+          <span class="pa-hero-year">2024</span>
+          <div class="pa-hero-tags">
+            <span class="pa-hero-tag">Web Responsive</span>
+            <span class="pa-hero-tag">Redesign</span>
+            <span class="pa-hero-tag">SaaS</span>
+          </div>
+        </div>
+        <h1 class="pa-hero-title">Property Detail Page</h1>
+        <p class="pa-hero-subtitle">Optimizing the Property Detail Page to reduce support tickets.</p>
+      </div>
+      <div class="pa-hero-right">
+        <picture>
+          <source media="(max-width: 768px)" srcset="images/project_property/mobile/project_hero_mobile.png">
+          <img src="images/project_property/desktop/project_hero_desktop.png" alt="Property Detail Page — diseño de la página">
+        </picture>
+      </div>
+    </section>
+
+    <!-- Body: sidebar + content -->
+    <div class="pa-layout">
+
+      <!-- Sidebar -->
+      <aside class="pa-sidebar" id="pa-sidebar">
+        <a href="work.html" class="pa-sidebar-back">
+          <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 12L6 8L10 4" stroke="#0f0f0f" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Back
+        </a>
+        <div class="pa-sidebar-project">
+          <span class="pa-sidebar-project-year">2024</span>
+          <span class="pa-sidebar-project-name">Property Detail Page</span>
+        </div>
+        <nav class="pa-toc">
+          <a href="#section-intro" class="pa-toc-link is-active">Intro</a>
+          <a href="#section-research" class="pa-toc-link">Research</a>
+          <a href="#section-definitions" class="pa-toc-link">Definitions</a>
+          <a href="#section-design" class="pa-toc-link">Design</a>
+          <a href="#section-testing" class="pa-toc-link">Testing</a>
+          <a href="#section-results" class="pa-toc-link">Results</a>
+        </nav>
+      </aside>
+
+      <!-- Main scrollable content -->
+      <div class="pa-content">
+
+        <!-- Meta bar -->
+        <div class="pa-meta-bar">
+          <div class="pa-meta-item">
+            <span class="pa-meta-label">My Role</span>
+            <span class="pa-meta-value">Senior UX Designer</span>
+          </div>
+          <div class="pa-meta-item">
+            <span class="pa-meta-label">Time</span>
+            <span class="pa-meta-value">4 months</span>
+          </div>
+          <div class="pa-meta-team">
+            <span class="pa-meta-label">Team</span>
+            <div class="pa-meta-team-values">
+              <span class="pa-meta-value">1x UX Designer</span>
+              <span class="pa-meta-value">1x Product Manager</span>
+              <span class="pa-meta-value">8x Developers</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── INTRO ───────────────────────── -->
+        <section id="section-intro" class="pa-intro">
+          <div class="pa-intro-badge">
+            <span class="pa-badge">INTRO</span>
+          </div>
+          <div class="pa-intro-left">
+            <div class="pa-section-block">
+              <h2 class="pa-section-title">Context</h2>
+              <p class="pa-body-text">A leading SaaS real estate platform used by thousands of agencies and agents across Latin America to manage and publish their property listings.</p>
+            </div>
+            <div class="pa-section-block">
+              <h2 class="pa-section-title">Problem</h2>
+              <p class="pa-body-text">The Property Detail Page was generating a high volume of support tickets. Users — mostly real estate agents — were frequently confused by the information hierarchy, couldn't find key data, and struggled with the publication flow.</p>
+            </div>
+            <div class="pa-section-block">
+              <h2 class="pa-section-title">Goal</h2>
+              <p class="pa-body-text">Redesign the Property Detail Page to be clearer, more scannable, and reduce the friction that was causing agents to contact support.</p>
+              <div class="pa-krs">
+                <div class="pa-kr">
+                  <span class="pa-kr-label">KR 1</span>
+                  <span class="pa-kr-value">Reduce support tickets related to the Property Detail Page by 70%.</span>
+                </div>
+                <div class="pa-kr">
+                  <span class="pa-kr-label">KR 2</span>
+                  <span class="pa-kr-value">Improve task completion rate for the publication flow.</span>
+                </div>
+                <div class="pa-kr">
+                  <span class="pa-kr-label">OKR</span>
+                  <span class="pa-kr-value">Deliver a world-class property management experience that retains and grows the agent user base.</span>
+                </div>
+              </div>
+            </div>
+            <div class="pa-section-block">
+              <h2 class="pa-section-title">Potential Solution</h2>
+              <p class="pa-body-text">Redesign the information architecture and visual hierarchy of the page to surface the right data at the right time, removing ambiguity and reducing the need for external support.</p>
+            </div>
+          </div>
+          <div class="pa-intro-right">
+            <div class="pa-intro-asset">
+              <picture>
+                <source media="(max-width: 768px)" srcset="images/project_property/mobile/project_hero_mobile.png">
+                <img src="images/project_property/desktop/project_hero_desktop.png" alt="Property Detail Page — pantalla principal">
+              </picture>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── RESEARCH ────────────────────── -->
+        <section id="section-research" class="pa-research">
+          <div class="pa-research-header">
+            <span class="pa-badge">RESEARCH</span>
+            <h2 class="pa-research-title">Discovery</h2>
+          </div>
+
+          <!-- Support tickets card -->
+          <div class="pa-card pa-card-interviews">
+            <div class="pa-card-interviews-img">
+              <picture>
+                <source media="(max-width: 768px)" srcset="images/project_property/mobile/project_hero_mobile.png">
+                <img src="images/project_property/desktop/project_hero_desktop.png" alt="Support tickets analysis">
+              </picture>
+            </div>
+            <div class="pa-card-text">
+              <span class="pa-card-eyebrow">SUPPORT DATA &amp; USER PAIN POINTS</span>
+              <div class="pa-card-content-group">
+                <h3 class="pa-card-title">Ticket Analysis</h3>
+                <p class="pa-card-body">I analyzed 6 months of support tickets to identify the most common user complaints related to the Property Detail Page.</p>
+              </div>
+              <div class="pa-card-meta">
+                <span class="pa-card-eyebrow">GOAL</span>
+                <p class="pa-card-body">Understand which specific areas of the page were creating the most confusion for real estate agents.</p>
+              </div>
+              <div class="pa-card-meta">
+                <span class="pa-card-eyebrow">OUTPUT</span>
+                <p class="pa-card-body">Pain point map + opportunity areas</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Benchmark card -->
+          <div class="pa-card pa-card-benchmark">
+            <div class="pa-card-text">
+              <span class="pa-card-eyebrow">COMPETITIVE ANALYSIS</span>
+              <h3 class="pa-card-title">Benchmark</h3>
+              <p class="pa-card-body">I analyzed the property detail pages of 5 leading real estate SaaS platforms in the region.</p>
+              <div class="pa-card-meta">
+                <span class="pa-card-eyebrow">GOAL</span>
+                <p class="pa-card-body">Identify best practices for information hierarchy, status visibility, and property data presentation.</p>
+              </div>
+              <div class="pa-card-meta">
+                <span class="pa-card-eyebrow">OUTPUT</span>
+                <p class="pa-card-body">Design principles + key patterns</p>
+              </div>
+            </div>
+            <div class="pa-card-benchmark-right">
+              <picture>
+                <source media="(max-width: 768px)" srcset="images/project_property/mobile/project_hero_mobile.png">
+                <img src="images/project_property/desktop/project_hero_desktop.png" alt="Benchmark — 1">
+              </picture>
+              <picture>
+                <source media="(max-width: 768px)" srcset="images/project_property/mobile/project_hero_mobile.png">
+                <img src="images/project_property/desktop/project_hero_desktop.png" alt="Benchmark — 2">
+              </picture>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── DEFINITIONS / USERFLOWS ────────── -->
+        <section id="section-definitions" class="pa-userflows">
+          <div class="pa-userflows-header">
+            <span class="pa-badge">DEFINITIONS</span>
+            <h2 class="pa-research-title">Userflows</h2>
+            <p class="pa-research-subtitle">I mapped the two main agent journeys within the Property Detail Page to understand where friction was happening and validate the redesign with stakeholders before moving to design.</p>
+          </div>
+          <div class="pa-flows-grid">
+            <div class="pa-flow-item">
+              <div class="pa-flow-img-wrap">
+                <picture>
+                  <source media="(max-width: 768px)" srcset="images/project_property/mobile/project_hero_mobile.png">
+                  <img src="images/project_property/desktop/project_hero_desktop.png" alt="Review property flow" class="pa-flow-img">
+                </picture>
+              </div>
+              <div class="pa-flow-text">
+                <p class="pa-flow-eyebrow">Review Property Flow</p>
+                <p class="pa-flow-desc">Access a property listing, review all its details, check publication status, and identify any missing or incorrect information.</p>
+              </div>
+            </div>
+            <div class="pa-flow-item">
+              <div class="pa-flow-img-wrap">
+                <picture>
+                  <source media="(max-width: 768px)" srcset="images/project_property/mobile/project_hero_mobile.png">
+                  <img src="images/project_property/desktop/project_hero_desktop.png" alt="Publish property flow" class="pa-flow-img">
+                </picture>
+              </div>
+              <div class="pa-flow-text">
+                <p class="pa-flow-eyebrow">Publish Property Flow</p>
+                <p class="pa-flow-desc">Complete and validate property information, then publish the listing across the selected portals with the correct settings.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── DESIGN ──────────────────────── -->
+        <section id="section-design" class="pa-design">
+          <div class="pa-design-header">
+            <span class="pa-badge">DESIGN</span>
+            <h2 class="pa-design-title">Building the solution</h2>
+            <p class="pa-design-subtitle">I redesigned the page from the ground up, presenting and validating each phase with product and stakeholders before moving forward.</p>
+          </div>
+          <div class="pa-stages-bar" id="pa-stages-bar">
+            <div class="pa-stage pa-stage--active" data-stage="structure">Structure</div>
+            <div class="pa-stage" data-stage="lofi">Lo-Fi</div>
+            <div class="pa-stage" data-stage="hifi">Hi-Fi</div>
+          </div>
+          <div class="pa-design-body">
+
+            <!-- STRUCTURE -->
+            <div class="pa-design-stage is-active" data-stage="structure">
+              <div class="pa-design-left">
+                <span class="pa-design-focus">Focus</span>
+                <div class="pa-design-point">
+                  <span class="pa-design-point-title">Content hierarchy definition</span>
+                  <span class="pa-design-point-desc">What sections are needed and in what order agents need to access them.</span>
+                </div>
+                <div class="pa-design-point">
+                  <span class="pa-design-point-title">Tab structure</span>
+                  <span class="pa-design-point-desc">Group related data into logical tabs to reduce cognitive overload.</span>
+                </div>
+              </div>
+              <div class="pa-wireframes">
+                <div class="pa-wireframe-item">
+                  <div class="pa-wireframe-img-card">
+                    <img src="images/project_property/desktop/project_hero_desktop.png" alt="Structure — Header">
+                  </div>
+                  <p class="pa-wireframe-label">Header &amp; Status</p>
+                </div>
+                <div class="pa-wireframe-item">
+                  <div class="pa-wireframe-img-card">
+                    <img src="images/project_property/desktop/project_hero_desktop.png" alt="Structure — Tabs">
+                  </div>
+                  <p class="pa-wireframe-label">Tab Navigation</p>
+                </div>
+                <div class="pa-wireframe-item">
+                  <div class="pa-wireframe-img-card">
+                    <img src="images/project_property/desktop/project_hero_desktop.png" alt="Structure — Detail">
+                  </div>
+                  <p class="pa-wireframe-label">Property Detail</p>
+                </div>
+              </div>
+              <div class="pa-wireframe-mobile">
+                <img src="images/project_property/mobile/project_hero_mobile.png" alt="Structure mobile">
+              </div>
+            </div>
+
+            <!-- LO-FI -->
+            <div class="pa-design-stage" data-stage="lofi">
+              <div class="pa-design-left">
+                <span class="pa-design-focus">Focus</span>
+                <div class="pa-design-point">
+                  <span class="pa-design-point-title">Status visibility</span>
+                  <span class="pa-design-point-desc">Make publication status and pending actions clearly prominent.</span>
+                </div>
+                <div class="pa-design-point">
+                  <span class="pa-design-point-title">Data grouping</span>
+                  <span class="pa-design-point-desc">Organize property attributes in scannable sections with clear labels.</span>
+                </div>
+              </div>
+              <div class="pa-wireframes">
+                <div class="pa-wireframe-item">
+                  <div class="pa-wireframe-img-card">
+                    <img src="images/project_property/desktop/project_hero_desktop.png" alt="Lo-Fi — Header">
+                  </div>
+                  <p class="pa-wireframe-label">Header &amp; Status</p>
+                </div>
+                <div class="pa-wireframe-item">
+                  <div class="pa-wireframe-img-card">
+                    <img src="images/project_property/desktop/project_hero_desktop.png" alt="Lo-Fi — Tabs">
+                  </div>
+                  <p class="pa-wireframe-label">Tab Navigation</p>
+                </div>
+                <div class="pa-wireframe-item">
+                  <div class="pa-wireframe-img-card">
+                    <img src="images/project_property/desktop/project_hero_desktop.png" alt="Lo-Fi — Detail">
+                  </div>
+                  <p class="pa-wireframe-label">Property Detail</p>
+                </div>
+              </div>
+              <div class="pa-wireframe-mobile">
+                <img src="images/project_property/mobile/project_hero_mobile.png" alt="Lo-Fi mobile">
+              </div>
+            </div>
+
+            <!-- HI-FI -->
+            <div class="pa-design-stage" data-stage="hifi">
+              <div class="pa-design-left">
+                <span class="pa-design-focus">Focus</span>
+                <div class="pa-design-point">
+                  <span class="pa-design-point-title">Clear information hierarchy</span>
+                  <span class="pa-design-point-desc">Price, status, and location always visible above the fold.</span>
+                </div>
+                <div class="pa-design-point">
+                  <span class="pa-design-point-title">Inline editing</span>
+                  <span class="pa-design-point-desc">Allow quick edits without navigating away from the detail page.</span>
+                </div>
+                <div class="pa-design-point">
+                  <span class="pa-design-point-title">Publication panel</span>
+                  <span class="pa-design-point-desc">Consolidated view of portal status and pending actions.</span>
+                </div>
+              </div>
+              <div class="pa-wireframes">
+                <div class="pa-wireframe-item">
+                  <div class="pa-wireframe-img-card">
+                    <img src="images/project_property/desktop/project_hero_desktop.png" alt="Hi-Fi — Header">
+                  </div>
+                  <p class="pa-wireframe-label">Header &amp; Status</p>
+                </div>
+                <div class="pa-wireframe-item">
+                  <div class="pa-wireframe-img-card">
+                    <img src="images/project_property/desktop/project_hero_desktop.png" alt="Hi-Fi — Tabs">
+                  </div>
+                  <p class="pa-wireframe-label">Tab Navigation</p>
+                </div>
+                <div class="pa-wireframe-item">
+                  <div class="pa-wireframe-img-card">
+                    <img src="images/project_property/desktop/project_hero_desktop.png" alt="Hi-Fi — Detail">
+                  </div>
+                  <p class="pa-wireframe-label">Property Detail</p>
+                </div>
+              </div>
+              <div class="pa-wireframe-mobile">
+                <img src="images/project_property/mobile/project_hero_mobile.png" alt="Hi-Fi mobile">
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- ── TESTING ─────────────────────── -->
+        <section id="section-testing" class="pa-testing">
+          <div class="pa-testing-header">
+            <span class="pa-badge">TESTING</span>
+            <h2 class="pa-testing-title">Testing &amp; Validation</h2>
+          </div>
+          <div class="pa-testing-cards">
+            <div class="pa-testing-card">
+              <span class="pa-testing-card-step">Step 1</span>
+              <div class="pa-testing-card-body">
+                <h3 class="pa-testing-card-title">Pre-testing</h3>
+                <p class="pa-testing-card-text">Define testing objectives and recruit real estate agents from the existing user base. Co-create the testing script with the product team.</p>
+              </div>
+              <div class="pa-testing-card-visual">
+              </div>
+            </div>
+            <div class="pa-testing-card">
+              <span class="pa-testing-card-step">Step 2</span>
+              <div class="pa-testing-card-body">
+                <h3 class="pa-testing-card-title">Moderated sessions</h3>
+                <p class="pa-testing-card-text">Ran 6 moderated usability tests with agents using a Hi-Fi prototype. Observed task completion, hesitations, and misunderstandings.</p>
+              </div>
+              <div class="pa-testing-card-visual">
+              </div>
+            </div>
+            <div class="pa-testing-card">
+              <span class="pa-testing-card-step">Step 3</span>
+              <div class="pa-testing-card-body">
+                <h3 class="pa-testing-card-title">Iteration</h3>
+                <p class="pa-testing-card-text">Prioritized findings by severity and frequency. Iterated on the publication panel and status labels based on agent feedback before final handoff.</p>
+              </div>
+              <div class="pa-testing-card-visual pa-testing-card-visual--gray">
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── RESULTS ─────────────────────── -->
+        <section id="section-results" class="pa-results">
+          <div class="pa-results-header">
+            <h2 class="pa-results-title">Results</h2>
+            <p class="pa-results-subtitle">Q4 2024 — 3 months after launching</p>
+          </div>
+          <div class="pa-stats">
+            <div class="pa-stat">
+              <span class="pa-stat-eyebrow">KR#1 — Support Reduction</span>
+              <p class="pa-stat-description">Reduce support tickets related to the Property Detail Page.</p>
+              <div class="pa-stat-divider"></div>
+              <div class="pa-stat-values">
+                <div class="pa-stat-meta">
+                  <span class="pa-stat-meta-label">Target</span>
+                  <span class="pa-stat-meta-value">−70%</span>
+                </div>
+                <div class="pa-stat-meta">
+                  <span class="pa-stat-meta-label">Result</span>
+                  <span class="pa-stat-meta-value pa-stat-meta-value--result">−80%</span>
+                </div>
+              </div>
+            </div>
+            <div class="pa-stat">
+              <span class="pa-stat-eyebrow">KR#2 — Task Completion</span>
+              <p class="pa-stat-description">Improve task completion rate for the publication flow.</p>
+              <div class="pa-stat-divider"></div>
+              <div class="pa-stat-values">
+                <div class="pa-stat-meta">
+                  <span class="pa-stat-meta-label">Before</span>
+                  <span class="pa-stat-meta-value">64%</span>
+                </div>
+                <div class="pa-stat-meta">
+                  <span class="pa-stat-meta-label">After</span>
+                  <span class="pa-stat-meta-value pa-stat-meta-value--result">91%</span>
+                </div>
+              </div>
+            </div>
+            <div class="pa-stat">
+              <span class="pa-stat-eyebrow">KR#3 — Agent Satisfaction</span>
+              <p class="pa-stat-description">Increase agent satisfaction score for the property management section.</p>
+              <div class="pa-stat-divider"></div>
+              <div class="pa-stat-values">
+                <div class="pa-stat-meta">
+                  <span class="pa-stat-meta-label">Before</span>
+                  <span class="pa-stat-meta-value">3.2 / 5</span>
+                </div>
+                <div class="pa-stat-meta">
+                  <span class="pa-stat-meta-label">After</span>
+                  <span class="pa-stat-meta-value pa-stat-meta-value--result">4.6 / 5</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div><!-- /.pa-content -->
+    </div><!-- /.pa-layout -->
+
+  </main>
+
+  <!-- Other Projects -->
+  <section class="pa-other-projects">
+    <a href="advisory.html" class="pa-other-card pa-other-card--green">
+      <div class="pa-other-img-wrap">
+        <img src="images/other_advisory.png" alt="Advisory Communications">
+      </div>
+      <div class="pa-other-body">
+        <div class="pa-other-meta-row">
+          <span class="pa-other-year">2025</span>
+          <span class="pa-other-tag pa-other-tag--green">Communication Flow</span>
+        </div>
+        <h3 class="pa-other-title">Advisory Communications</h3>
+        <p class="pa-other-desc">Improve conversion rates across the funnel for Mexico advisors to deliver better customer service.</p>
+        <div class="pa-other-results">
+          <span class="pa-other-results-label pa-other-results-label--green">RESULTS</span>
+          <span class="pa-other-results-value">+12% CR Visit</span>
+        </div>
+      </div>
+    </a>
+    <a href="pronto-app.html" class="pa-other-card pa-other-card--yellow">
+      <div class="pa-other-img-wrap">
+        <img src="images/case_study_01.png" alt="Pronto App">
+      </div>
+      <div class="pa-other-body">
+        <div class="pa-other-meta-row">
+          <span class="pa-other-year pa-other-year--yellow">2022</span>
+          <span class="pa-other-tag pa-other-tag--yellow">Android App</span>
+          <span class="pa-other-tag pa-other-tag--yellow">0 to 1 Design</span>
+        </div>
+        <h3 class="pa-other-title pa-other-title--yellow">Pronto App</h3>
+        <p class="pa-other-desc pa-other-desc--yellow">Cómo optimizar la preparación de órdenes, reduciendo tiempos de trabajo y evitando errores de picking.</p>
+        <div class="pa-other-results">
+          <span class="pa-other-results-label pa-other-results-label--yellow">RESULTS</span>
+          <span class="pa-other-results-value pa-other-results-value--yellow">25 min. avg picking</span>
+        </div>
+      </div>
+    </a>
+  </section>
+
+  <!-- Footer -->
+  <div class="footer-bg footer-bg--light" style="position:relative;z-index:1;padding-top:24px;">
+    <footer class="footer--dark" id="contact">
+      <div class="footer-inner">
+        <span class="footer-year">2026</span>
+        <p class="footer-tagline">Based in Madrid, working globally.</p>
+        <div class="footer-social">
+          <a href="https://www.linkedin.com/in/giuliana-vicente/" target="_blank" rel="noopener">Linked In</a>
+          <a href="mailto:giuvicente23@gmail.com">Email</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // ── Page transition ─────────────────────────────────────────────────
+    var curtain = document.getElementById('page-curtain');
+    curtain.classList.add('curtain-exit');
+    document.addEventListener('click', function(e) {
+      var link = e.target.closest('a');
+      if (!link) return;
+      var href = link.getAttribute('href');
+      if (!href || link.target === '_blank' || href.startsWith('http') || href.startsWith('mailto') || href.startsWith('tel') || href.startsWith('#')) return;
+      e.preventDefault();
+      curtain.classList.remove('curtain-exit');
+      curtain.classList.add('curtain-enter');
+      setTimeout(function() { window.location.href = href; }, 550);
+    });
+
+    // ── Cursor ──────────────────────────────────────────────────────────
+    var cursorDot    = document.getElementById('cursor-dot');
+    var cursorBubble = document.getElementById('cursor-bubble');
+    var cursorX = window.innerWidth / 2;
+    var cursorY = window.innerHeight / 2;
+    var rafPending = false;
+    document.addEventListener('mousemove', function(e) {
+      cursorX = e.clientX;
+      cursorY = e.clientY;
+      if (!rafPending) {
+        rafPending = true;
+        requestAnimationFrame(function() {
+          cursorDot.style.left    = cursorX + 'px';
+          cursorDot.style.top     = cursorY + 'px';
+          cursorBubble.style.left = cursorX + 'px';
+          cursorBubble.style.top  = cursorY + 'px';
+          rafPending = false;
+        });
+      }
+    });
+
+    // ── Mobile menu ─────────────────────────────────────────────────────
+    (function() {
+      var btn   = document.querySelector('.navbar-hamburger');
+      var menu  = document.getElementById('mobile-menu');
+      var close = document.querySelector('.mobile-menu-close');
+      if (!btn || !menu) return;
+      function openMenu() {
+        menu.classList.add('is-open');
+        btn.classList.add('is-active');
+        document.body.classList.add('menu-open');
+        btn.setAttribute('aria-expanded', 'true');
+        menu.setAttribute('aria-hidden', 'false');
+      }
+      function closeMenu() {
+        menu.classList.remove('is-open');
+        btn.classList.remove('is-active');
+        document.body.classList.remove('menu-open');
+        btn.setAttribute('aria-expanded', 'false');
+        menu.setAttribute('aria-hidden', 'true');
+      }
+      btn.addEventListener('click', openMenu);
+      if (close) close.addEventListener('click', closeMenu);
+      menu.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', closeMenu); });
+    })();
+
+    // ── Design stages tabs ───────────────────────────────────────────────
+    (function() {
+      var stagesBar = document.getElementById('pa-stages-bar');
+      if (!stagesBar) return;
+      var stages = document.querySelectorAll('.pa-design-stage');
+      var tabs = Array.from(stagesBar.querySelectorAll('.pa-stage'));
+      var autoTimer;
+
+      function activateTab(tab) {
+        tabs.forEach(function(t) { t.classList.remove('pa-stage--active'); });
+        tab.classList.add('pa-stage--active');
+        stages.forEach(function(s) {
+          s.classList.toggle('is-active', s.dataset.stage === tab.dataset.stage);
+        });
+      }
+
+      function startAuto() {
+        autoTimer = setInterval(function() {
+          var currentIndex = tabs.findIndex(function(t) { return t.classList.contains('pa-stage--active'); });
+          var nextIndex = (currentIndex + 1) % tabs.length;
+          activateTab(tabs[nextIndex]);
+        }, 4000);
+      }
+
+      tabs.forEach(function(tab) {
+        tab.addEventListener('click', function() {
+          clearInterval(autoTimer);
+          activateTab(tab);
+          startAuto();
+        });
+      });
+
+      startAuto();
+    })();
+
+    // ── TOC active state ─────────────────────────────────────────────────
+    (function() {
+      var sections = document.querySelectorAll('.pa-content section[id]');
+      var links = document.querySelectorAll('.pa-toc-link');
+      if (!sections.length || !links.length) return;
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            links.forEach(function(l) { l.classList.remove('is-active'); });
+            var target = document.querySelector('.pa-toc-link[href="#' + entry.target.id + '"]');
+            if (target) target.classList.add('is-active');
+          }
+        });
+      }, { rootMargin: '-30% 0px -60% 0px' });
+      sections.forEach(function(s) { observer.observe(s); });
+    })();
+
+    // ── Scroll reveal ────────────────────────────────────────────────────
+    (function() {
+      var revealSelectors = [
+        '.pa-hero-tag', '.pa-hero-title', '.pa-hero-subtitle', '.pa-hero-meta',
+        '.pa-meta-row', '.pa-body-text',
+        '.pa-section-title', '.pa-research-title', '.pa-research-subtitle',
+        '.pa-card', '.pa-testing-card',
+        '.pa-flow-img',
+        '.pa-design-header', '.pa-stages-bar',
+        '.pa-results-title', '.pa-results-subtitle', '.pa-stat',
+        'section > *'
+      ];
+      var elements = document.querySelectorAll(revealSelectors.join(','));
+      elements.forEach(function(el) { el.classList.add('reveal'); });
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+      elements.forEach(function(el) { observer.observe(el); });
+    })();
+
+    // ── Footer reveal ────────────────────────────────────────────────────
+    var footerEl = document.querySelector('footer');
+    var footerObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          footerEl.classList.add('footer-visible');
+          footerObserver.unobserve(footerEl);
+        }
+      });
+    }, { threshold: 0.05 });
+    footerObserver.observe(footerEl);
+  </script>
+
+</body>
+</html>
