@@ -932,9 +932,9 @@ footer.footer-visible .footer-inner {
 .outcome-label {
   font-family: 'ApfelGrotezk', sans-serif;
   font-weight: 400;
-  font-size: 14px;
-  line-height: 16px;
-  letter-spacing: -0.28px;
+  font-size: 20px;
+  line-height: 22px;
+  letter-spacing: -0.4px;
   color: var(--outcome-label-color, var(--card-secondary, var(--grey)));
   white-space: nowrap;
 }
@@ -942,17 +942,17 @@ footer.footer-visible .footer-inner {
 .card-metric {
   font-family: 'ApfelGrotezk', sans-serif;
   font-weight: 500;
-  font-size: 14px;
-  line-height: 14px;
-  letter-spacing: -0.28px;
+  font-size: 20px;
+  line-height: 20px;
+  letter-spacing: -0.4px;
   color: var(--card-text, var(--black));
   white-space: nowrap;
 }
 
 .outcome-sep {
   color: var(--card-secondary, var(--grey));
-  font-size: 14px;
-  line-height: 14px;
+  font-size: 20px;
+  line-height: 20px;
 }
 
 /* ── Panel de imagen (derecha) ───────────────── */
